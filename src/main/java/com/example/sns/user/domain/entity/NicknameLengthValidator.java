@@ -1,0 +1,15 @@
+package com.example.sns.user.domain.entity;
+
+import static com.example.sns.common.util.StringInBoundary.isInBoundary;
+
+import com.example.sns.user.exception.InvalidNicknameLength;
+
+public class NicknameLengthValidator {
+
+    public void validateNicknameLength(String nickname,int min, int  max) {
+       if(!isInBoundary(nickname,min , max)){
+           throw new InvalidNicknameLength();
+       }
+    }
+
+}
