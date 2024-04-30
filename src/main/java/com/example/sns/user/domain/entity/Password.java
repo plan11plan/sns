@@ -13,4 +13,7 @@ import lombok.NoArgsConstructor;
 public class Password {
     String password;
 
+    public String getPasswordToString() {
+        return password;
+    }
 }

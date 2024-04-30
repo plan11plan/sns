@@ -12,4 +12,8 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class Age {
     int age;
+
+    public int getAgeToInt() {
+        return age;
+    }
 }

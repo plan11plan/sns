@@ -21,6 +21,8 @@ public class QName extends BeanPath<Name> {
 
     public final StringPath name = createString("name");
 
+    public final StringPath nameToString = createString("nameToString");
+
     public QName(String variable) {
         super(Name.class, forVariable(variable));
     }

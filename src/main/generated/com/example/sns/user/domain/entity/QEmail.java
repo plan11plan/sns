@@ -21,6 +21,8 @@ public class QEmail extends BeanPath<Email> {
 
     public final StringPath email = createString("email");
 
+    public final StringPath emailToString = createString("emailToString");
+
     public QEmail(String variable) {
         super(Email.class, forVariable(variable));
     }

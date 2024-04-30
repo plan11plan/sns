@@ -33,7 +33,6 @@ class UserCreateTest {
         Assertions.assertThat(userCreate.age()).isEqualTo(26);
         Assertions.assertThat(userCreate.sex()).isEqualTo(Sex.M);
         Assertions.assertThat(userCreate.userStatus()).isEqualTo(UserStatus.ACTIVE);
-
     }
 
 

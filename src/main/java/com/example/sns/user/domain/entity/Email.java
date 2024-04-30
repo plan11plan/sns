@@ -8,8 +8,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Embeddable
 public class Email {
     String email;
+
+    public String getEmailToString() {
+        return email;
+    }
 }

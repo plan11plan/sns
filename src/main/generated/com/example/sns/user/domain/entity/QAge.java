@@ -21,6 +21,8 @@ public class QAge extends BeanPath<Age> {
 
     public final NumberPath<Integer> age = createNumber("age", Integer.class);
 
+    public final NumberPath<Integer> ageToInt = createNumber("ageToInt", Integer.class);
+
     public QAge(String variable) {
         super(Age.class, forVariable(variable));
     }

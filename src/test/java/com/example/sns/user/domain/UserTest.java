@@ -28,11 +28,11 @@ class UserTest {
                 .build();
         User user = User.from(userCreate);
 
-        Assertions.assertThat(user.getNameToString()).isEqualTo("name");
-        Assertions.assertThat(user.getNicknameToString()).isEqualTo("nickname");
-        Assertions.assertThat(user.getEmailToString()).isEqualTo("email@gmail.com");
-        Assertions.assertThat(user.getPasswordToString()).isEqualTo("password");
-        Assertions.assertThat(user.getAgeToInt()).isEqualTo(26);
+        Assertions.assertThat(user.getName()).isEqualTo("name");
+        Assertions.assertThat(user.getNickname()).isEqualTo("nickname");
+        Assertions.assertThat(user.getEmail()).isEqualTo("email@gmail.com");
+        Assertions.assertThat(user.getPassword()).isEqualTo("password");
+        Assertions.assertThat(user.getAge()).isEqualTo(26);
         Assertions.assertThat(user.getSex()).isEqualTo(Sex.M);
         Assertions.assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE);
 

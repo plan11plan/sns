@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,5 +13,8 @@ import lombok.NoArgsConstructor;
 public class Name {
     String name;
 
+    public String getNameToString() {
+        return name;
+    }
 
 }

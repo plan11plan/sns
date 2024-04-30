@@ -69,27 +69,27 @@ public class User {
                 .build();
     }
 
-    public String getNameToString() {
-        return name.getName();
+    public String getName() {
+        return name.getNameToString();
     }
 
-    public int getAgeToInt() {
-        return age.getAge();
+    public int getAge() {
+        return age.getAgeToInt();
     }
 
     public Sex getSex() {
         return sex;
     }
 
-    public String getNicknameToString() {
-        return nickname.getNickname();
+    public String getNickname() {
+        return nickname.getNicknameToString();
     }
 
-    public String getEmailToString() {
-        return email.getEmail();
+    public String getEmail() {
+        return email.getEmailToString();
     }
 
-    public String getPasswordToString() {
+    public String getPassword() {
         return password.getPassword();
     }
 

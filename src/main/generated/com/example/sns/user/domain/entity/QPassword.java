@@ -21,6 +21,8 @@ public class QPassword extends BeanPath<Password> {
 
     public final StringPath password = createString("password");
 
+    public final StringPath passwordToString = createString("passwordToString");
+
     public QPassword(String variable) {
         super(Password.class, forVariable(variable));
     }
