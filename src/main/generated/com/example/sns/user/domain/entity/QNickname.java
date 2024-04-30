@@ -2,8 +2,6 @@ package com.example.sns.user.domain.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.example.sns.user.domain.validator.NicknameBlankValidator;
-import com.example.sns.user.domain.validator.NicknameLengthValidator;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -21,11 +19,11 @@ public class QNickname extends BeanPath<Nickname> {
 
     public static final QNickname nickname1 = new QNickname("nickname1");
 
-    public final SimplePath<NicknameBlankValidator> blankValidator = createSimple("blankValidator", NicknameBlankValidator.class);
+    public final SimplePath<com.example.sns.user.domain.validator.NicknameBlankValidator> blankValidator = createSimple("blankValidator", com.example.sns.user.domain.validator.NicknameBlankValidator.class);
 
     public final StringPath nickname = createString("nickname");
 
-    public final SimplePath<NicknameLengthValidator> nicknameLengthValidator = createSimple("nicknameLengthValidator", NicknameLengthValidator.class);
+    public final SimplePath<com.example.sns.user.domain.validator.NicknameLengthValidator> nicknameLengthValidator = createSimple("nicknameLengthValidator", com.example.sns.user.domain.validator.NicknameLengthValidator.class);
 
     public final StringPath nicknameToString = createString("nicknameToString");
 

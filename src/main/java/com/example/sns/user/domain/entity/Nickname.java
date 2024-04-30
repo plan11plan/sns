@@ -2,6 +2,7 @@ package com.example.sns.user.domain.entity;
 
 import com.example.sns.user.domain.validator.NicknameBlankValidator;
 import com.example.sns.user.domain.validator.NicknameLengthValidator;
+import com.example.sns.user.exception.DuplicateNickname;
 import jakarta.persistence.Embeddable;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,7 +31,7 @@ public class Nickname {
 
     public void edit(Nickname to){
         if(this.nickname.equals(to.getNicknameToString())){
-            System.out.println("닉네임이 같아요");
+            throw new DuplicateNickname();
         }
         else {
             this.nickname = to.getNicknameToString();

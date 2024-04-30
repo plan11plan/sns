@@ -2,6 +2,7 @@ package com.example.sns.user.domain.entity;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
+import com.example.sns.user.exception.DuplicateNickname;
 import com.example.sns.user.exception.InvalidNicknameLength;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +26,7 @@ class NicknameTest {
         String inputNickname = "";
         // expected
         assertThatExceptionOfType(InvalidNicknameLength.class)
-                .isThrownBy(() ->  Nickname.builder().nickname(inputNickname).build())
+                .isThrownBy(() -> Nickname.builder().nickname(inputNickname).build())
                 .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }
 
@@ -35,7 +36,7 @@ class NicknameTest {
         String inputNickname = "n";
         // expected
         assertThatExceptionOfType(InvalidNicknameLength.class)
-                .isThrownBy(() ->  Nickname.builder().nickname(inputNickname).build())
+                .isThrownBy(() -> Nickname.builder().nickname(inputNickname).build())
                 .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }
 
@@ -45,15 +46,32 @@ class NicknameTest {
         String inputNickname = "aaaaaaaaaaaaaaaaaaaaa"; // 21 characters
         // expected
         assertThatExceptionOfType(InvalidNicknameLength.class)
-                .isThrownBy(() ->  Nickname.builder().nickname(inputNickname).build())
+                .isThrownBy(() -> Nickname.builder().nickname(inputNickname).build())
                 .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }
+
     @DisplayName("[수정] 닉네임 수정")
     @Test
-    void test(){
-        Nickname dd = new Nickname("dd");
-        dd.edit(new Nickname("change"));
-        System.out.println(dd.getNicknameToString());
+    void edit() {
+        // given
+        Nickname nickname = new Nickname("nickname");
+        Nickname to = new Nickname("change");
+        // when
+        nickname.edit(to);
+        // then
+        Assertions.assertThat(nickname.getNickname()).isEqualTo("change");
+    }
+
+    @DisplayName("[수정 실패] 현재 닉네임과 같을시 예외 발생")
+    @Test
+    void editFail() {
+        // given
+        Nickname nickname = new Nickname("nickname");
+        Nickname to = new Nickname("nickname");
+        // expected
+        assertThatExceptionOfType(DuplicateNickname.class)
+                .isThrownBy(() -> nickname.edit(to))
+                .withMessageContaining("다른 닉네임을 사용해주세요.");
     }
 
 }
