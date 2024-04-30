@@ -2,6 +2,8 @@ package com.example.sns.user.domain.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.example.sns.user.domain.validator.NicknameBlankValidator;
+import com.example.sns.user.domain.validator.NicknameLengthValidator;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;

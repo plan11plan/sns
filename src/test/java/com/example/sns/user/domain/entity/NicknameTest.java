@@ -48,4 +48,12 @@ class NicknameTest {
                 .isThrownBy(() ->  Nickname.builder().nickname(inputNickname).build())
                 .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }
+    @DisplayName("[수정] 닉네임 수정")
+    @Test
+    void test(){
+        Nickname dd = new Nickname("dd");
+        dd.edit(new Nickname("change"));
+        System.out.println(dd.getNicknameToString());
+    }
+
 }

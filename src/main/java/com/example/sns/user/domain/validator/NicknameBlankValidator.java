@@ -1,4 +1,4 @@
-package com.example.sns.user.domain.entity.validator;
+package com.example.sns.user.domain.validator;
 
 import com.example.sns.user.exception.InvalidNicknameLength;
 

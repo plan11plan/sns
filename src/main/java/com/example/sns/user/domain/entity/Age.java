@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Embeddable
 public class Age {
     int age;

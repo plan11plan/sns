@@ -7,7 +7,7 @@ import com.example.sns.user.domain.entity.Nickname;
 import com.example.sns.user.domain.entity.Password;
 import com.example.sns.user.domain.entity.Sex;
 import com.example.sns.user.domain.entity.UserStatus;
-import com.example.sns.user.domain.entity.request.UserCreate;
+import com.example.sns.user.domain.request.UserCreate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;

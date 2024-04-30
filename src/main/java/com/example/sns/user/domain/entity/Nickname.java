@@ -1,5 +1,7 @@
 package com.example.sns.user.domain.entity;
 
+import com.example.sns.user.domain.validator.NicknameBlankValidator;
+import com.example.sns.user.domain.validator.NicknameLengthValidator;
 import jakarta.persistence.Embeddable;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +26,16 @@ public class Nickname {
         blankValidator.execute(nickname);
         nicknameLengthValidator.execute(nickname, LENGTH_MIN, LENGTH_MAX);
         this.nickname = nickname;
+    }
+
+    public void edit(Nickname to){
+        if(this.nickname.equals(to.getNicknameToString())){
+            System.out.println("닉네임이 같아요");
+        }
+        else {
+            this.nickname = to.getNicknameToString();
+        }
+
     }
 
 
