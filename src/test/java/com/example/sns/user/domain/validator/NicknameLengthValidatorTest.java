@@ -1,4 +1,4 @@
-package com.example.sns.user.domain.entity;
+package com.example.sns.user.domain.validator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
