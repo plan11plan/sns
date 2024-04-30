@@ -9,9 +9,9 @@ class NicknameTest {
     @DisplayName("[생성] 닉네임을 만든다.")
     @Test
     void createNickname(){
-        String INPUT_NICKNAME = "nickname";
+        String inputNickname = "nickname";
         //when
-        Nickname nickname = Nickname.builder().nickname(INPUT_NICKNAME).build();
+        Nickname nickname = Nickname.builder().nickname(inputNickname).build();
         //then
         Assertions.assertThat(nickname.getNicknameToString()).isEqualTo("nickname");
     }
