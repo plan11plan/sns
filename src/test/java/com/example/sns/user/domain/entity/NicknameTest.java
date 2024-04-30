@@ -1,14 +1,17 @@
 package com.example.sns.user.domain.entity;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+
+import com.example.sns.user.exception.InvalidNicknameLength;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class NicknameTest {
 
-    @DisplayName("[생성] 닉네임을 만든다.")
+    @DisplayName("[생성] 유효한 닉네임으로 객체를 성공적으로 생성한다.")
     @Test
-    void createNickname(){
+    void createNicknameWithValidInput() {
         String inputNickname = "nickname";
         //when
         Nickname nickname = Nickname.builder().nickname(inputNickname).build();
@@ -16,35 +19,33 @@ class NicknameTest {
         Assertions.assertThat(nickname.getNicknameToString()).isEqualTo("nickname");
     }
 
-    @DisplayName("[생성] 빈값을 받을 수 없다.")
+    @DisplayName("[생성 실패] 빈 문자열로 닉네임 생성 시 예외 발생")
     @Test
-    void createNickname4(){
-        String INPUT_NICKNAME = "";
-        //when
-        Nickname nickname = Nickname.builder().nickname(INPUT_NICKNAME).build();
-        //then
-        Assertions.assertThat(nickname.getNicknameToString()).isEqualTo("nickname");
+    void createNicknameWithEmptyString() {
+        String inputNickname = "";
+        // expected
+        assertThatExceptionOfType(InvalidNicknameLength.class)
+                .isThrownBy(() ->  Nickname.builder().nickname(inputNickname).build())
+                .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }
 
-
-    @DisplayName("[생성] 최소길이 미만으로 생성 불가")
+    @DisplayName("[생성 실패] 최소 길이 미만의 닉네임으로 생성 시 예외 발생")
     @Test
-    void createNickname2(){
-        String INPUT_NICKNAME = "n";
-        //when
-        Nickname nickname = Nickname.builder().nickname(INPUT_NICKNAME).build();
-        //then
-        Assertions.assertThat(nickname.getNicknameToString()).isEqualTo("n");
+    void createNicknameWithLessThanMinLength() {
+        String inputNickname = "n";
+        // expected
+        assertThatExceptionOfType(InvalidNicknameLength.class)
+                .isThrownBy(() ->  Nickname.builder().nickname(inputNickname).build())
+                .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }
 
-
-    @DisplayName("[생성] 최대길이 넘게 생성 불가")
+    @DisplayName("[생성 실패] 최대 길이 초과의 닉네임으로 생성 시 예외 발생")
     @Test
-    void createNickname3(){
-        String INPUT_NICKNAME = "aaaaaaaaaaaaaaaaaaaaa";
-        //when
-        Nickname nickname = Nickname.builder().nickname(INPUT_NICKNAME).build();
-        //then
-        Assertions.assertThat(nickname.getNicknameToString()).isEqualTo("n");
+    void createNicknameWithMoreThanMaxLength() {
+        String inputNickname = "aaaaaaaaaaaaaaaaaaaaa"; // 21 characters
+        // expected
+        assertThatExceptionOfType(InvalidNicknameLength.class)
+                .isThrownBy(() ->  Nickname.builder().nickname(inputNickname).build())
+                .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }
 }

@@ -19,7 +19,11 @@ public class QNickname extends BeanPath<Nickname> {
 
     public static final QNickname nickname1 = new QNickname("nickname1");
 
+    public final SimplePath<NicknameBlankValidator> blankValidator = createSimple("blankValidator", NicknameBlankValidator.class);
+
     public final StringPath nickname = createString("nickname");
+
+    public final SimplePath<NicknameLengthValidator> nicknameLengthValidator = createSimple("nicknameLengthValidator", NicknameLengthValidator.class);
 
     public final StringPath nicknameToString = createString("nicknameToString");
 
