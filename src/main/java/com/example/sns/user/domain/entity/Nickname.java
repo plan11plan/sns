@@ -1,8 +1,8 @@
 package com.example.sns.user.domain.entity;
 
+import com.example.sns.user.domain.validator.DuplicateNicknameValidator;
 import com.example.sns.user.domain.validator.NicknameBlankValidator;
 import com.example.sns.user.domain.validator.NicknameLengthValidator;
-import com.example.sns.user.exception.DuplicateNickname;
 import jakarta.persistence.Embeddable;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +20,7 @@ public class Nickname {
     private String nickname;
     private NicknameLengthValidator nicknameLengthValidator = new NicknameLengthValidator();
     private NicknameBlankValidator blankValidator = new NicknameBlankValidator();
+    private DuplicateNicknameValidator duplicateNicknameValidator = new DuplicateNicknameValidator();
 
 
     @Builder
@@ -29,14 +30,9 @@ public class Nickname {
         this.nickname = nickname;
     }
 
-    public void edit(Nickname to){
-        if(this.nickname.equals(to.getNicknameToString())){
-            throw new DuplicateNickname();
-        }
-        else {
-            this.nickname = to.getNicknameToString();
-        }
-
+    public void edit(Nickname to) {
+        duplicateNicknameValidator.execute(this,to);
+        this.nickname = to.getNicknameToString();
     }
 
 

@@ -21,6 +21,8 @@ public class QNickname extends BeanPath<Nickname> {
 
     public final SimplePath<com.example.sns.user.domain.validator.NicknameBlankValidator> blankValidator = createSimple("blankValidator", com.example.sns.user.domain.validator.NicknameBlankValidator.class);
 
+    public final SimplePath<com.example.sns.user.domain.validator.DuplicateNicknameValidator> duplicateNicknameValidator = createSimple("duplicateNicknameValidator", com.example.sns.user.domain.validator.DuplicateNicknameValidator.class);
+
     public final StringPath nickname = createString("nickname");
 
     public final SimplePath<com.example.sns.user.domain.validator.NicknameLengthValidator> nicknameLengthValidator = createSimple("nicknameLengthValidator", com.example.sns.user.domain.validator.NicknameLengthValidator.class);
