@@ -13,7 +13,7 @@ class NicknameLengthValidatorTest {
     void validateNicknameLength() {
         //given
         NicknameLengthValidator nicknameLengthValidator = new NicknameLengthValidator();
-        nicknameLengthValidator.validateNicknameLength("4444", 1, 4);
+        nicknameLengthValidator.execute("4444", 1, 4);
         //expected
 
     }
@@ -26,7 +26,7 @@ class NicknameLengthValidatorTest {
 
         // expected
         assertThatExceptionOfType(InvalidNicknameLength.class)
-                .isThrownBy(() -> nicknameLengthValidator.validateNicknameLength("4444", 5, 10))
+                .isThrownBy(() -> nicknameLengthValidator.execute("4444", 5, 10))
                 .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요."); // Use the exact message you expect
     }
 
