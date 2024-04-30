@@ -17,26 +17,28 @@ import org.springframework.util.Assert;
 @NoArgsConstructor
 public class Nickname {
     private final static Long NAME_MAX_LENGTH = 20L;
+    private final static Long NAME_MIN_LENGTH = 2L;
 
     private String nickname;
 
     @Builder
     public Nickname(String nickname) {
-//        validateNickname(nickname);
+        Objects.requireNonNull(nickname);
+        validateMaxLengthNickname(nickname);
+        validateMinLengthNickname(nickname);
         this.nickname = nickname;
     }
 
     public void changeNickname(Nickname to) {
         Objects.requireNonNull(to);
-        validateNickname(to);
         this.nickname = to.getNickname();
     }
 
-    private void validateNickname(String nickname) {
-        Assert.isTrue(nickname.length() <= NAME_MAX_LENGTH, "최대 길이를 초과했습니다.");
+    private void validateMaxLengthNickname(String nickname) {
+        Assert.isTrue(nickname.length() <= NAME_MAX_LENGTH, "20글자 이하로 입력해주세요..");
     }
-    private void validateNickname(Nickname nickname) {
-        Assert.isTrue(nickname.getNickname().length() <= NAME_MAX_LENGTH, "최대 길이를 초과했습니다.");
+    private void validateMinLengthNickname(String nickname) {
+        Assert.isTrue(nickname.length() >= NAME_MIN_LENGTH, "2글자 이상으로 입력해주세요");
     }
 
     private boolean isSameNickname(Nickname to){
