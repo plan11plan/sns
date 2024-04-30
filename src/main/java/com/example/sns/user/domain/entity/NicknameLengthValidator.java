@@ -6,7 +6,7 @@ import com.example.sns.user.exception.InvalidNicknameLength;
 
 public class NicknameLengthValidator {
 
-    public void validateNicknameLength(String nickname,int min, int  max) {
+    public void execute(String nickname,int min, int  max) {
        if(!isInBoundary(nickname,min , max)){
            throw new InvalidNicknameLength();
        }
