@@ -1,4 +1,4 @@
-package com.example.sns.user.domain.entity.vo;
+package com.example.sns.user.domain.entity.request;
 
 import com.example.sns.user.domain.entity.Sex;
 import com.example.sns.user.domain.entity.UserStatus;

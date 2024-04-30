@@ -1,4 +1,4 @@
-package com.example.sns.user.domain.entity;
+package com.example.sns.user.domain.entity.validator;
 
 import static com.example.sns.common.util.StringInBoundary.isInBoundary;
 

@@ -1,6 +1,4 @@
-package com.example.sns.user.domain.entity.vo;
-
-import static org.junit.jupiter.api.Assertions.*;
+package com.example.sns.user.domain.entity.request;
 
 import com.example.sns.user.domain.entity.Sex;
 import com.example.sns.user.domain.entity.UserStatus;
