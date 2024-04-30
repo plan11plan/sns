@@ -7,8 +7,9 @@ import com.example.sns.user.domain.entity.Nickname;
 import com.example.sns.user.domain.entity.Password;
 import com.example.sns.user.domain.entity.Sex;
 import com.example.sns.user.domain.entity.UserStatus;
-import com.example.sns.user.domain.entity.vo.UserCreate;
+import com.example.sns.user.domain.entity.request.UserCreate;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,25 +30,24 @@ public class User {
 
     private Name name;
     private Age age;
-    private Sex sex;
-
     private Nickname nickname;
-
     private Email email;
-
-
     private Password password;
+
+    @Enumerated
+    private Sex sex;
+    @Enumerated
     private UserStatus userStatus;
 
     private LocalDate birthday;
     private LocalDateTime createdAt;
 
     @Builder
-    public User(Name name, Age age,Nickname nickname,Sex sex, Email email, Password password, UserStatus userStatus,
+    public User(Name name, Age age, Nickname nickname, Sex sex, Email email, Password password, UserStatus userStatus,
                 LocalDate birthday, LocalDateTime createdAt) {
         this.name = name;
-        this.age =age;
-        this.sex =sex;
+        this.age = age;
+        this.sex = sex;
         this.nickname = nickname;
         this.email = email;
         this.password = password;
