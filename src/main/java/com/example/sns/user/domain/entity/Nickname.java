@@ -1,6 +1,9 @@
 package com.example.sns.user.domain.entity;
 
-import com.example.sns.user.domain.validator.NicknameValidatorFactory;
+import static com.example.sns.user.domain.validator.NicknameValidatorFactory.blankValidator;
+import static com.example.sns.user.domain.validator.NicknameValidatorFactory.duplicateValidator;
+import static com.example.sns.user.domain.validator.NicknameValidatorFactory.lengthValidator;
+
 import jakarta.persistence.Embeddable;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,17 +19,16 @@ public class Nickname {
     public static final int LENGTH_MIN = 2;
     public static final int LENGTH_MAX = 20;
     private String nickname;
-    private NicknameValidatorFactory factory = new NicknameValidatorFactory();
 
     @Builder
     public Nickname(String nickname) {
-        factory.blankValidator().execute(nickname);
-        factory.lengthValidator().execute(nickname, LENGTH_MIN, LENGTH_MAX);
+        blankValidator().execute(nickname);
+        lengthValidator().execute(nickname, LENGTH_MIN, LENGTH_MAX);
         this.nickname = nickname;
     }
 
     public void edit(Nickname to) {
-        factory.duplicateValidator().execute(to, this);
+        duplicateValidator().execute(to, this);
         this.nickname = to.getNicknameToString();
     }
 

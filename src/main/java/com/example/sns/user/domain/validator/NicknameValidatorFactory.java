@@ -2,13 +2,13 @@ package com.example.sns.user.domain.validator;
 
 public class NicknameValidatorFactory {
 
-    public NicknameLengthValidator lengthValidator(){
+    public static NicknameLengthValidator lengthValidator(){
         return new NicknameLengthValidator();
     }
-    public NicknameBlankValidator blankValidator(){
+    public static NicknameBlankValidator blankValidator(){
         return new NicknameBlankValidator();
     }
-    public DuplicateNicknameValidator duplicateValidator(){
+    public static DuplicateNicknameValidator duplicateValidator(){
         return new DuplicateNicknameValidator();
     }
 }

@@ -1,9 +1,8 @@
 package com.example.sns.user.domain.repository;
 
 import com.example.sns.user.domain.entity.root.User;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository {
-    Optional<User> findById(Long id);
+public interface UserRepository extends JpaRepository<User,Long> {
 
 }

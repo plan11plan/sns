@@ -19,8 +19,6 @@ public class QNickname extends BeanPath<Nickname> {
 
     public static final QNickname nickname1 = new QNickname("nickname1");
 
-    public final SimplePath<com.example.sns.user.domain.validator.NicknameValidatorFactory> factory = createSimple("factory", com.example.sns.user.domain.validator.NicknameValidatorFactory.class);
-
     public final StringPath nickname = createString("nickname");
 
     public final StringPath nicknameToString = createString("nicknameToString");
