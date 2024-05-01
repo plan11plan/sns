@@ -5,7 +5,7 @@ import com.example.sns.user.exception.DuplicateNickname;
 
 public class DuplicateNicknameValidator {
 
-    public void execute(Nickname nickname,Nickname to) {
+    public void execute(Nickname to, Nickname nickname) {
         if (nickname.getNicknameToString().equals(to.getNicknameToString())) {
             throw new DuplicateNickname();
         }
