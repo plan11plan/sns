@@ -1,7 +1,6 @@
 package com.example.sns.user.domain.entity;
 
 import static com.example.sns.user.domain.validator.NicknameValidatorFactory.blankValidator;
-import static com.example.sns.user.domain.validator.NicknameValidatorFactory.duplicateValidator;
 import static com.example.sns.user.domain.validator.NicknameValidatorFactory.lengthValidator;
 
 import jakarta.persistence.Embeddable;
@@ -27,11 +26,14 @@ public class Nickname {
         this.nickname = nickname;
     }
 
-    public void edit(Nickname to) {
-        duplicateValidator().execute(to, this);
-        this.nickname = to.getNicknameToString();
-    }
+//    public void edit(Nickname to) {
+//        duplicateValidator().execute(to, this);
+//        this.nickname = to.getNicknameToString();
+//    }
 
+    public void edit(NicknameEditor editor) {
+        this.nickname = editor.getEditNicknameToString();
+    }
 
     public String getNicknameToString() {
         return this.nickname;

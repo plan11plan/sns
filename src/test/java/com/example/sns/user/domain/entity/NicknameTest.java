@@ -56,8 +56,12 @@ class NicknameTest {
         // given
         Nickname nickname = new Nickname("nickname");
         Nickname to = new Nickname("change");
+        NicknameEditor editor = NicknameEditor.builder()
+                .nickname(nickname)
+                .editTo(to).build();
+
         // when
-        nickname.edit(to);
+        nickname.edit(editor);
         // then
         Assertions.assertThat(nickname.getNickname()).isEqualTo("change");
     }
@@ -70,7 +74,9 @@ class NicknameTest {
         Nickname to = new Nickname("nickname");
         // expected
         assertThatExceptionOfType(DuplicateNickname.class)
-                .isThrownBy(() -> nickname.edit(to))
+                .isThrownBy(() -> nickname.edit(NicknameEditor.builder()
+                        .nickname(nickname)
+                        .editTo(to).build()))
                 .withMessageContaining("다른 닉네임을 사용해주세요.");
     }
 
