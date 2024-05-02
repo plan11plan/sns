@@ -1,8 +1,9 @@
 package com.example.sns.user.domain.entity;
 
 
-import com.example.sns.user.domain.validator.password.BlankPasswordValidator;
-import com.example.sns.user.domain.validator.password.PasswordLengthValidator;
+import static com.example.sns.user.domain.validator.PasswordValidatorFactory.blankValidator;
+import static com.example.sns.user.domain.validator.PasswordValidatorFactory.lengthValidator;
+
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,8 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * [생성] - 비밀번호를 생성한다. 최소 4글자~20글자
- * [수정] - 이전 비밀번호와 같은 비밀번호로 변경할 수 없다.
+ * [생성] - 비밀번호를 생성한다. 최소 4글자~20글자 [수정] - 이전 비밀번호와 같은 비밀번호로 변경할 수 없다.
  */
 @Getter
 @Embeddable
@@ -25,13 +25,14 @@ public class Password {
 
     @Builder
     public Password(String input) {
-        BlankPasswordValidator.execute(input);
-        PasswordLengthValidator.execute(input,LENGTH_MIN,LENGTH_MAX);
+        blankValidator().validate(input);
+        lengthValidator().validate(input);
         this.nowPassword = input;
         this.oldPassword = input;
     }
+
     private void verifyChangePassword(Password password) {
-        if(isSameWithBefore(password.getOldPassword())){
+        if (isSameWithBefore(password.getOldPassword())) {
             throw new IllegalArgumentException();
         }
         if (isSameWithCurrent(password.getNowPassword())) {

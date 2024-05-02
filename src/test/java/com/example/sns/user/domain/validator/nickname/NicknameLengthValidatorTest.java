@@ -1,9 +1,8 @@
-package com.example.sns.user.domain.validator;
+package com.example.sns.user.domain.validator.nickname;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 import com.example.sns.user.domain.entity.Nickname;
-import com.example.sns.user.domain.validator.nickname.NicknameLengthValidator;
 import com.example.sns.user.exception.nickname.InvalidLengthNickname;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
