@@ -1,8 +1,10 @@
 package com.example.sns.user.domain.entity;
 
 import static com.example.sns.user.domain.validator.NicknameValidatorFactory.blankValidator;
+import static com.example.sns.user.domain.validator.NicknameValidatorFactory.duplicateValidator;
 import static com.example.sns.user.domain.validator.NicknameValidatorFactory.lengthValidator;
 
+import com.example.sns.common.util.Pair;
 import jakarta.persistence.Embeddable;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,13 +28,9 @@ public class Nickname {
         this.nickname = nickname;
     }
 
-//    public void edit(Nickname to) {
-//        duplicateValidator().execute(to, this);
-//        this.nickname = to.getNicknameToString();
-//    }
-
-    public void edit(NicknameEditor editor) {
-        this.nickname = editor.getEditNicknameToString();
+    public void editTo(Nickname to) {
+        duplicateValidator().validate(new Pair<>(to,this));
+        this.nickname = to.getNicknameToString();
     }
 
     public String getNicknameToString() {

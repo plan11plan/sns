@@ -52,16 +52,13 @@ class NicknameTest {
 
     @DisplayName("[수정] 닉네임 수정")
     @Test
-    void edit() {
+    void editTo() {
         // given
         Nickname nickname = new Nickname("nickname");
         Nickname to = new Nickname("change");
-        NicknameEditor editor = NicknameEditor.builder()
-                .nickname(nickname)
-                .editTo(to).build();
 
         // when
-        nickname.edit(editor);
+        nickname.editTo(to);
         // then
         Assertions.assertThat(nickname.getNickname()).isEqualTo("change");
     }
@@ -70,13 +67,13 @@ class NicknameTest {
     @Test
     void editFail() {
         // given
-        Nickname nickname = new Nickname("nickname");
-        Nickname to = new Nickname("nickname");
+        String sameNickname= "nickname";
+        Nickname nickname = new Nickname(sameNickname);
+        Nickname to = new Nickname(sameNickname);
+
         // expected
         assertThatExceptionOfType(DuplicateNickname.class)
-                .isThrownBy(() -> nickname.edit(NicknameEditor.builder()
-                        .nickname(nickname)
-                        .editTo(to).build()))
+                .isThrownBy(() -> nickname.editTo(to))
                 .withMessageContaining("다른 닉네임을 사용해주세요.");
     }
 
