@@ -27,7 +27,7 @@ class UserTest {
         User user = User.from(userCreate);
 
         Assertions.assertThat(user.getName().getName()).isEqualTo("name");
-        Assertions.assertThat(user.getNickname().getNickname()).isEqualTo("nickname");
+        Assertions.assertThat(user.getNickname().getValue()).isEqualTo("nickname");
         Assertions.assertThat(user.getEmail().getEmail()).isEqualTo("email@gmail.com");
         Assertions.assertThat(user.getPassword().getValue()).isEqualTo("password");
         Assertions.assertThat(user.getAge().getAge()).isEqualTo(26);

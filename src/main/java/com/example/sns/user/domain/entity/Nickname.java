@@ -36,4 +36,8 @@ public class Nickname {
     public String getNicknameToString() {
         return this.nickname;
     }
+
+    public String getValue(){
+        return this.nickname;
+    }
 }
