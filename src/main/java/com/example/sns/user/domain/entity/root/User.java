@@ -68,40 +68,5 @@ public class User {
                 .birthday(userCreate.birthday())
                 .build();
     }
-
-    public String getName() {
-        return name.getNameToString();
-    }
-
-    public int getAge() {
-        return age.getAgeToInt();
-    }
-
-    public Sex getSex() {
-        return sex;
-    }
-
-    public String getNickname() {
-        return nickname.getNicknameToString();
-    }
-
-    public String getEmail() {
-        return email.getEmailToString();
-    }
-
-    public String getPassword() {
-        return password.getPassword();
-    }
-
-    public UserStatus getUserStatus() {
-        return userStatus;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+    
 }
