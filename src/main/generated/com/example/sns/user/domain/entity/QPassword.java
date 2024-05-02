@@ -17,11 +17,13 @@ public class QPassword extends BeanPath<Password> {
 
     private static final long serialVersionUID = 1679922520L;
 
-    public static final QPassword password1 = new QPassword("password1");
+    public static final QPassword password = new QPassword("password");
 
-    public final StringPath password = createString("password");
+    public final StringPath nowPassword = createString("nowPassword");
 
-    public final StringPath passwordToString = createString("passwordToString");
+    public final StringPath nowValue = createString("nowValue");
+
+    public final StringPath oldPassword = createString("oldPassword");
 
     public QPassword(String variable) {
         super(Password.class, forVariable(variable));

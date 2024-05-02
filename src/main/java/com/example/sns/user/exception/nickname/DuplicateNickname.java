@@ -1,4 +1,4 @@
-package com.example.sns.user.exception;
+package com.example.sns.user.exception.nickname;
 
 import com.example.sns.common.exception.RootException;
 

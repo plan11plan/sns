@@ -1,5 +1,9 @@
 package com.example.sns.user.domain.validator;
 
+import com.example.sns.user.domain.validator.nickname.DuplicateNicknameValidator;
+import com.example.sns.user.domain.validator.nickname.NicknameBlankValidator;
+import com.example.sns.user.domain.validator.nickname.NicknameLengthValidator;
+
 public class NicknameValidatorFactory {
 
     public static NicknameLengthValidator lengthValidator(){

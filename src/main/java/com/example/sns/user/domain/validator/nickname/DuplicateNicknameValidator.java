@@ -1,7 +1,7 @@
-package com.example.sns.user.domain.validator;
+package com.example.sns.user.domain.validator.nickname;
 
 import com.example.sns.user.domain.entity.Nickname;
-import com.example.sns.user.exception.DuplicateNickname;
+import com.example.sns.user.exception.nickname.DuplicateNickname;
 
 public class DuplicateNicknameValidator {
 

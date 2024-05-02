@@ -2,7 +2,8 @@ package com.example.sns.user.domain.validator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-import com.example.sns.user.exception.InvalidNicknameLength;
+import com.example.sns.user.domain.validator.nickname.NicknameBlankValidator;
+import com.example.sns.user.exception.nickname.InvalidLengthNickname;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ class NicknameBlankValidatorTest {
         var nicknameBlankValidator = new NicknameBlankValidator();
 
         // expected
-        assertThatExceptionOfType(InvalidNicknameLength.class)
+        assertThatExceptionOfType(InvalidLengthNickname.class)
                 .isThrownBy(() -> nicknameBlankValidator.execute(""))
                 .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }

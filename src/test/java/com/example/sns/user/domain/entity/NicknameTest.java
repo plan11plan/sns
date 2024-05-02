@@ -2,8 +2,8 @@ package com.example.sns.user.domain.entity;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-import com.example.sns.user.exception.DuplicateNickname;
-import com.example.sns.user.exception.InvalidNicknameLength;
+import com.example.sns.user.exception.nickname.DuplicateNickname;
+import com.example.sns.user.exception.nickname.InvalidLengthNickname;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class NicknameTest {
     void createNicknameWithEmptyString() {
         String inputNickname = "";
         // expected
-        assertThatExceptionOfType(InvalidNicknameLength.class)
+        assertThatExceptionOfType(InvalidLengthNickname.class)
                 .isThrownBy(() -> Nickname.builder().nickname(inputNickname).build())
                 .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }
@@ -35,7 +35,7 @@ class NicknameTest {
     void createNicknameWithLessThanMinLength() {
         String inputNickname = "n";
         // expected
-        assertThatExceptionOfType(InvalidNicknameLength.class)
+        assertThatExceptionOfType(InvalidLengthNickname.class)
                 .isThrownBy(() -> Nickname.builder().nickname(inputNickname).build())
                 .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }
@@ -45,7 +45,7 @@ class NicknameTest {
     void createNicknameWithMoreThanMaxLength() {
         String inputNickname = "aaaaaaaaaaaaaaaaaaaaa"; // 21 characters
         // expected
-        assertThatExceptionOfType(InvalidNicknameLength.class)
+        assertThatExceptionOfType(InvalidLengthNickname.class)
                 .isThrownBy(() -> Nickname.builder().nickname(inputNickname).build())
                 .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
     }

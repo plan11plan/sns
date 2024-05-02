@@ -2,8 +2,8 @@ package com.example.sns.user.domain.validator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-import com.example.sns.user.domain.validator.NicknameLengthValidator;
-import com.example.sns.user.exception.InvalidNicknameLength;
+import com.example.sns.user.domain.validator.nickname.NicknameLengthValidator;
+import com.example.sns.user.exception.nickname.InvalidLengthNickname;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ class NicknameLengthValidatorTest {
         NicknameLengthValidator nicknameLengthValidator = new NicknameLengthValidator();
 
         // expected
-        assertThatExceptionOfType(InvalidNicknameLength.class)
+        assertThatExceptionOfType(InvalidLengthNickname.class)
                 .isThrownBy(() -> nicknameLengthValidator.execute("4444", 5, 10))
                 .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요."); // Use the exact message you expect
     }
