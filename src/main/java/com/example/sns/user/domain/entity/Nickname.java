@@ -21,8 +21,8 @@ public class Nickname {
 
     @Builder
     public Nickname(String nickname) {
-        blankValidator().execute(nickname);
-        lengthValidator().execute(nickname, LENGTH_MIN, LENGTH_MAX);
+        blankValidator().validate(nickname);
+        lengthValidator().validate(nickname);
         this.nickname = nickname;
     }
 

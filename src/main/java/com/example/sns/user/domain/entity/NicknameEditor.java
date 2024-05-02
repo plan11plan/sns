@@ -1,6 +1,8 @@
 package com.example.sns.user.domain.entity;
 
-import com.example.sns.user.domain.validator.NicknameValidatorFactory;
+import static com.example.sns.user.domain.validator.NicknameValidatorFactory.duplicateValidator;
+
+import com.example.sns.common.util.Pair;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,7 +13,7 @@ public class NicknameEditor {
 
     @Builder
     public NicknameEditor(Nickname nickname, Nickname editTo) {
-        NicknameValidatorFactory.duplicateValidator().execute(editTo,nickname);
+        duplicateValidator().validate(new Pair<>(nickname,editTo));
         this.nickname = nickname;
         this.editTo = editTo;
     }

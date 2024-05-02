@@ -14,7 +14,7 @@ class NicknameBlankValidatorTest {
     void validateNicknameLength() {
         //given
         var nicknameBlankValidator = new NicknameBlankValidator();
-        nicknameBlankValidator.execute("123");
+        nicknameBlankValidator.validate("123");
         //expected
 
     }
@@ -28,13 +28,8 @@ class NicknameBlankValidatorTest {
 
         // expected
         assertThatExceptionOfType(InvalidLengthNickname.class)
-                .isThrownBy(() -> nicknameBlankValidator.execute(""))
-                .withMessageContaining("2글자 이상,20 글자 이하로 입력해주세요.");
-    }
-
-    @Test
-    void d(){
-
+                .isThrownBy(() -> nicknameBlankValidator.validate(""))
+                .withMessageContaining("2글자 이상, 20글자 이하로 입력해주세요.");
     }
 
 }
