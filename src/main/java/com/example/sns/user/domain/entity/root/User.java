@@ -90,7 +90,7 @@ public class User {
     }
 
     public String getPassword() {
-        return password.getNowPassword();
+        return password.getPassword();
     }
 
     public UserStatus getUserStatus() {

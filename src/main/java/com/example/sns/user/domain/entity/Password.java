@@ -2,10 +2,11 @@ package com.example.sns.user.domain.entity;
 
 
 import static com.example.sns.user.domain.validator.PasswordValidatorFactory.blankValidator;
+import static com.example.sns.user.domain.validator.PasswordValidatorFactory.duplicateCurrentPasswordValidator;
 import static com.example.sns.user.domain.validator.PasswordValidatorFactory.lengthValidator;
 
+import com.example.sns.common.util.Pair;
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,41 +16,28 @@ import lombok.NoArgsConstructor;
  */
 @Getter
 @Embeddable
-@AllArgsConstructor
 @NoArgsConstructor
 public class Password {
     public static final int LENGTH_MIN = 4;
     public static final int LENGTH_MAX = 20;
-    private String nowPassword;
-    private String oldPassword;
+    private String password;
 
     @Builder
     public Password(String input) {
         blankValidator().validate(input);
         lengthValidator().validate(input);
-        this.nowPassword = input;
-        this.oldPassword = input;
-    }
-
-    private void verifyChangePassword(Password password) {
-        if (isSameWithBefore(password.getOldPassword())) {
-            throw new IllegalArgumentException();
-        }
-        if (isSameWithCurrent(password.getNowPassword())) {
-            throw new IllegalArgumentException();
-        }
+        this.password =input;
     }
 
 
-    boolean isSameWithCurrent(String input) {
-        return nowPassword.equals(input);
+    public void editTo(Password to){
+        duplicateCurrentPasswordValidator().validate(new Pair<>(this,to));
+        this.password=to.getValue();
+
     }
 
-    boolean isSameWithBefore(String input) {
-        return oldPassword.equals(input);
-    }
 
-    public String getNowValue() {
-        return nowPassword;
+    public String getValue() {
+        return this.password;
     }
 }
