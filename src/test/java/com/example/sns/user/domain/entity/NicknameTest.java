@@ -2,8 +2,9 @@ package com.example.sns.user.domain.entity;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-import com.example.sns.user.exception.nickname.DuplicateNickname;
-import com.example.sns.user.exception.nickname.InvalidLengthNickname;
+import com.example.sns.core.user.domain.entity.Nickname;
+import com.example.sns.core.user.exception.nickname.DuplicateNickname;
+import com.example.sns.core.user.exception.nickname.InvalidLengthNickname;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

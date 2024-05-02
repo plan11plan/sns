@@ -1,8 +1,8 @@
 package com.example.sns.user.domain.request;
 
-import com.example.sns.user.domain.entity.Sex;
-import com.example.sns.user.domain.entity.UserStatus;
-import com.example.sns.user.domain.request.UserCreate;
+import com.example.sns.core.user.domain.entity.Sex;
+import com.example.sns.core.user.domain.entity.UserStatus;
+import com.example.sns.core.user.domain.request.UserCreate;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.assertj.core.api.Assertions;

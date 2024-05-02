@@ -3,7 +3,8 @@ package com.example.sns.user.domain.validator.password;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import com.example.sns.user.exception.password.InvalidLengthPassword;
+import com.example.sns.core.user.domain.validator.password.PasswordLengthValidator;
+import com.example.sns.core.user.exception.password.InvalidLengthPassword;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -2,6 +2,9 @@ package com.example.sns.user.domain.entity.root;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.example.sns.core.user.domain.entity.Sex;
+import com.example.sns.core.user.domain.entity.UserStatus;
+import com.example.sns.core.user.domain.entity.root.User;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -38,9 +41,9 @@ public class QUser extends EntityPathBase<User> {
 
     public final com.example.sns.user.domain.entity.QPassword password;
 
-    public final EnumPath<com.example.sns.user.domain.entity.Sex> sex = createEnum("sex", com.example.sns.user.domain.entity.Sex.class);
+    public final EnumPath<Sex> sex = createEnum("sex", Sex.class);
 
-    public final EnumPath<com.example.sns.user.domain.entity.UserStatus> userStatus = createEnum("userStatus", com.example.sns.user.domain.entity.UserStatus.class);
+    public final EnumPath<UserStatus> userStatus = createEnum("userStatus", UserStatus.class);
 
     public QUser(String variable) {
         this(User.class, forVariable(variable), INITS);

@@ -4,8 +4,9 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 import com.example.sns.common.util.Pair;
-import com.example.sns.user.domain.entity.Nickname;
-import com.example.sns.user.exception.nickname.DuplicateNickname;
+import com.example.sns.core.user.domain.entity.Nickname;
+import com.example.sns.core.user.domain.validator.nickname.DuplicateNicknameValidator;
+import com.example.sns.core.user.exception.nickname.DuplicateNickname;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

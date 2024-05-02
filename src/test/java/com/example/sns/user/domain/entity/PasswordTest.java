@@ -3,8 +3,9 @@ package com.example.sns.user.domain.entity;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import com.example.sns.user.exception.password.DuplicateCurrentPassword;
-import com.example.sns.user.exception.password.InvalidLengthPassword;
+import com.example.sns.core.user.domain.entity.Password;
+import com.example.sns.core.user.exception.password.DuplicateCurrentPassword;
+import com.example.sns.core.user.exception.password.InvalidLengthPassword;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

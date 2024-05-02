@@ -2,6 +2,7 @@ package com.example.sns.user.domain.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.example.sns.core.user.domain.entity.Nickname;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
