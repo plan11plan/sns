@@ -1,35 +1,35 @@
 package com.example.sns.user.domain.validator.nickname;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-import com.example.sns.user.domain.validator.nickname.NicknameBlankValidator;
 import com.example.sns.user.exception.nickname.InvalidLengthNickname;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class NicknameBlankValidatorTest {
 
-    @DisplayName("닉네임이 빈값이 아니다.")
+    @DisplayName("닉네임이 비어있지 않을 때 예외를 발생시키지 않는다.")
     @Test
-    void validateNicknameLength() {
+    void validateNicknameIsNotEmpty() {
         //given
         var nicknameBlankValidator = new NicknameBlankValidator();
-        nicknameBlankValidator.validate("123");
-        //expected
 
+        //expected
+        assertThatCode(() -> nicknameBlankValidator.validate("123"))
+                .doesNotThrowAnyException();
     }
 
-
-    @DisplayName("닉네임의 길이가 \"\" 면 예외를 반환한다.")
+    @DisplayName("닉네임이 빈 문자열일 때 예외를 발생시킨다.")
     @Test
-    void validateNicknameLengthFail() {
+    void validateNicknameIsEmpty() {
         //given
         var nicknameBlankValidator = new NicknameBlankValidator();
 
         // expected
         assertThatExceptionOfType(InvalidLengthNickname.class)
                 .isThrownBy(() -> nicknameBlankValidator.validate(""))
-                .withMessageContaining("2글자 이상, 20글자 이하로 입력해주세요.");
+                .withMessage("2글자 이상, 20글자 이하로 입력해주세요.");
     }
 
 }

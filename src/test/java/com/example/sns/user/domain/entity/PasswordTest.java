@@ -33,7 +33,7 @@ class PasswordTest {
         // expected
         assertThatExceptionOfType(InvalidLengthPassword.class)
                 .isThrownBy(() -> new Password(input))
-                .withMessageContaining("4글자 이상,20 글자 이하로 입력해주세요.");
+                .withMessageContaining("4글자 이상, 20글자 이하로 입력해주세요.");
     }
 
 
@@ -44,6 +44,6 @@ class PasswordTest {
         // expected
         assertThatExceptionOfType(InvalidLengthPassword.class)
                 .isThrownBy(() -> new Password(input))
-                .withMessageContaining("4글자 이상,20 글자 이하로 입력해주세요.");
+                .withMessageContaining("4글자 이상, 20글자 이하로 입력해주세요.");
     }
 }

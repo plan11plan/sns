@@ -16,8 +16,9 @@ class PasswordLengthValidatorTest {
     void setUp() {
         int min = 4;  // 최소 길이
         int max = 20; // 최대 길이
-        validator = new PasswordLengthValidator();
-    }
+        validator = PasswordLengthValidator.builder().
+                min(min)
+                .max(max).build();}
 
     @Test
     @DisplayName("유효한 비밀번호 길이는 예외를 발생시키지 않아야 한다")
