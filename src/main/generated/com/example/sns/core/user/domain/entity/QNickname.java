@@ -1,8 +1,7 @@
-package com.example.sns.user.domain.entity;
+package com.example.sns.core.user.domain.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.example.sns.core.user.domain.entity.Nickname;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -16,13 +15,15 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEmbeddableSerializer")
 public class QNickname extends BeanPath<Nickname> {
 
-    private static final long serialVersionUID = 533627691L;
+    private static final long serialVersionUID = 1982980042L;
 
     public static final QNickname nickname1 = new QNickname("nickname1");
 
     public final StringPath nickname = createString("nickname");
 
     public final StringPath nicknameToString = createString("nicknameToString");
+
+    public final StringPath value = createString("value");
 
     public QNickname(String variable) {
         super(Nickname.class, forVariable(variable));

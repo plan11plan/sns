@@ -1,14 +1,15 @@
 package com.example.sns.core.user.domain.entity.root;
 
 import com.example.sns.core.user.domain.entity.Age;
-import com.example.sns.core.user.domain.entity.Nickname;
-import com.example.sns.core.user.domain.entity.Sex;
 import com.example.sns.core.user.domain.entity.Email;
 import com.example.sns.core.user.domain.entity.Name;
+import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.Password;
+import com.example.sns.core.user.domain.entity.Sex;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.request.UserCreate;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,9 +35,9 @@ public class User {
     private Email email;
     private Password password;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)  // 상태가 enum 타입일 경우
     private Sex sex;
-    @Enumerated
+    @Enumerated(EnumType.STRING)  // 상태가 enum 타입일 경우
     private UserStatus userStatus;
 
     private LocalDate birthday;

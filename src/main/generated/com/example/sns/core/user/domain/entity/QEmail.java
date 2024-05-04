@@ -1,8 +1,7 @@
-package com.example.sns.user.domain.entity;
+package com.example.sns.core.user.domain.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.example.sns.core.user.domain.entity.Email;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -16,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEmbeddableSerializer")
 public class QEmail extends BeanPath<Email> {
 
-    private static final long serialVersionUID = -69881345L;
+    private static final long serialVersionUID = 894808512L;
 
     public static final QEmail email1 = new QEmail("email1");
 

@@ -1,8 +1,7 @@
-package com.example.sns.user.domain.entity;
+package com.example.sns.core.user.domain.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.example.sns.core.user.domain.entity.Password;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -16,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEmbeddableSerializer")
 public class QPassword extends BeanPath<Password> {
 
-    private static final long serialVersionUID = 1679922520L;
+    private static final long serialVersionUID = -1165692425L;
 
     public static final QPassword password1 = new QPassword("password1");
 
