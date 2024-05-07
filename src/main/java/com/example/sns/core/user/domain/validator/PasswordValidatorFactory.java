@@ -6,10 +6,7 @@ import com.example.sns.core.user.domain.validator.password.DuplicateCurrentPassw
 import com.example.sns.core.user.domain.validator.password.PasswordBlankValidator;
 import com.example.sns.core.user.domain.validator.password.PasswordLengthValidator;
 
-public class PasswordValidatorFactory {
-    private PasswordValidatorFactory() {
-    }
-
+public interface PasswordValidatorFactory {
     public static Validator<String> lengthValidator() {
         return new PasswordLengthValidator(Password.LENGTH_MIN, Password.LENGTH_MAX);
     }
@@ -18,7 +15,7 @@ public class PasswordValidatorFactory {
         return new PasswordBlankValidator();
     }
 
-    public static Validator<Pair<Password,Password>> duplicateCurrentPasswordValidator(){
+    public static Validator<Pair<Password, Password>> duplicateCurrentPasswordValidator() {
         return new DuplicateCurrentPasswordValidator();
     }
 

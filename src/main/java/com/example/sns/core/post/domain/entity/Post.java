@@ -1,31 +1,47 @@
 package com.example.sns.core.post.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AccessLevel;
+import com.example.sns.common.service.port.ClockHolder;
+import com.example.sns.core.post.domain.entity.request.PostCreate;
+import com.example.sns.core.post.domain.entity.request.PostUpdate;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private Long memberId;
+    private final Long id;
+    private final WriterId writerId;
+    private final Title title;
+    private final Content content;
+    private final Long createdAt;
+    private final Long modifiedAt;
 
-    private Title title;
-
-    private Contents contents;
 
     @Builder
-    public Post(Long memberId, Title title, Contents contents) {
-        this.memberId = memberId;
+    public Post(Long id, WriterId writerId, Title title, Content content, Long createdAt, Long modifiedAt) {
+        this.id =id;
+        this.writerId = writerId;
         this.title = title;
-        this.contents = contents;
+        this.content = content;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
+    }
+    public static Post from(PostCreate postCreate, ClockHolder clockHolder){
+        return Post.builder()
+                .writerId(postCreate.writerId())
+                .title(postCreate.title())
+                .content(postCreate.content())
+                .createdAt(clockHolder.millis())
+                .build();
+    }
+    public Post update(PostUpdate postUpdate,ClockHolder clockHolder){
+        return Post.builder()
+                .title(postUpdate.title())
+                .content(postUpdate.content())
+                .modifiedAt(clockHolder.millis())
+                ///
+                .id(id)
+                .writerId(writerId)
+                .createdAt(createdAt)
+                .build();
     }
 }

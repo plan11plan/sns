@@ -30,14 +30,11 @@ public class Nickname {
 
     public void editTo(Nickname to) {
         duplicateValidator().validate(new Pair<>(to,this));
-        this.nickname = to.getNicknameToString();
+        this.nickname = to.getValue();
     }
 
-    public String getNicknameToString() {
+    public String getValue() {
         return this.nickname;
     }
 
-    public String getValue(){
-        return this.nickname;
-    }
 }

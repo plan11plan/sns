@@ -10,7 +10,7 @@ public class DuplicateNicknameValidator implements Validator<Pair<Nickname, Nick
     public void validate(Pair<Nickname, Nickname> nicknames) throws DuplicateNickname {
         Nickname to = nicknames.getFirst();
         Nickname nickname = nicknames.getSecond();
-        if (nickname.getNicknameToString().equals(to.getNicknameToString())) {
+        if (nickname.getValue().equals(to.getValue())) {
             throw new DuplicateNickname();
         }
     }

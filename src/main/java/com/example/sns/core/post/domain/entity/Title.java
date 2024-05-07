@@ -2,13 +2,10 @@ package com.example.sns.core.post.domain.entity;
 
 
 import com.example.sns.core.post.domain.validator.TitleValidatorFactory;
-import jakarta.persistence.Embeddable;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Embeddable
+
 @Getter
-@NoArgsConstructor
 public class Title {
     public static final int LENGTH_MIN = 2;
     public static final int LENGTH_MAX = 20;

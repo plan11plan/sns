@@ -1,73 +1,120 @@
 package com.example.sns.core.user.domain.entity.root;
 
-import com.example.sns.core.user.domain.entity.Age;
+import com.example.sns.common.exception.CertificationCodeNotMatchedException;
+import com.example.sns.common.service.port.ClockHolder;
+import com.example.sns.common.service.port.UuidHolder;
+import com.example.sns.core.user.domain.entity.Birthday;
 import com.example.sns.core.user.domain.entity.Email;
-import com.example.sns.core.user.domain.entity.Name;
 import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.Password;
 import com.example.sns.core.user.domain.entity.Sex;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.request.UserCreate;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.time.LocalDate;
+import com.example.sns.core.user.domain.request.UserUpdate;
 import java.time.LocalDateTime;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    private Name name;
-    private Age age;
-    private Nickname nickname;
-    private Email email;
-    private Password password;
+    private final Long id;
 
-    @Enumerated(EnumType.STRING)  // 상태가 enum 타입일 경우
-    private Sex sex;
-    @Enumerated(EnumType.STRING)  // 상태가 enum 타입일 경우
-    private UserStatus userStatus;
+    private final Email email;
+    private final Password password;
+    private final Nickname nickname;
+    private final Sex sex;
+    private final Birthday birthday;
+    private final UserStatus status;
 
-    private LocalDate birthday;
-    private LocalDateTime createdAt;
+    private final Long lastLoginAt;
+    private final String certificationCode;
+    private final LocalDateTime createdAt;
 
     @Builder
-    public User(Name name, Age age, Nickname nickname, Sex sex, Email email, Password password, UserStatus userStatus,
-                LocalDate birthday, LocalDateTime createdAt) {
-        this.name = name;
-        this.age = age;
-        this.sex = sex;
-        this.nickname = nickname;
+    public User(Long id, Email email, Password password, Nickname nickname, Sex sex, Birthday birthday,
+                UserStatus status, Long lastLoginAt, String certificationCode, LocalDateTime createdAt) {
+        this.id = id;
+        ///
         this.email = email;
         this.password = password;
-        this.userStatus = userStatus;
+        this.nickname = nickname;
+        this.status = status;
+        this.sex = sex;
         this.birthday = birthday;
         this.createdAt = createdAt;
+        ///
+        this.lastLoginAt = lastLoginAt;
+        this.certificationCode = certificationCode;
     }
 
-    public static User from(UserCreate userCreate) {
+    public static User from(UserCreate userCreate, UuidHolder uuidHolder) {
         return User.builder()
-                .name(new Name(userCreate.name()))
-                .age(new Age(userCreate.age()))
-                .nickname(new Nickname(userCreate.nickname()))
-                .email(new Email(userCreate.email()))
-                .password(new Password(userCreate.password()))
-                .sex(userCreate.sex())
-                .userStatus(userCreate.userStatus())
-                .birthday(userCreate.birthday())
+                .certificationCode(uuidHolder.random())
+                ///
+                .email(userCreate.getEmail())
+                .password(userCreate.getPassword())
+                .nickname(userCreate.getNickname())
+                .status(userCreate.getStatus())
+                .sex(userCreate.getSex())
+                .birthday(userCreate.getBirthday())
+                .createdAt(userCreate.getCreatedAt())
                 .build();
     }
 
+
+    public User update(UserUpdate userUpdate) {
+        return User.builder()
+                .email(userUpdate.getEmail())
+                .password(userUpdate.getPassword())
+                .nickname(userUpdate.getNickname())
+                ///
+                .id(id)
+                .status(status)
+                .sex(sex)
+                .birthday(birthday)
+                .createdAt(createdAt)
+                .lastLoginAt(lastLoginAt)
+                .certificationCode(certificationCode)
+                .build();
+    }
+
+    public User login(ClockHolder clockHolder) {
+        return User.builder()
+                .lastLoginAt(clockHolder.millis())
+                ///
+                .id(id)
+                .email(email)
+                .password(password)
+                .nickname(nickname)
+                .status(status)
+                .sex(sex)
+                .birthday(birthday)
+                .createdAt(createdAt)
+                .certificationCode(certificationCode)
+                .build();
+    }
+
+    public User certificate(String certificationCode) {
+        if (!this.certificationCode.equals(certificationCode)) {
+            throw new CertificationCodeNotMatchedException();
+        }
+        return User.builder()
+                .certificationCode(certificationCode)
+                .status(UserStatus.ACTIVE)
+                ///
+                .id(id)
+                .email(email)
+                .password(password)
+                .nickname(nickname)
+                .sex(sex)
+                .birthday(birthday)
+                .createdAt(createdAt)
+                .lastLoginAt(lastLoginAt)
+                .build();
+    }
+
+    public String getNicknameValue() {
+        return nickname.getValue();
+    }
 }

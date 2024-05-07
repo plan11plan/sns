@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Email {
     String email;
 
-    public String getEmailToString() {
+    public String getValue() {
         return email;
     }
 }

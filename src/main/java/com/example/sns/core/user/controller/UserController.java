@@ -1,0 +1,52 @@
+package com.example.sns.core.user.controller;
+
+import com.example.sns.core.user.controller.response.UserResponse;
+import com.example.sns.core.user.service.AuthenticationService;
+import com.example.sns.core.user.service.UserCreateService;
+import com.example.sns.core.user.service.UserReadService;
+import com.example.sns.core.user.service.UserUpdateService;
+import java.net.URI;
+import lombok.Builder;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+//@Tag(name = "유저(users)")
+@RestController
+@Builder
+@RequestMapping("/api/users")
+@RequiredArgsConstructor
+public class UserController {
+
+   private final UserCreateService userCreateService;
+   private final UserReadService userReadService;
+   private final UserUpdateService userUpdateService;
+   private final AuthenticationService authenticationService;
+
+    @ResponseStatus
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponse> getById(@PathVariable long id) {
+        return ResponseEntity
+                .ok()
+                .body(UserResponse.from(userReadService.getById(id)));
+    }
+
+    @GetMapping("/{id}/verify")
+    public ResponseEntity<Void> verifyEmail(
+            @PathVariable long id,
+            @RequestParam String certificationCode) {
+        authenticationService.verifyEmail(id, certificationCode);
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(URI.create("http://localhost:3000"))
+                .build();
+    }
+
+
+
+}

@@ -21,8 +21,6 @@ public class QNickname extends BeanPath<Nickname> {
 
     public final StringPath nickname = createString("nickname");
 
-    public final StringPath nicknameToString = createString("nicknameToString");
-
     public final StringPath value = createString("value");
 
     public QNickname(String variable) {

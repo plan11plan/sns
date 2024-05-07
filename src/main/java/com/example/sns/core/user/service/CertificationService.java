@@ -1,10 +1,12 @@
 package com.example.sns.core.user.service;
 
 import com.example.sns.core.user.service.port.MailSender;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@Builder
 @RequiredArgsConstructor
 public class CertificationService {
     private final MailSender mailSender;
