@@ -1,8 +1,8 @@
 package com.example.sns.core.post.domain.entity;
 
-import com.example.sns.common.service.port.ClockHolder;
 import com.example.sns.core.post.domain.entity.request.PostCreate;
 import com.example.sns.core.post.domain.entity.request.PostUpdate;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,12 +12,12 @@ public class Post {
     private final WriterId writerId;
     private final Title title;
     private final Content content;
-    private final Long createdAt;
-    private final Long modifiedAt;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime modifiedAt;
 
 
     @Builder
-    public Post(Long id, WriterId writerId, Title title, Content content, Long createdAt, Long modifiedAt) {
+    public Post(Long id, WriterId writerId, Title title, Content content, LocalDateTime createdAt, LocalDateTime modifiedAt) {
         this.id =id;
         this.writerId = writerId;
         this.title = title;
@@ -25,19 +25,19 @@ public class Post {
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }
-    public static Post from(PostCreate postCreate, ClockHolder clockHolder){
+    public static Post from(PostCreate postCreate,LocalDateTime localDateTime){
         return Post.builder()
                 .writerId(postCreate.writerId())
                 .title(postCreate.title())
                 .content(postCreate.content())
-                .createdAt(clockHolder.millis())
+                .createdAt(localDateTime)
                 .build();
     }
-    public Post update(PostUpdate postUpdate,ClockHolder clockHolder){
+    public Post update(PostUpdate postUpdate,LocalDateTime localDateTime){
         return Post.builder()
                 .title(postUpdate.title())
                 .content(postUpdate.content())
-                .modifiedAt(clockHolder.millis())
+                .modifiedAt(localDateTime)
                 ///
                 .id(id)
                 .writerId(writerId)

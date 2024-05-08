@@ -20,7 +20,7 @@ public class CertificationServiceTest {
         // then
         Assertions.assertThat(mailSender.email).isEqualTo("email@gmail.com");
         Assertions.assertThat(mailSender.title).isEqualTo("Please certify your email address");
-        Assertions.assertThat(mailSender.content).isEqualTo("Please cl   ick the following link to certify your email address: http://localhost:8080/api/users/1/verify?certificationCode=123");
+        Assertions.assertThat(mailSender.content).isEqualTo("Please click the following link to certify your email address: http://localhost:8080/api/users/1/verify?certificationCode=123");
 
     }
 }

@@ -1,56 +1,63 @@
 package com.example.sns.unit.post.domain;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.Title;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
+import com.example.sns.core.post.domain.entity.WriterId;
+import com.example.sns.core.post.domain.entity.request.PostCreate;
+import com.example.sns.core.post.domain.entity.request.PostUpdate;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
-class PostTest {
+public class PostTest {
 
-
-    @DisplayName("[생성] 포스트를 만든다.")
     @Test
-    void createPost(){
+    public void PostCreate으로_게시물을_만들_수_있다() {
         // given
-        Title title = new Title("title");
-        Content content = new Content("content");
+        LocalDateTime createTime = LocalDateTime.now();
+        PostCreate postCreate = PostCreate.builder()
+                .writerId(new WriterId(1L))
+                .title(new Title("title"))
+                .content(new Content("content"))
+                .build();
+        // when
+        Post post = Post.from(postCreate, createTime);
+
+        // then
+        assertThat(post.getWriterId().getValue()).isEqualTo(1L);
+        assertThat(post.getTitle().getValue()).isEqualTo("title");
+        assertThat(post.getContent().getValue()).isEqualTo("content");
+        assertThat(post.getCreatedAt()).isEqualTo(createTime);
+
+    }
+    @Test
+    public void PostUpdate로_게시물을_수정할_수_있다() {
+        // given
+        PostUpdate postUpdate = PostUpdate.builder()
+                .title(new Title("title"))
+                .content(new Content("content"))
+                .build();
+        LocalDateTime createdAt = LocalDateTime.now();
+        LocalDateTime updatedAt = LocalDateTime.now();
+
+        Post post = Post.builder()
+                .id(1L)
+                .writerId(new WriterId(1L))
+                .title(new Title("title"))
+                .content(new Content("content"))
+                .createdAt(createdAt)
+                .build();
 
         // when
-        Post post = Post.builder()
-                .title(title)
-                .content(content)
-                .build();
-        // Expected
-        Assertions.assertThat(post.getTitle().getValue()).isEqualTo("title");
-        Assertions.assertThat(post.getContent().getValue()).isEqualTo("content");
-    }
-    @DisplayName("[생성 예외] 포스트를 만든다.")
-    @Test
-    void createPost2(){
-        // given
-        Title title = new Title("title");
-        Content content = new Content("content");
+        post = post.update(postUpdate, updatedAt);
 
-        // when
-        Post post = Post.builder()
-                .title(title)
-                .content(content)
-                .build();
-        // Expected
-        Assertions.assertThat(post.getTitle().getValue()).isEqualTo("title");
-        Assertions.assertThat(post.getContent().getValue()).isEqualTo("content");
-    }
-
-    @DisplayName("PostCreate 로 게시물을 만들 수 있다.")
-    @Test
-    void postCreate(){
-
-    }
-    @DisplayName("update로 데이터를 수정 할 수 있다.")
-    @Test
-    void update(){
-
+        // then
+        assertThat(post.getWriterId().getValue()).isEqualTo(1L);
+        assertThat(post.getTitle().getValue()).isEqualTo("title");
+        assertThat(post.getContent().getValue()).isEqualTo("content");
+        assertThat(post.getCreatedAt()).isEqualTo(createdAt);
+        assertThat(post.getModifiedAt()).isEqualTo(updatedAt);
     }
 }
