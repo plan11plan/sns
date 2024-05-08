@@ -2,6 +2,7 @@ package com.example.sns.core.user.controller.response;
 
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -13,7 +14,7 @@ public class MyProfileResponse {
     private String email;
     private String nickname;
     private UserStatus status;
-    private Long lastLoginAt;
+    private LocalDateTime lastLoginAt;
 
     public static MyProfileResponse from(User user){
         return MyProfileResponse.builder()

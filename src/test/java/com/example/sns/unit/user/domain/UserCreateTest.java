@@ -1,11 +1,16 @@
 package com.example.sns.unit.user.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.example.sns.core.user.domain.entity.Birthday;
+import com.example.sns.core.user.domain.entity.Email;
+import com.example.sns.core.user.domain.entity.Nickname;
+import com.example.sns.core.user.domain.entity.Password;
 import com.example.sns.core.user.domain.entity.Sex;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.request.UserCreate;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,23 +20,21 @@ class UserCreateTest {
     @Test
     void UserCreate(){
         UserCreate userCreate = UserCreate.builder()
-                .name("name")
-                .nickname("nickname")
-                .email("email@gmail.com")
-                .password("password")
-                .age(26)
+                .nickname(new Nickname("nickname"))
+                .email(new Email("email@gmail.com"))
+                .password(new Password("password"))
                 .sex(Sex.M)
-                .userStatus(UserStatus.ACTIVE)
+                .birthday(new Birthday(LocalDate.of(1999,7,28)))
+                .status(UserStatus.PENDING)
                 .createdAt(LocalDateTime.now())
-                .birthday(LocalDate.of(1999,8,28))
                 .build();
-        Assertions.assertThat(userCreate.name()).isEqualTo("name");
-        Assertions.assertThat(userCreate.nickname()).isEqualTo("nickname");
-        Assertions.assertThat(userCreate.email()).isEqualTo("email@gmail.com");
-        Assertions.assertThat(userCreate.password()).isEqualTo("password");
-        Assertions.assertThat(userCreate.age()).isEqualTo(26);
-        Assertions.assertThat(userCreate.sex()).isEqualTo(Sex.M);
-        Assertions.assertThat(userCreate.userStatus()).isEqualTo(UserStatus.ACTIVE);
+        assertThat(userCreate.getNickname().getValue()).isEqualTo("nickname");
+        assertThat(userCreate.getEmail().getEmail()).isEqualTo("email@gmail.com");
+        assertThat(userCreate.getPassword().getPassword()).isEqualTo("password");
+        assertThat(userCreate.getSex().toString()).isEqualTo("M");
+        assertThat(userCreate.getStatus()).isEqualTo(UserStatus.PENDING);
+        assertThat(userCreate.getBirthday().getBirthday()).isEqualTo("1999-07-28");
+
     }
 
 

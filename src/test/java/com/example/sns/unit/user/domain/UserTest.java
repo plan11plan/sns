@@ -1,8 +1,10 @@
 package com.example.sns.unit.user.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.example.sns.common.exception.CertificationCodeNotMatchedException;
-import com.example.sns.common.service.port.ClockHolder;
 import com.example.sns.common.service.port.UuidHolder;
+import com.example.sns.core.user.domain.entity.Birthday;
 import com.example.sns.core.user.domain.entity.Email;
 import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.Password;
@@ -23,121 +25,173 @@ class UserTest {
 
     @DisplayName("User는 UserCreate 객체로 생성할 수 있다.")
     @Test
-    void createMember(){
+    void createMember() {
         // given
         UserCreate userCreate = UserCreate.builder()
-                .email("email@gmail.com")
-                .nickname("nickname")
-                .password("password")
-                .userStatus(UserStatus.PENDING)
+                .nickname(new Nickname("nickname"))
+                .email(new Email("email@gmail.com"))
+                .password(new Password("password"))
+                .sex(Sex.M)
+                .birthday(new Birthday(LocalDate.of(1999, 7, 28)))
+                .status(UserStatus.PENDING)
                 .createdAt(LocalDateTime.now())
                 .build();
         UuidHolder uuidHolder = new TestUuidHolder("1234");
 
         // when
-        User user = User.from(userCreate,uuidHolder);
+        User user = User.from(userCreate, uuidHolder);
 
         // then
-        Assertions.assertThat(user.getEmail().getEmail()).isEqualTo("email@gmail.com");
-        Assertions.assertThat(user.getPassword().getValue()).isEqualTo("password");
-        Assertions.assertThat(user.getStatus()).isEqualTo(UserStatus.PENDING);
-        Assertions.assertThat(user.getCertificationCode()).isEqualTo("1234");
+        assertThat(userCreate.getNickname().getValue()).isEqualTo("nickname");
+        assertThat(userCreate.getEmail().getEmail()).isEqualTo("email@gmail.com");
+        assertThat(userCreate.getPassword().getPassword()).isEqualTo("password");
+        assertThat(userCreate.getSex().toString()).isEqualTo("M");
+        assertThat(userCreate.getStatus()).isEqualTo(UserStatus.PENDING);
+        assertThat(userCreate.getBirthday().getBirthday()).isEqualTo("1999-07-28");
 
 
     }
+
     //TODO : 수정할게 많음.
     @DisplayName("User는 UserUpdate 객체로 데이터를 수정할 수 있다.")
     @Test
-    void update(){
+    void update() {
         // given
+        String certificationCode = new TestUuidHolder("1234").random();
+        long millis = new TestClockHolder(1000L).millis();
+        LocalDateTime now = LocalDateTime.now();
+        //
         User user = User.builder()
-                .id(1L)
                 .email(new Email("email@gmail.com"))
-                .userInfo(new UserInfo(new Name("name"), new Nickname("nickname"), Sex.M, LocalDate.now()))
-                .userStatus(UserStatus.ACTIVE)
                 .password(new Password("password"))
-                .certificationCode(new TestUuidHolder("1234").random())
-                .lastLoginAt(new TestClockHolder(1000L).millis())
+                .nickname(new Nickname("nickname"))
+                ///
+                .id(1L)
+                .sex(Sex.W)
+                .status(UserStatus.ACTIVE)
+                .certificationCode(certificationCode)
+                .createdAt(now)
+                .birthday(new Birthday(LocalDate.of(1999, 7, 28)))
+                .nickname(new Nickname("nickname"))
+                .lastLoginAt(now)
                 .build();
-        UuidHolder uuidHolder = new TestUuidHolder("1234");
 
         UserUpdate userUpdate = UserUpdate.builder()
-                .email("changeEmail@gmail.com")
-                .password("changePassword")
+                .email(new Email("changeEmail@gmail.com"))
+                .password(new Password("changePassword"))
+                .nickname(new Nickname("changeNickname"))
                 .build();
 
         // when
-        user  = user.update(userUpdate);
+        user = user.update(userUpdate);
 
         // then
-        Assertions.assertThat(user.getEmail().getEmail()).isEqualTo("changeEmail@gmail.com");
-        Assertions.assertThat(user.getUserInfo().getNickname().getValue()).isEqualTo("nickname");
-        Assertions.assertThat(user.getPassword().getPassword()).isEqualTo("changePassword");
-        Assertions.assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
-        Assertions.assertThat(user.getCertificationCode()).isEqualTo("1234");
+        assertThat(user.getNickname().getValue()).isEqualTo("changeNickname");
+        assertThat(user.getPassword().getPassword()).isEqualTo("changePassword");
+        assertThat(user.getEmail().getEmail()).isEqualTo("changeEmail@gmail.com");
+        // and
+        assertThat(user.getId()).isEqualTo(1L);
+        assertThat(user.getSex().toString()).isEqualTo("W");
+        assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
+        assertThat(user.getCertificationCode()).isEqualTo(certificationCode);
+        assertThat(user.getCreatedAt()).isEqualTo(now);
+        assertThat(user.getBirthday().getBirthday()).isEqualTo("1999-07-28");
     }
+
     @DisplayName("User는 로그인을 할 수 있고, 로그인시 마지막 로그인 시간이 변경된다.")
     @Test
-    void login(){
+    void login() {
         // given
+        String certificationCode = new TestUuidHolder("1234").random();
+        LocalDateTime now = LocalDateTime.now();
+        //
         User user = User.builder()
                 .id(1L)
+                .nickname(new Nickname("nickname"))
                 .email(new Email("email@gmail.com"))
-                .userInfo(new UserInfo(new Name("name"), new Nickname("nickname"), Sex.M, LocalDate.now()))
-                .userStatus(UserStatus.ACTIVE)
                 .password(new Password("password"))
-                .certificationCode(new TestUuidHolder("1234").random())
-                .lastLoginAt(new TestClockHolder(1000L).millis())
+                .sex(Sex.M)
+                .birthday(new Birthday(LocalDate.of(1999, 7, 28)))
+                .status(UserStatus.ACTIVE)
+                .certificationCode(certificationCode)
+                .lastLoginAt(now)
+                .createdAt(now)
                 .build();
-        ClockHolder clockHolder = new TestClockHolder(2000L);
         // when
-        user  = user.login(clockHolder);
+        LocalDateTime loginTime = LocalDateTime.now();
+        user = user.login(loginTime);
         // then
-        Assertions.assertThat(user.getEmail().getEmail()).isEqualTo("email@gmail.com");
-        Assertions.assertThat(user.getLastLoginAt()).isEqualTo(2000L);
-        Assertions.assertThat(user.getPassword().getValue()).isEqualTo("password");
-        Assertions.assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
-        Assertions.assertThat(user.getCertificationCode()).isEqualTo("1234");
+        assertThat(user.getId()).isEqualTo(1L);
+        assertThat(user.getNickname().getValue()).isEqualTo("nickname");
+        assertThat(user.getEmail().getEmail()).isEqualTo("email@gmail.com");
+        assertThat(user.getPassword().getPassword()).isEqualTo("password");
+        assertThat(user.getSex().toString()).isEqualTo("M");
+        assertThat(user.getBirthday().getBirthday()).isEqualTo("1999-07-28");
+        assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
+        assertThat(user.getCertificationCode()).isEqualTo(certificationCode);
+        assertThat(user.getLastLoginAt()).isEqualTo(loginTime);
+        assertThat(user.getCreatedAt()).isEqualTo(now);
+
     }
+
     @DisplayName("유효한 인증 코드로 계정을 활성화 할 수 있다.")
     @Test
-    void certificate(){
+    void certificate() {
         // given
+        String certificationCode = new TestUuidHolder("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa").random();
+        LocalDateTime now = LocalDateTime.now();
+        //
         User user = User.builder()
                 .id(1L)
+                .nickname(new Nickname("nickname"))
                 .email(new Email("email@gmail.com"))
-                .userInfo(new UserInfo(new Name("name"), new Nickname("nickname"), Sex.M, LocalDate.now()))
-                .userStatus(UserStatus.PENDING)
                 .password(new Password("password"))
-                .certificationCode(new TestUuidHolder("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa").random())
-                .lastLoginAt(new TestClockHolder(1000L).millis())
+                .sex(Sex.M)
+                .birthday(new Birthday(LocalDate.of(1999, 7, 28)))
+                .status(UserStatus.PENDING)
+                .certificationCode(certificationCode)
+                .lastLoginAt(now)
+                .createdAt(now)
                 .build();
 
         // when
         user = user.certificate("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa");
 
         // then
-        Assertions.assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
+        assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
+        // and
+        assertThat(user.getId()).isEqualTo(1L);
+        assertThat(user.getNickname().getValue()).isEqualTo("nickname");
+        assertThat(user.getEmail().getEmail()).isEqualTo("email@gmail.com");
+        assertThat(user.getPassword().getPassword()).isEqualTo("password");
+        assertThat(user.getSex().toString()).isEqualTo("M");
+        assertThat(user.getBirthday().getBirthday()).isEqualTo("1999-07-28");
+        assertThat(user.getCertificationCode()).isEqualTo(certificationCode);
+        assertThat(user.getLastLoginAt()).isEqualTo(now);
+        assertThat(user.getCreatedAt()).isEqualTo(now);
     }
 
     @DisplayName("User는 잘못된 인증 코드로 계정을 활성화 시도하면 에러를 던진다.")
     @Test
-    void certificate_error(){
+    void certificate_error() {
         // given
+        String certificationCode = new TestUuidHolder("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa").random();
+        LocalDateTime now = LocalDateTime.now();
+
         User user = User.builder()
                 .id(1L)
+                .nickname(new Nickname("nickname"))
                 .email(new Email("email@gmail.com"))
-                .userInfo(new UserInfo(new Name("name"), new Nickname("nickname"), Sex.M, LocalDate.now()))
-                .userStatus(UserStatus.PENDING)
                 .password(new Password("password"))
-                .certificationCode(new TestUuidHolder("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa").random())
-                .lastLoginAt(new TestClockHolder(1000L).millis())
+                .sex(Sex.M)
+                .birthday(new Birthday(LocalDate.of(1999, 7, 28)))
+                .status(UserStatus.PENDING)
+                .certificationCode(certificationCode)
+                .lastLoginAt(now)
+                .createdAt(now)
                 .build();
-
-        // when
-
-        // then
-        Assertions.assertThatThrownBy(()->{
+        // expected
+        Assertions.assertThatThrownBy(() -> {
             user.certificate("boo");
         }).isInstanceOf(CertificationCodeNotMatchedException.class);
 

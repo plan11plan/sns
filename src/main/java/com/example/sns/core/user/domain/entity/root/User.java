@@ -1,7 +1,6 @@
 package com.example.sns.core.user.domain.entity.root;
 
 import com.example.sns.common.exception.CertificationCodeNotMatchedException;
-import com.example.sns.common.service.port.ClockHolder;
 import com.example.sns.common.service.port.UuidHolder;
 import com.example.sns.core.user.domain.entity.Birthday;
 import com.example.sns.core.user.domain.entity.Email;
@@ -27,13 +26,13 @@ public class User {
     private final Birthday birthday;
     private final UserStatus status;
 
-    private final Long lastLoginAt;
+    private final LocalDateTime lastLoginAt;
     private final String certificationCode;
     private final LocalDateTime createdAt;
 
     @Builder
     public User(Long id, Email email, Password password, Nickname nickname, Sex sex, Birthday birthday,
-                UserStatus status, Long lastLoginAt, String certificationCode, LocalDateTime createdAt) {
+                UserStatus status, LocalDateTime lastLoginAt, String certificationCode, LocalDateTime createdAt) {
         this.id = id;
         ///
         this.email = email;
@@ -79,9 +78,9 @@ public class User {
                 .build();
     }
 
-    public User login(ClockHolder clockHolder) {
+    public User login(LocalDateTime localDateTime) {
         return User.builder()
-                .lastLoginAt(clockHolder.millis())
+                .lastLoginAt(localDateTime)
                 ///
                 .id(id)
                 .email(email)

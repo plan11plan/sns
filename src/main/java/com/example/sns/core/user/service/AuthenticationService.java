@@ -1,9 +1,9 @@
 package com.example.sns.core.user.service;
 
 import com.example.sns.common.exception.ResourceNotFoundException;
-import com.example.sns.common.service.port.ClockHolder;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.service.port.UserRepository;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final UserRepository userRepository;
-    private final ClockHolder clockHolder;
 
     @Transactional
     public void login(long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Users", id));
-        user = user.login(clockHolder);
+        user = user.login(LocalDateTime.now());
         userRepository.save(user);
 
     }

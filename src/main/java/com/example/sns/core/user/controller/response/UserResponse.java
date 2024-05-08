@@ -2,6 +2,7 @@ package com.example.sns.core.user.controller.response;
 
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,10 +13,10 @@ public class UserResponse {
     private String email;
     private String nickname;
     private UserStatus status;
-    private Long lastLoginAt;
+    private LocalDateTime lastLoginAt;
 
     @Builder
-    private UserResponse(Long id, String email, String nickname, UserStatus status, Long lastLoginAt) {
+    private UserResponse(Long id, String email, String nickname, UserStatus status, LocalDateTime lastLoginAt) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
