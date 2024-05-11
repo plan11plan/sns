@@ -1,6 +1,6 @@
 package com.example.sns.mock;
 
-import com.example.sns.common.service.port.UuidHolder;
+import com.example.sns.core.common.service.port.UuidHolder;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

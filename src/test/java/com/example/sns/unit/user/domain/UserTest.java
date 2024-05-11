@@ -2,8 +2,8 @@ package com.example.sns.unit.user.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.sns.common.exception.CertificationCodeNotMatchedException;
-import com.example.sns.common.service.port.UuidHolder;
+import com.example.sns.core.common.exception.CertificationCodeNotMatchedException;
+import com.example.sns.core.common.service.port.UuidHolder;
 import com.example.sns.core.user.domain.entity.Birthday;
 import com.example.sns.core.user.domain.entity.Email;
 import com.example.sns.core.user.domain.entity.Nickname;

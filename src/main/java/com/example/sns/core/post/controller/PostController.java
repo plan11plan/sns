@@ -5,6 +5,7 @@ import com.example.sns.core.post.controller.request.PostUpdateRequest;
 import com.example.sns.core.post.controller.response.PostResponse;
 import com.example.sns.core.post.service.PostReadService;
 import com.example.sns.core.post.service.PostUpdateService;
+import com.example.sns.core.post.service.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +25,11 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PostResponse> getById(@PathVariable long id){
-        return ResponseEntity.ok(PostResponse.from(postRadService.getById(id),null));
+        return ResponseEntity.ok(PostResponse.from(PostDto.from(postRadService.getById(id)),null));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PostResponse> update(@PathVariable long id, @RequestBody PostUpdateRequest request){
-        return ResponseEntity.ok(PostResponse.from(postUpdateService.update(id,request.toDomainRequest()),null));
+        return ResponseEntity.ok(PostResponse.from(PostDto.from(postUpdateService.update(id,request.toDomainRequest())),null));
     }
 }

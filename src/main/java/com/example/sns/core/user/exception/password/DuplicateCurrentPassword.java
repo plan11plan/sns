@@ -1,6 +1,6 @@
 package com.example.sns.core.user.exception.password;
 
-import com.example.sns.common.exception.RootException;
+import com.example.sns.core.common.exception.RootException;
 
 public class DuplicateCurrentPassword extends RootException {
     private static final String MESSAGE = "같은 비밀번호로 변경할 수 없습니다.";

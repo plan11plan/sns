@@ -1,6 +1,6 @@
 package com.example.sns.mock;
 
-import com.example.sns.common.service.port.ClockHolder;
+import com.example.sns.core.common.service.port.ClockHolder;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

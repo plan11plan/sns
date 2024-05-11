@@ -1,7 +1,7 @@
 package com.example.sns.core.user.controller.response;
 
 import com.example.sns.core.user.domain.entity.UserStatus;
-import com.example.sns.core.user.domain.entity.root.User;
+import com.example.sns.core.user.service.dto.UserDto;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class UserResponse {
         this.lastLoginAt = lastLoginAt;
     }
 
-    public static UserResponse from(User user){
+    public static UserResponse from(UserDto user){
         return UserResponse.builder()
                 .id(user.getId())
                 .email(user.getEmail().getValue())

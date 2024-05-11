@@ -1,6 +1,6 @@
 package com.example.sns.mock;
 
-import com.example.sns.common.exception.ResourceNotFoundException;
+import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.service.port.UserRepository;
@@ -62,5 +62,10 @@ public class FakeUserRepository implements UserRepository {
             data.add(user);
             return user;
         }
+    }
+
+    @Override
+    public Optional<List<User>> findAllByIdIn(List<Long> ids) {
+        return Optional.empty();
     }
 }

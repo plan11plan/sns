@@ -1,6 +1,6 @@
 package com.example.sns.core.user.service;
 
-import com.example.sns.common.exception.ResourceNotFoundException;
+import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.service.port.UserRepository;
 import java.time.LocalDateTime;

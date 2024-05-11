@@ -4,6 +4,7 @@ import com.example.sns.core.user.controller.request.UserCreateRequest;
 import com.example.sns.core.user.controller.response.UserResponse;
 import com.example.sns.core.user.domain.request.UserCreate;
 import com.example.sns.core.user.service.UserCreateService;
+import com.example.sns.core.user.service.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +25,10 @@ public class UserWriteController {
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody UserCreateRequest request) {
         UserCreate userCreate = request.toDomainRequest();
+        UserDto userDto = userCreateService.create(userCreate);
         return ResponseEntity
             .status(HttpStatus.CREATED)
-            .body(UserResponse.from(userCreateService.create(userCreate)));
+            .body(UserResponse.from(userDto));
     }
 
 }

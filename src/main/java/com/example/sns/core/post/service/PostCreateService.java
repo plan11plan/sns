@@ -2,6 +2,7 @@ package com.example.sns.core.post.service;
 
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.request.PostCreate;
+import com.example.sns.core.post.service.dto.PostDto;
 import com.example.sns.core.post.service.port.PostRepository;
 import com.example.sns.core.user.service.port.UserRepository;
 import java.time.LocalDateTime;
@@ -17,9 +18,9 @@ public class PostCreateService {
     private final UserRepository userRepository;
 //    private final ClockHolder clockHolder;
 
-    public Post create(PostCreate postCreate){
+    public PostDto create(PostCreate postCreate){
         Post post = Post.from(postCreate, LocalDateTime.now());
-        return postRepository.save(post);
+        return PostDto.from(postRepository.save(post));
 
     }
 }

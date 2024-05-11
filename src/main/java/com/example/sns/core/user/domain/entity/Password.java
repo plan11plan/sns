@@ -1,7 +1,7 @@
 package com.example.sns.core.user.domain.entity;
 
 
-import com.example.sns.common.util.Pair;
+import com.example.sns.core.common.util.Pair;
 import com.example.sns.core.user.domain.validator.PasswordValidatorFactory;
 import jakarta.persistence.Embeddable;
 import lombok.Builder;

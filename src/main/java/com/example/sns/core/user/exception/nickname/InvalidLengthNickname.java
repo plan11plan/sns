@@ -1,6 +1,6 @@
 package com.example.sns.core.user.exception.nickname;
 
-import com.example.sns.common.exception.RootException;
+import com.example.sns.core.common.exception.RootException;
 
 /**
  * status : 400

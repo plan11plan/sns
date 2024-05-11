@@ -4,7 +4,7 @@ import static com.example.sns.core.user.domain.validator.NicknameValidatorFactor
 import static com.example.sns.core.user.domain.validator.NicknameValidatorFactory.duplicateValidator;
 import static com.example.sns.core.user.domain.validator.NicknameValidatorFactory.lengthValidator;
 
-import com.example.sns.common.util.Pair;
+import com.example.sns.core.common.util.Pair;
 import jakarta.persistence.Embeddable;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.example.sns.core.post.infrastructure;
 
-import com.example.sns.common.exception.ResourceNotFoundException;
+import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.service.port.PostRepository;
 import java.util.Optional;

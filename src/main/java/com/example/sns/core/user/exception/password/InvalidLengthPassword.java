@@ -1,6 +1,6 @@
 package com.example.sns.core.user.exception.password;
 
-import com.example.sns.common.exception.RootException;
+import com.example.sns.core.common.exception.RootException;
 import com.example.sns.core.user.domain.entity.Password;
 
 /**
