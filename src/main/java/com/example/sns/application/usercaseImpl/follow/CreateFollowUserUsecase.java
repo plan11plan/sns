@@ -2,6 +2,7 @@ package com.example.sns.application.usercaseImpl.follow;
 
 import com.example.sns.application.dto.CreateFollowUserCommand;
 import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.core.follow.domain.FollowStatus;
 import com.example.sns.core.follow.domain.Following;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.request.FollowCreate;
@@ -25,6 +26,7 @@ public class CreateFollowUserUsecase {
         FollowCreate followCreate = FollowCreate.builder()
                 .follower(Follower.fromId(follower.getId()))
                 .following(Following.fromId(following.getId()))
+                .status(FollowStatus.PENDING)
                 .createdAt(timeHolder.nowDateTime())
                 .build();
         return followCreateService.create(followCreate);

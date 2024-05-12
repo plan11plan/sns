@@ -13,9 +13,10 @@ import org.springframework.stereotype.Service;
 public class RejectFollowUserUsecase {
     private final UserReadService userReadService;
     private final FollowRejectService followRejectService;
+
     public void execute(RejectFollowUserCommand command) {
-        UserDto follower = userReadService.getById(command.getFollower().getId());
-        UserDto following = userReadService.getById(command.getFollowing().getId());
+        UserDto follower = userReadService.getById(command.getFollowerId());
+        UserDto following = userReadService.getById(command.getFollowingId());
         FollowReject followReject = FollowReject.builder()
                 .follower(follower)
                 .following(following)

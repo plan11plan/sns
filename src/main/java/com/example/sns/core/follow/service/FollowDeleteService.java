@@ -13,13 +13,13 @@ public class FollowDeleteService {
     private final FollowRepository followRepository;
     public void deleteFollower(FollowerDelete request) {
         Follow follow = followRepository.findFollowerByUserIdAndFollowerId(
-                request.getFollowerId(), request.getUserId(), request.getStatus()
+                request.getUserId(),  request.getFollowerId(), request.getStatus()
         ).orElseThrow();
         followRepository.delete(follow);
     }
     public void deleteFollowing(FollowingDelete request){
         Follow follow = followRepository.findFollowingByUserIdAndFollowingId(
-                 request.getFollowingId(),request.getUserId(), request.getStatus()
+                request.getUserId(),  request.getFollowingId(), request.getStatus()
         ).orElseThrow();
         followRepository.delete(follow);
     }

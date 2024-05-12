@@ -10,13 +10,13 @@ public class FollowAccept {
     UserDto follower;
     UserDto following;
 
-    FollowStatus followStatus;
+    FollowStatus status;
 
     @Builder
     public FollowAccept(UserDto follower, UserDto following) {
         this.follower = follower;
         this.following = following;
-        this.followStatus = FollowStatus.PENDING;
+        this.status = FollowStatus.PENDING;
     }
     public Long getFollowerId(){
         return follower.getId();

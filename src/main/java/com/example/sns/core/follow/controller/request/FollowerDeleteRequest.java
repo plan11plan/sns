@@ -1,9 +1,8 @@
 package com.example.sns.core.follow.controller.request;
 
 import com.example.sns.application.dto.DeleteFollowerUserCommand;
-import com.example.sns.core.follow.domain.FollowStatus;
-import com.example.sns.core.follow.domain.Following;
 import com.example.sns.core.follow.domain.Follower;
+import com.example.sns.core.follow.domain.Following;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -13,7 +12,7 @@ public class FollowerDeleteRequest {
     private final Following following;
 
     @Builder
-    public FollowerDeleteRequest(Follower follower, Following following, FollowStatus status) {
+    public FollowerDeleteRequest(Follower follower, Following following) {
         this.follower = follower;
         this.following = following;
     }

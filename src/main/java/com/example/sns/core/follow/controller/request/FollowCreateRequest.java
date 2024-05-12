@@ -3,24 +3,27 @@ package com.example.sns.core.follow.controller.request;
 import com.example.sns.application.dto.CreateFollowUserCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 public class FollowCreateRequest {
-    private final Follower follower;
-    private final Following following;
+    private final Long followerId;
+    private final Long followingId;
 
     @Builder
-    public FollowCreateRequest(Follower follower, Following following) {
-        this.follower = follower;
-        this.following = following;
+    public FollowCreateRequest(
+            @JsonProperty("followerId") Long followerId,
+            @JsonProperty("followingId") Long followingId) {
+        this.followerId = followerId;
+        this.followingId = followingId;
     }
 
-    public CreateFollowUserCommand toCommand(){
+    public CreateFollowUserCommand toCommand() {
         return CreateFollowUserCommand.builder()
-                .follower(follower)
-                .following(following)
+                .follower(Follower.fromId(followerId))
+                .following(Following.fromId(followingId))
                 .build();
     }
 }

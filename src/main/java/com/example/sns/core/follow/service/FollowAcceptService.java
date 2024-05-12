@@ -18,8 +18,9 @@ public class FollowAcceptService {
 
     public void accept(FollowAccept request){
         Follow follow = followRepository.findFollowByFollowerIdAndFollowingIdAndStatus(
-                request.getFollowerId(),request.getFollowingId(),request.getFollowStatus())
+                request.getFollowerId(),request.getFollowingId(),request.getStatus())
                 .orElseThrow();
-        follow.accept(timeHolder);
+        Follow accept = follow.accept(timeHolder);
+        followRepository.save(accept);
     }
 }

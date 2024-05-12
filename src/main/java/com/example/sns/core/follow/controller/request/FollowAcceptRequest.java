@@ -1,5 +1,6 @@
 package com.example.sns.core.follow.controller.request;
 
+
 import com.example.sns.application.dto.AcceptFollowUserCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;

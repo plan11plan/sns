@@ -1,6 +1,5 @@
 package com.example.sns.application.dto;
 
-import com.example.sns.core.follow.domain.FollowStatus;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
 import lombok.Builder;
@@ -11,19 +10,16 @@ public class AcceptFollowUserCommand {
 
     private final Follower follower;
     private final Following following;
-    private final FollowStatus status;
-
 
     @Builder
-    public AcceptFollowUserCommand(Follower follower, Following following, FollowStatus status) {
+    public AcceptFollowUserCommand(Follower follower, Following following) {
         this.follower = follower;
         this.following = following;
-        this.status = status;
     }
-    public java.lang.Long getFollowerId(){
+    public Long getFollowerId(){
         return follower.getId();
     }
-    public java.lang.Long getFollowingId(){
+    public Long getFollowingId(){
         return following.getId();
     }
 }

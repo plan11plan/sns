@@ -1,8 +1,6 @@
 package com.example.sns.core.user.domain.entity;
 
-import static com.example.sns.core.user.domain.validator.NicknameValidatorFactory.blankValidator;
 import static com.example.sns.core.user.domain.validator.NicknameValidatorFactory.duplicateValidator;
-import static com.example.sns.core.user.domain.validator.NicknameValidatorFactory.lengthValidator;
 
 import com.example.sns.core.common.util.Pair;
 import jakarta.persistence.Embeddable;
@@ -23,8 +21,8 @@ public class Nickname {
 
     @Builder
     public Nickname(String nickname)  {
-        blankValidator().validate(nickname);
-        lengthValidator().validate(nickname);
+//        blankValidator().validate(nickname);
+//        lengthValidator().validate(nickname);
         this.nickname = nickname;
     }
 

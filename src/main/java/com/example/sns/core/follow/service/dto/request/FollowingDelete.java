@@ -16,7 +16,7 @@ public class FollowingDelete {
 
 
     @Builder
-    public FollowingDelete(Follower userId, Following following, FollowStatus status) {
+    public FollowingDelete(Follower userId, Following following) {
         this.userId = userId;
         this.following = following;
         this.status = FollowStatus.ACCEPTED;

@@ -6,14 +6,14 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class FollowReject {
+public class FollowingCancel {
     UserDto follower;
     UserDto following;
 
     FollowStatus status;
 
     @Builder
-    public FollowReject(UserDto follower, UserDto following) {
+    public FollowingCancel(UserDto follower, UserDto following) {
         this.follower = follower;
         this.following = following;
         this.status = FollowStatus.PENDING;
@@ -24,4 +24,5 @@ public class FollowReject {
     public Long getFollowingId(){
         return following.getId();
     }
+
 }

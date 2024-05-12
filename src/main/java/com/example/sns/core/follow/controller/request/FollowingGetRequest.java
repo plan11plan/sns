@@ -8,15 +8,15 @@ import lombok.Getter;
 @Getter
 public class FollowingGetRequest {
 
-    Follower aFollower;
+    Follower follower;
 
-    public FollowingGetRequest(Follower aFollower) {
-        this.aFollower = aFollower;
+    public FollowingGetRequest(Follower follower) {
+        this.follower = follower;
     }
 
     public GetFollowingUserCommand toCommand(){
         return GetFollowingUserCommand.builder()
-                .follower(aFollower)
+                .follower(follower)
                 .build();
 
     }

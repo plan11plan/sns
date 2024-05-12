@@ -7,6 +7,9 @@ import com.example.sns.core.user.domain.entity.Password;
 import com.example.sns.core.user.domain.entity.Sex;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.request.UserCreate;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,14 +26,20 @@ public class UserCreateRequest {
 
 
     @Builder
-    public UserCreateRequest(Email email, Password password, Nickname nickname, UserStatus status, Sex sex,
-                             Birthday birthday) {
+    public UserCreateRequest(
+            @JsonProperty("email") Email email,
+            @JsonProperty("password") Password password,
+            @JsonProperty("nickname") Nickname nickname,
+            @JsonProperty("status") UserStatus status,
+            @JsonProperty("sex") Sex sex,
+            @JsonProperty("birthday")
+            @JsonFormat(pattern = "yyyy-MM-dd") LocalDate birthday) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.status = status;
         this.sex = sex;
-        this.birthday = birthday;
+        this.birthday = new Birthday(birthday);
     }
 
     public UserCreate toDomainRequest() {

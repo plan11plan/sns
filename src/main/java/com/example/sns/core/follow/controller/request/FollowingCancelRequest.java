@@ -1,4 +1,4 @@
-package com.example.sns.application.dto;
+package com.example.sns.core.follow.controller.request;
 
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
@@ -6,20 +6,14 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class RejectFollowUserCommand {
-
+public class FollowingCancelRequest {
     private final Follower follower;
     private final Following following;
 
+
     @Builder
-    public RejectFollowUserCommand(Follower follower, Following following) {
+    public FollowingCancelRequest(Follower follower, Following following) {
         this.follower = follower;
         this.following = following;
-    }
-    public Long getFollowerId(){
-        return follower.getId();
-    }
-    public Long getFollowingId(){
-        return following.getId();
     }
 }
