@@ -1,7 +1,7 @@
 package com.example.sns.core.follow.controller.request;
 
 
-import com.example.sns.application.dto.AcceptFollowUserCommand;
+import com.example.sns.application.dto.AcceptFollowCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
 import lombok.Builder;
@@ -18,10 +18,10 @@ public class FollowAcceptRequest {
         this.following = following;
     }
 
-    public AcceptFollowUserCommand toCommand(){
-        return AcceptFollowUserCommand.builder()
-                .follower(follower)
-                .following(following)
+    public AcceptFollowCommand toCommand(){
+        return AcceptFollowCommand.builder()
+                .toFollower(follower)
+                .fromUser(following)
                 .build();
     }
 }

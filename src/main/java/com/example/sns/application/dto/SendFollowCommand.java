@@ -1,27 +1,25 @@
 package com.example.sns.application.dto;
 
 import com.example.sns.core.follow.domain.FollowStatus;
+import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class DeleteFollowingUserCommand {
-    private final Long fromUserId;
+public class SendFollowCommand {
+    private final Follower fromUser;
     private final Following toFollowing;
     private final FollowStatus status;
 
-
     @Builder
-    public DeleteFollowingUserCommand(Long fromUserId, Following toFollowing) {
-        this.fromUserId = fromUserId;
+    public SendFollowCommand(Follower fromUser, Following toFollowing, FollowStatus status) {
+        this.fromUser = fromUser;
         this.toFollowing = toFollowing;
-        this.status = FollowStatus.ACCEPTED;
+        this.status = status;
     }
-
-
-    public Long getFromUserId(){
-        return fromUserId;
+    public Long getUserId(){
+        return fromUser.getId();
     }
     public Long getFollowingId(){
         return toFollowing.getId();

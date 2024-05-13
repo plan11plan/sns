@@ -5,14 +5,23 @@ import lombok.Getter;
 public class Follower {
     private final Long id;
 
-    private Follower(Long id) {
-        this.id = id;
+    private Follower(Long userId) {
+        this.id = userId;
     }
 
-    public static Follower fromId(Long id) {
-        if (id == null || id <= 0) {
+    public static Follower fromUserId(Long userId) {
+        if (userId == null || userId <= 0) {
             throw new IllegalArgumentException("Invalid ID for Follower");
         }
-        return new Follower(id);
+        return new Follower(userId);
+    }
+    public static Follower fromId(Long userId) {
+        if (userId == null || userId <= 0) {
+            throw new IllegalArgumentException("Invalid ID for Follower");
+        }
+        return new Follower(userId);
+    }
+    public Long getId(){
+        return id;
     }
 }

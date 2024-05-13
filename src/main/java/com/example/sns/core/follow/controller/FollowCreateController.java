@@ -1,9 +1,8 @@
 package com.example.sns.core.follow.controller;
 
-import com.example.sns.application.dto.CreateFollowUserCommand;
-import com.example.sns.application.usercaseImpl.follow.CreateFollowUserUsecase;
+import com.example.sns.application.dto.SendFollowCommand;
+import com.example.sns.application.usercaseImpl.follow.write.SendFollowUsecase;
 import com.example.sns.core.follow.controller.request.FollowCreateRequest;
-import com.example.sns.core.follow.service.dto.response.FollowDto;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/users/follows")
 @RequiredArgsConstructor
 public class FollowCreateController {
-    private final CreateFollowUserUsecase createFollowUserUsecase;
+    private final SendFollowUsecase sendFollowUsecase;
+
     @PostMapping()
-    public FollowDto create(@RequestBody FollowCreateRequest followCreateRequest) {
-        CreateFollowUserCommand createFollowUserCommand = followCreateRequest.toCommand();
-         return createFollowUserUsecase.execute(createFollowUserCommand);
+    public void create(@RequestBody FollowCreateRequest followCreateRequest) {
+        SendFollowCommand sendFollowCommand = followCreateRequest.toCommand();
+        sendFollowUsecase.execute(sendFollowCommand);
     }
 }

@@ -2,8 +2,8 @@ package com.example.sns.core.follow.controller;
 
 import com.example.sns.application.dto.DeleteFollowerUserCommand;
 import com.example.sns.application.dto.DeleteFollowingUserCommand;
-import com.example.sns.application.usercaseImpl.follow.DeleteMyFollowerUserUsecase;
-import com.example.sns.application.usercaseImpl.follow.DeleteMyFollowingUserUsecase;
+import com.example.sns.application.usercaseImpl.follow.write.DeleteMyFollowerUserUsecase;
+import com.example.sns.application.usercaseImpl.follow.write.DeleteMyFollowingUserUsecase;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
 import lombok.Builder;
@@ -22,14 +22,14 @@ public class FollowDeleteController {
     private final DeleteMyFollowerUserUsecase deleteMyFollowerUserUsecase;
     @DeleteMapping("/following/{followingId}")
     public void deleteFollowing(@PathVariable("userId") Long userId, @PathVariable("followingId") Long followingId) {
-        DeleteFollowingUserCommand command = new DeleteFollowingUserCommand(userId, Following.fromId(followingId));
+        DeleteFollowingUserCommand command = new DeleteFollowingUserCommand(userId, Following.fromUserId(followingId));
         deleteMyFollowingUserUsecase.execute(command);
     }
 
     // 다른 사용자가 나를 팔로우한 것을 해제
     @DeleteMapping("/follower/{followerId}")
     public void deleteFollower(@PathVariable("userId") Long userId, @PathVariable("followerId") Long followerId) {
-        DeleteFollowerUserCommand command = new DeleteFollowerUserCommand(userId, Follower.fromId(followerId));
+        DeleteFollowerUserCommand command = new DeleteFollowerUserCommand(userId, Follower.fromUserId(followerId));
         deleteMyFollowerUserUsecase.execute(command);
 
     }

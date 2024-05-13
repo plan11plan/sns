@@ -9,10 +9,17 @@ public class Following {
         this.id = id;
     }
 
-    public static Following fromId(Long id) {
-        if (id == null || id <= 0) {
+    public static Following fromUserId(Long userId) {
+        if (userId == null || userId <= 0) {
             throw new IllegalArgumentException("Invalid ID for Following");
         }
-        return new Following(id);
+        return new Following(userId);
+    }
+
+    public static Following fromId(Long userId) {
+        if (userId == null || userId <= 0) {
+            throw new IllegalArgumentException("Invalid ID for Following");
+        }
+        return new Following(userId);
     }
 }

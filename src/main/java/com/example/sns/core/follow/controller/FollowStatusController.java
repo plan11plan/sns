@@ -1,12 +1,12 @@
 package com.example.sns.core.follow.controller;
 
 
-import com.example.sns.application.dto.AcceptFollowUserCommand;
-import com.example.sns.application.dto.CancelFollowingUserCommand;
-import com.example.sns.application.dto.RejectFollowUserCommand;
-import com.example.sns.application.usercaseImpl.follow.CancelFollowingUserUsecase;
-import com.example.sns.application.usercaseImpl.follow.AcceptFollowUserUsecase;
-import com.example.sns.application.usercaseImpl.follow.RejectFollowUserUsecase;
+import com.example.sns.application.dto.AcceptFollowCommand;
+import com.example.sns.application.dto.CancelFollowCommand;
+import com.example.sns.application.dto.RejectFollowCommand;
+import com.example.sns.application.usercaseImpl.follow.write.CancelFollowUsecase;
+import com.example.sns.application.usercaseImpl.follow.write.AcceptFollowUsecase;
+import com.example.sns.application.usercaseImpl.follow.write.RejectFollowUsecase;
 import com.example.sns.core.follow.controller.request.FollowAcceptRequest;
 import com.example.sns.core.follow.controller.request.FollowRejectRequest;
 import com.example.sns.core.follow.domain.Follower;
@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class FollowStatusController {
 
-    private final RejectFollowUserUsecase rejectFollowUserUsecase;
-    private final AcceptFollowUserUsecase acceptFollowUserUsecase;
-    private final CancelFollowingUserUsecase cancelFollowingUserUsecase;
+    private final RejectFollowUsecase rejectFollowUsecase;
+    private final AcceptFollowUsecase acceptFollowUsecase;
+    private final CancelFollowUsecase cancelFollowUsecase;
 
 
 
@@ -34,23 +34,23 @@ public class FollowStatusController {
 
     @PostMapping("/reject/{followerId}")
     public void reject(@PathVariable("userId")Long userId,@PathVariable("followerId")Long followerId) {
-        FollowRejectRequest followRejectRequest = new FollowRejectRequest(Follower.fromId(followerId),
-                Following.fromId(userId));
-        RejectFollowUserCommand command = followRejectRequest.toCommand();
-        rejectFollowUserUsecase.execute(command);
+        FollowRejectRequest followRejectRequest = new FollowRejectRequest(Follower.fromUserId(followerId),
+                Following.fromUserId(userId));
+        RejectFollowCommand command = followRejectRequest.toCommand();
+        rejectFollowUsecase.execute(command);
     }
 
     @PostMapping("/accept/{followerId}")
     public void accept(@PathVariable("userId")Long userId,@PathVariable("followerId")Long followerId) {
-        FollowAcceptRequest followAcceptRequest = new FollowAcceptRequest(Follower.fromId(followerId),
-                Following.fromId(userId));
-        AcceptFollowUserCommand command = followAcceptRequest.toCommand();
-        acceptFollowUserUsecase.execute(command);
+        FollowAcceptRequest followAcceptRequest = new FollowAcceptRequest(Follower.fromUserId(followerId),
+                Following.fromUserId(userId));
+        AcceptFollowCommand command = followAcceptRequest.toCommand();
+        acceptFollowUsecase.execute(command);
     }
     @PostMapping("/cancel/{followingId}")
     public void cancel(@PathVariable("userId")Long userId,@PathVariable("followingId")Long followingId){
-        CancelFollowingUserCommand command = new CancelFollowingUserCommand(userId,Following.fromId(followingId));
-        cancelFollowingUserUsecase.execute(command);
+        CancelFollowCommand command = new CancelFollowCommand(userId,Following.fromUserId(followingId));
+        cancelFollowUsecase.execute(command);
     }
 
 }

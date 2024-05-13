@@ -60,8 +60,8 @@ public class FollowEntity {
     public Follow toModel() {
         return Follow.builder()
                 .id(id)
-                .follower(Follower.fromId(followerId))
-                .following(Following.fromId(followingId))
+                .follower(Follower.fromUserId(followerId))
+                .following(Following.fromUserId(followingId))
                 .status(status)
                 .createdAt(createdAt)
                 .modifiedAt(modifiedAt)

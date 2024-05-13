@@ -1,7 +1,10 @@
 package com.example.sns.core.follow.domain;
 
-import com.example.sns.core.common.service.port.TimeHolder;
-import com.example.sns.core.follow.domain.request.FollowCreate;
+import com.example.sns.core.follow.domain.request.FollowAcceptionDetails;
+import com.example.sns.core.follow.domain.request.FollowCancelDetails;
+import com.example.sns.core.follow.domain.request.FollowCreationDetails;
+import com.example.sns.core.follow.domain.request.FollowDeleteDetails;
+import com.example.sns.core.follow.domain.request.FollowRejectionDetails;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,53 +48,69 @@ public class Follow {
         this.modifiedAt = modifiedAt;
     }
 
-    public static Follow from(FollowCreate followCreate) {
+    public static Follow from(FollowCreationDetails creationsDetails) {
         return Follow.builder()
-                .follower(followCreate.getFollower())
-                .following(followCreate.getFollowing())
-                .status(followCreate.getStatus())
-                .createdAt(followCreate.getCreatedAt())
-                .modifiedAt(followCreate.getModifiedAt())
+                .follower(creationsDetails.getFromUser())
+                .following(creationsDetails.getToFollowing())
+                .status(creationsDetails.getStatus())
+                .createdAt(creationsDetails.getCreatedAt())
+                .modifiedAt(creationsDetails.getModifiedAt())
                 .build();
     }
 
-    public Follow accept(TimeHolder timeHolder) {
-        if (!this.status.equals(FollowStatus.PENDING)) {
-            throw new IllegalStateException();
-        }
+    public Follow accept(FollowAcceptionDetails followAcceptionDetails) {
+//        if (!this.status.equals(FollowStatus.ACCEPTED)) {
+//            throw new IllegalStateException("도메인 예외 "+followAcceptionDetails.getStatus());
+//        }
         return Follow.builder()
                 .id(id)
                 .follower(follower)
                 .following(following)
-                .status(FollowStatus.ACCEPTED)
-                .modifiedAt(timeHolder.nowDateTime())
+                .status(followAcceptionDetails.getStatus())
+                .createdAt(createdAt)
+                .modifiedAt(followAcceptionDetails.getModifiedAt())
                 .build();
 
     }
 
-    public Follow reject(TimeHolder timeHolder) {
-        if (!this.status.equals(FollowStatus.PENDING)) {
-            throw new IllegalStateException();
-        }
+    public Follow reject(FollowRejectionDetails followRejectionDetails) {
+//        if (!this.status.equals(FollowStatus.REJECTED)) {
+//            throw new IllegalStateException("도메인 예외 "+followRejectionDetails.getStatus());
+//        }
         return Follow.builder()
                 .id(id)
                 .follower(follower)
                 .following(following)
-                .status(FollowStatus.REJECTED)
-                .modifiedAt(timeHolder.nowDateTime())
+                .status(followRejectionDetails.getStatus())
+                .createdAt(createdAt)
+                .modifiedAt(followRejectionDetails.getModifiedAt())
                 .build();
     }
 
-    public Follow cancel(TimeHolder timeHolder) {
-        if (!this.status.equals(FollowStatus.ACCEPTED)) {
-            throw new IllegalStateException();
-        }
+    public Follow cancel(FollowCancelDetails followCancelDetails) {
+//        if (!this.status.equals(FollowStatus.CANCELLED)) {
+//            throw new IllegalStateException("도메인 예외 "+followCancelDetails.getStatus());
+//        }
         return Follow.builder()
                 .id(id)
                 .follower(follower)
                 .following(following)
-                .status(FollowStatus.CANCELLED)
-                .modifiedAt(timeHolder.nowDateTime())
+                .status(followCancelDetails.getStatus())
+                .createdAt(createdAt)
+                .modifiedAt(followCancelDetails.getModifiedAt())
+                .build();
+    }
+    public Follow delete(FollowDeleteDetails followDeleteDetails) {
+//        if (!this.status.equals(FollowStatus.DELETED)) {
+//            throw new IllegalStateException("도메인 예외 "+ followDeleteDetails.getStatus());
+//        }
+        return Follow.builder()
+                .id(id)
+                .follower(follower)
+                .following(following)
+                .status(followDeleteDetails.getStatus())
+                .createdAt(createdAt)
+                .modifiedAt(followDeleteDetails.getModifiedAt())
                 .build();
     }
 }

@@ -1,6 +1,6 @@
 package com.example.sns.core.follow.controller.request;
 
-import com.example.sns.application.dto.CreateFollowUserCommand;
+import com.example.sns.application.dto.SendFollowCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,10 +20,10 @@ public class FollowCreateRequest {
         this.followingId = followingId;
     }
 
-    public CreateFollowUserCommand toCommand() {
-        return CreateFollowUserCommand.builder()
-                .follower(Follower.fromId(followerId))
-                .following(Following.fromId(followingId))
+    public SendFollowCommand toCommand() {
+        return SendFollowCommand.builder()
+                .fromUser(Follower.fromUserId(followerId))
+                .toFollowing(Following.fromUserId(followingId))
                 .build();
     }
 }

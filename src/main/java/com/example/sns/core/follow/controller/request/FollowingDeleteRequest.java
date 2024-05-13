@@ -8,20 +8,20 @@ import lombok.Getter;
 
 @Getter
 public class FollowingDeleteRequest {
-    private final Follower follower;
-    private final Following following;
+    private final Follower fromUser;
+    private final Following toFollowing;
 
     @Builder
-    public FollowingDeleteRequest(Follower follower, Following following) {
-        this.follower = follower;
-        this.following = following;
+    public FollowingDeleteRequest(Follower fromUser, Following toFollowing) {
+        this.fromUser = fromUser;
+        this.toFollowing = toFollowing;
     }
 
     public DeleteFollowingUserCommand toCommand() {
         return DeleteFollowingUserCommand
                 .builder()
-                .userId(follower.getId())
-                .following(following)
+                .fromUserId(fromUser.getId())
+                .toFollowing(toFollowing)
                 .build();
     }
 
