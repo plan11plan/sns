@@ -10,9 +10,13 @@ public interface FollowJpaRepository extends JpaRepository<FollowEntity, Long> {
     Optional<List<FollowEntity>> findAllByFollowerIdAndStatus(Long followerId, FollowStatus status);
 
     Optional<List<FollowEntity>> findAllByFollowingIdAndStatus(Long followingId, FollowStatus status);
-
+//
     @Query("SELECT f FROM FollowEntity f WHERE f.followerId = :followerId AND f.followingId = :followingId AND f.status = :status")
     Optional<FollowEntity> findByFollowerIdAndFollowingIdAndStatus(Long followerId, Long followingId, FollowStatus status);
+
+    @Query("SELECT f FROM FollowEntity f WHERE f.followerId = :followerId AND f.followingId = :followingId")
+    Optional<FollowEntity> findByFollowerIdAndFollowingId(Long followerId, Long followingId);
+    //
     @Query("SELECT f FROM FollowEntity f WHERE f.followerId = :userId AND f.followingId = :followingId AND f.status = :status")
     Optional<FollowEntity> findFollowingByUserIdAndFollowingId(Long userId, Long followingId, FollowStatus status);
 

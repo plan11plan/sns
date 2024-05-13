@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface FollowRepository {
     Optional<Follow> findFollowByFollowerIdAndFollowingIdAndStatus(Long followerId, Long followingId, FollowStatus status);
+    //
+    Optional<Follow> findFollowByFollowerIdAndFollowingId(Long followerId, Long followingId);
 
 
     // 팔로워 관계를 조회 (내가 팔로우하는 사람)

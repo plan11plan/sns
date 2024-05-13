@@ -20,6 +20,12 @@ public class FollowRepositoryImpl implements FollowRepository {
         return followJpaRepository.findByFollowerIdAndFollowingIdAndStatus(followerId, followingId, status)
                 .map(FollowEntity::toModel);
     }
+
+    @Override
+    public Optional<Follow> findFollowByFollowerIdAndFollowingId(Long followerId, Long followingId) {
+        return followJpaRepository.findByFollowerIdAndFollowingId(followerId, followingId)
+                .map(FollowEntity::toModel);    }
+
     @Override
     public Optional<Follow> findFollowingByUserIdAndFollowingId(Long userId, Long followingId, FollowStatus status) {
         return followJpaRepository.findFollowingByUserIdAndFollowingId(userId, followingId, status)

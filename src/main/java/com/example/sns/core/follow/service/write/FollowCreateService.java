@@ -27,6 +27,12 @@ public class FollowCreateService {
      */
 
     public void create(FollowCreateDto dto) {
+        //TODO : 팔로우가 이미 생성돼있는지 DB 체크.
+        if (followRepository.findFollowByFollowerIdAndFollowingId(dto.fromUserId(), dto.getToFollowingId()).isPresent()) {
+            throw new IllegalArgumentException("이미 팔로우 요청을 한적이 있습니다");
+
+        }
+        //
         var followCreationDetails = FollowCreationDetails.builder()
                 .fromUser(dto.getFromUser())
                 .toFollowing(dto.getToFollowing())

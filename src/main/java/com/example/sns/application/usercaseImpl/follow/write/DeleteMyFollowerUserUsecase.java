@@ -21,6 +21,7 @@ public class DeleteMyFollowerUserUsecase {
 
         Following fromUser = Following.fromUserId(userId);
         Follower toFollower = Follower.fromId(followerId);
+
         var followerDeleteDto = FollowerDeleteDto.builder()
                 .fromUser(fromUser)
                 .toFollower(toFollower)

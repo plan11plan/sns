@@ -4,8 +4,6 @@ import com.example.sns.application.dto.GetFollowerUserCommand;
 import com.example.sns.application.dto.GetFollowingUserCommand;
 import com.example.sns.application.usercaseImpl.follow.read.GetFollowerUsecase;
 import com.example.sns.application.usercaseImpl.follow.read.GetFollowingUsecase;
-import com.example.sns.core.follow.controller.request.FollowerGetRequest;
-import com.example.sns.core.follow.controller.request.FollowingGetRequest;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
 import com.example.sns.core.user.service.dto.UserDto;
@@ -26,16 +24,14 @@ public class FollowReadController {
     private final GetFollowerUsecase getFollowerUsecase;
 
     @GetMapping("/following/{followerId}")
-    public List<UserDto> getFollowing(@PathVariable("followerId") Follower followerId) {
-        FollowingGetRequest followingGetRequest = new FollowingGetRequest(followerId);
-        GetFollowingUserCommand getFollowingCommandUser = followingGetRequest.toCommand();
-        return getFollowingUsecase.execute(getFollowingCommandUser);
+    public List<UserDto> getFollowing(@PathVariable("followerId") Long followerId) {
+        GetFollowingUserCommand command = new GetFollowingUserCommand(Follower.fromId(followerId));
+        return getFollowingUsecase.execute(command);
     }
 
     @GetMapping("/follower/{followingId}")
-    public List<UserDto> getFollower(@PathVariable("followingId") Following followingId) {
-        FollowerGetRequest followerGetRequest = new FollowerGetRequest(followingId);
-        GetFollowerUserCommand command = followerGetRequest.toCommand();
+    public List<UserDto> getFollower(@PathVariable("followingId") Long followingId) {
+        GetFollowerUserCommand command = new GetFollowerUserCommand(Following.fromId(followingId));
         return getFollowerUsecase.execute(command);
     }
 }

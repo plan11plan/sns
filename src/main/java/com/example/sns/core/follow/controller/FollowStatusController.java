@@ -28,10 +28,6 @@ public class FollowStatusController {
     private final AcceptFollowUsecase acceptFollowUsecase;
     private final CancelFollowUsecase cancelFollowUsecase;
 
-
-
-
-
     @PostMapping("/reject/{followerId}")
     public void reject(@PathVariable("userId")Long userId,@PathVariable("followerId")Long followerId) {
         FollowRejectRequest followRejectRequest = new FollowRejectRequest(Follower.fromUserId(followerId),
