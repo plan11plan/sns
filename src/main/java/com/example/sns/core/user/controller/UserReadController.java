@@ -4,6 +4,8 @@ import com.example.sns.core.user.controller.response.UserResponse;
 import com.example.sns.core.user.service.AuthenticationService;
 import com.example.sns.core.user.service.UserReadService;
 import com.example.sns.core.user.service.UserUpdateService;
+import com.example.sns.core.user.service.dto.NicknameHistoryDto;
+import java.util.List;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +34,13 @@ public class UserReadController {
                 .body(UserResponse.from(userReadService.getById(id)));
     }
 
-
+    @ResponseStatus
+    @GetMapping("/info/{id}")
+    public ResponseEntity<List<NicknameHistoryDto>> getNicknameHistories(@PathVariable("id") Long id) {
+        return ResponseEntity
+                .ok()
+                .body(userReadService.getNicknameHistories(id));
+    }
 
 
 }

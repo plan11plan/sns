@@ -60,6 +60,9 @@ public class User {
                 .createdAt(userCreate.getCreatedAt())
                 .build();
     }
+    public void changeNickname(Nickname nickname){
+        this.nickname.editTo(nickname);
+    }
 
 
     public User update(UserUpdate userUpdate) {

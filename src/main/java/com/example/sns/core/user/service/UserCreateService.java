@@ -15,12 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserCreateService {
     private final UserRepository userRepository;
     private final CertificationService certificationService;
+
     private final UuidHolder uuidHolder;
 
     @Transactional
     public UserDto create(UserCreate userCreate) {
         User user = User.from(userCreate, uuidHolder);
         user = userRepository.save(user);
+
         certificationService.send(userCreate.getEmail().getValue(),user.getId(), user.getCertificationCode());
         return UserDto.from(user);
     }
