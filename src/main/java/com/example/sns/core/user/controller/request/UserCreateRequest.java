@@ -33,6 +33,7 @@ public class UserCreateRequest {
             @JsonProperty("status") UserStatus status,
             @JsonProperty("sex") Sex sex,
             @JsonProperty("birthday")
+            // @DateTimeFormat(iso - DateTimeFormat.ISO.DATE)
             @JsonFormat(pattern = "yyyy-MM-dd") LocalDate birthday) {
         this.email = email;
         this.password = password;

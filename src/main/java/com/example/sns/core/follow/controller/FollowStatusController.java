@@ -1,9 +1,9 @@
 package com.example.sns.core.follow.controller;
 
 
-import com.example.sns.application.dto.AcceptFollowCommand;
-import com.example.sns.application.dto.CancelFollowCommand;
-import com.example.sns.application.dto.RejectFollowCommand;
+import com.example.sns.application.dto.follow.AcceptFollowCommand;
+import com.example.sns.application.dto.follow.CancelFollowCommand;
+import com.example.sns.application.dto.follow.RejectFollowCommand;
 import com.example.sns.application.usercaseImpl.follow.write.CancelFollowUsecase;
 import com.example.sns.application.usercaseImpl.follow.write.AcceptFollowUsecase;
 import com.example.sns.application.usercaseImpl.follow.write.RejectFollowUsecase;

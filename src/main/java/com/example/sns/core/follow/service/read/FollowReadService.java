@@ -21,6 +21,7 @@ public class FollowReadService {
                 .orElseThrow(() -> new ResourceNotFoundException("follow", request.getUserId()));
         return FollowDto.from(follows);
     }
+
     public List<FollowDto> getFollowers(FollowGetDto request){
         List<Follow> follows = followRepository.findAllByFollowingIdAndStatus(request.getUserId(),request.getStatus())
                 .orElseThrow(() -> new ResourceNotFoundException("follow", request.getUserId()));

@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class WriterId {
-    long writerId;
+    Long writerId;
 
-    public long getValue(){
+    public Long getValue(){
         return this.writerId;
     }
 

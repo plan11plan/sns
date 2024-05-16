@@ -1,7 +1,7 @@
 package com.example.sns.application.usercaseImpl.follow.write;
 
 
-import com.example.sns.application.dto.CancelFollowCommand;
+import com.example.sns.application.dto.follow.CancelFollowCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
 import com.example.sns.core.follow.service.write.FollowCancelService;

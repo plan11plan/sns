@@ -1,6 +1,6 @@
 package com.example.sns.application.usercaseImpl.follow.write;
 
-import com.example.sns.application.dto.AcceptFollowCommand;
+import com.example.sns.application.dto.follow.AcceptFollowCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
 import com.example.sns.core.follow.service.request.FollowAcceptDto;

@@ -1,7 +1,7 @@
 package com.example.sns.core.follow.controller;
 
-import com.example.sns.application.dto.GetFollowerUserCommand;
-import com.example.sns.application.dto.GetFollowingUserCommand;
+import com.example.sns.application.dto.follow.GetFollowerUserCommand;
+import com.example.sns.application.dto.follow.GetFollowingUserCommand;
 import com.example.sns.application.usercaseImpl.follow.read.GetFollowerUsecase;
 import com.example.sns.application.usercaseImpl.follow.read.GetFollowingUsecase;
 import com.example.sns.core.follow.domain.Follower;

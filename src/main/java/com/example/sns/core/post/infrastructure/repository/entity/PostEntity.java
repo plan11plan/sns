@@ -1,12 +1,15 @@
-package com.example.sns.core.post.infrastructure;
+package com.example.sns.core.post.infrastructure.repository.entity;
 
 
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
+import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,8 +28,12 @@ public class PostEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "user_Id")
+    @Column(name = "writer_Id")
     private Long writerId;
+
+    @Column(name ="status")
+    @Enumerated(EnumType.STRING)
+    private PostStatus status;
 
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
@@ -43,8 +50,11 @@ public class PostEntity {
         PostEntity postEntity = new PostEntity();
         postEntity.id = post.getId();
         postEntity.writerId = post.getWriterId().getValue();
+        postEntity.status = post.getPostStatus();
         postEntity.title = post.getTitle().getValue();
         postEntity.content = post.getContent().getValue();
+        postEntity.createdAt=post.getCreatedAt();
+        postEntity.modifiedAt=post.getModifiedAt();
         return postEntity;
     }
 

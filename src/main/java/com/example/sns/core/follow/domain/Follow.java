@@ -113,4 +113,10 @@ public class Follow {
                 .modifiedAt(followDeleteDetails.getModifiedAt())
                 .build();
     }
+    public Long getFollowerId(){
+        return follower.getId();
+    }
+    public Long getFollowingId(){
+        return following.getId();
+    }
 }

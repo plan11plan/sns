@@ -1,7 +1,7 @@
 package com.example.sns.core.follow.controller.request;
 
 
-import com.example.sns.application.dto.GetFollowingUserCommand;
+import com.example.sns.application.dto.follow.GetFollowingUserCommand;
 import com.example.sns.core.follow.domain.Follower;
 import lombok.Getter;
 

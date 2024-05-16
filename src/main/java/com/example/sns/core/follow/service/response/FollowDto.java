@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 public class FollowDto {
-    private final java.lang.Long id;
+    private final Long id;
     private final Follower follower;
     private final Following following;
     private final FollowStatus status;
@@ -20,7 +20,7 @@ public class FollowDto {
     private final LocalDateTime modifiedAt;
 
     @Builder
-    public FollowDto(java.lang.Long id, Follower follower, Following following, FollowStatus status, LocalDateTime createdAt,
+    public FollowDto(Long id, Follower follower, Following following, FollowStatus status, LocalDateTime createdAt,
                      LocalDateTime modifiedAt) {
         this.id = id;
         this.follower = follower;

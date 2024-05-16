@@ -1,7 +1,7 @@
 package com.example.sns.core.follow.controller;
 
-import com.example.sns.application.dto.DeleteFollowerUserCommand;
-import com.example.sns.application.dto.DeleteFollowingUserCommand;
+import com.example.sns.application.dto.follow.DeleteFollowerUserCommand;
+import com.example.sns.application.dto.follow.DeleteFollowingUserCommand;
 import com.example.sns.application.usercaseImpl.follow.write.DeleteMyFollowerUserUsecase;
 import com.example.sns.application.usercaseImpl.follow.write.DeleteMyFollowingUserUsecase;
 import com.example.sns.core.follow.domain.Follower;
