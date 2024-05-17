@@ -20,4 +20,12 @@ public class Timeline {
         //Id null일때만 createdAt 생성 허용.
         this.createdAt = createdAt == null ? LocalDateTime.now() : createdAt;
     }
+
+    public static Timeline of(Long userId,Long postId, LocalDateTime createdAt){
+        return Timeline.builder()
+                .userId(userId)
+                .postId(postId)
+                .createdAt(createdAt)
+                .build();
+    }
 }

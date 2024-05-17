@@ -6,7 +6,9 @@ import com.example.sns.core.post.domain.entity.CursorResponse;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.infrastructure.repository.queryDsl.PostQueryDslRepository;
-import com.example.sns.core.post.service.port.PostRepository;
+import com.example.sns.core.post.service.dto.PostDto;
+import com.example.sns.core.post.service.dto.PostGeyByCursor;
+import com.example.sns.core.post.service.port.PostReadRepository;
 import java.util.List;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -16,26 +18,30 @@ import org.springframework.stereotype.Service;
 @Builder
 @RequiredArgsConstructor
 public class PostReadService {
-    private final PostRepository postRepository;
+    private final PostReadRepository postReadRepository;
     private final PostQueryDslRepository postQueryDslRepository;
 
     public Post getById(Long id) {
-        return postRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("post",id));
+        return postReadRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("post",id));
+    }
+    public List<PostDto> getPosts(List<Long> postIds) {
+        return postReadRepository.findAllByInId(postIds).stream().map(PostDto::from).toList();
     }
 
     //TODO
-    public CursorResponse<Post> getPosts(Long writerId,PostStatus status, CursorRequest cursorRequest) {
-        List<Post> posts = findAllBy(writerId, status,cursorRequest);
-        Long nextKey = cursorRequest.getNextKey(posts);
-        return new CursorResponse<>(cursorRequest.next(nextKey), posts);
+    public CursorResponse<Post> getPostsByCursor(PostGeyByCursor request) {
+        List<Post> posts = findAllBy(request.getWriterId(), request.getStatus(),request.getCursorRequest());
+        Long nextKey = request.getCursorRequest().getNextKey(posts);
+
+        return new CursorResponse<>(request.getCursorRequest().next(nextKey), posts);
     }
 
     private List<Post> findAllBy(Long writerId, PostStatus status, CursorRequest cursorRequest) {
         if (cursorRequest.hasKey()) {
-          return  postRepository.findPostsByWriterAndStatusBeforeId(writerId,status, cursorRequest.getKey(), cursorRequest.getSize());
-//            return postRepository.findAllByWriterId(cursorRequest.getKey(), writerId, cursorRequest.getSize()
+          return  postReadRepository.findPostsByWriterAndStatusBeforeId(writerId,status, cursorRequest.getKey(), cursorRequest.getSize());
+//            return postWriteRepository.findAllByWriterId(cursorRequest.getKey(), writerId, cursorRequest.getSize()
         }
-        return postRepository.findLatestPostsByWriterAndStatus(writerId,status,cursorRequest.getSize());
+        return postReadRepository.findLatestPostsByWriterAndStatus(writerId,status,cursorRequest.getSize());
     }
 
      //TODO : 타임라인을 위한 포스트 조회
@@ -49,14 +55,14 @@ public class PostReadService {
 //
 //    private List<Post> findAllBy(List<Long> writerIds, CursorRequest cursorRequest) {
 //        if (cursorRequest.hasKey()) {
-//            return postRepository.findAllByLessThanIdAndWriterIdInAndOrderByIdDesc(
+//            return postWriteRepository.findAllByLessThanIdAndWriterIdInAndOrderByIdDesc(
 //                    cursorRequest.getKey(),
 //                    writerIds,
 //                    cursorRequest.getSize()
 //            );
 //        }
 //
-//        return postRepository.findAllByWriterIdInAndOrderByIdDesc(writerIds, cursorRequest.getSize());
+//        return postWriteRepository.findAllByWriterIdInAndOrderByIdDesc(writerIds, cursorRequest.getSize());
 //    }
 
 

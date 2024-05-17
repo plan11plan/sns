@@ -23,13 +23,8 @@ public class CreatePostUsecase {
     private final TimelineWriteService timelineWriteService;
 
     public void execute(CreatePostCommand command){
-        Long writerId = command.getWriterId();
-        PostCreate postCreate = PostCreate.builder()
-                .writerId(command.getWriter())
-                .title(command.getTitle())
-                .status(PostStatus.PUBLISHED)
-                .content(command.getContent())
-                .build();
+        Long writerId = userReadService.getById(command.getWriterId()).getId();
+        PostCreate postCreate = getPostCreate(command);
         Long postId = postCreateService.create(postCreate).getId();
         List<Long> followerIds = followReadService.getFollowers(FollowGetDto.fromId(writerId))
                 .stream()
@@ -37,6 +32,16 @@ public class CreatePostUsecase {
                 .toList();
        timelineWriteService.deliveryToTimeline(postId,followerIds);
 
+    }
+
+    private static PostCreate getPostCreate(CreatePostCommand command) {
+        PostCreate postCreate = PostCreate.builder()
+                .writerId(command.getWriter())
+                .title(command.getTitle())
+                .status(PostStatus.PUBLISHED)
+                .content(command.getContent())
+                .build();
+        return postCreate;
     }
 
 }

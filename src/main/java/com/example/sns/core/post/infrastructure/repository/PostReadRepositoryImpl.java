@@ -1,21 +1,19 @@
 package com.example.sns.core.post.infrastructure.repository;
 
-import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.infrastructure.repository.entity.PostEntity;
 import com.example.sns.core.post.infrastructure.repository.jpa.PostJpaRepository;
 import com.example.sns.core.post.infrastructure.repository.queryDsl.PostQueryDslRepository;
-import com.example.sns.core.post.service.port.PostRepository;
+import com.example.sns.core.post.service.port.PostReadRepository;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
 @RequiredArgsConstructor
-public class PostRepositoryImpl implements PostRepository {
+public class PostReadRepositoryImpl implements PostReadRepository {
     private final PostJpaRepository postJpaRepository;
     private final PostQueryDslRepository postQueryDslRepository;
 
@@ -24,15 +22,6 @@ public class PostRepositoryImpl implements PostRepository {
         return postJpaRepository.findById(id).map(PostEntity::toModel);
     }
 
-    @Override
-    public Post save(Post post) {
-        return postJpaRepository.save(PostEntity.from(post)).toModel();
-    }
-
-    @Override
-    public Post getById(long id) {
-        return postJpaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("posts", id)).toModel();
-    }
 
     public List<Post> findLatestPostsByWriterAndStatus(Long writerId, PostStatus status, int limit) {
         return postQueryDslRepository.findLatestPostsByWriterAndStatus(writerId,status,limit)
@@ -44,6 +33,10 @@ public class PostRepositoryImpl implements PostRepository {
                 .stream().map(PostEntity::toModel).toList();
     }
 
+    @Override
+    public List<Post> findAllByInId(List<Long> postIds) {
+        return postQueryDslRepository.findAllByInIdOrderByIdDesc(postIds).stream().map(PostEntity::toModel).toList();
+    }
 
 //    @Override
 //    public List<Post> findAllByLessThanIdAndMemberIdInAndOrderByIdDesc(Long key, List<Long> userIds, int size) {
@@ -54,6 +47,5 @@ public class PostRepositoryImpl implements PostRepository {
 //    public List<Post> findAllByWriterIdInAndOrderByIdDesc(List<Long> userIds, int size) {
 //        return postJpaRepository.findAllByWriterIdInOrderByIdDesc(userIds,size);
 //    }
-
 
 }

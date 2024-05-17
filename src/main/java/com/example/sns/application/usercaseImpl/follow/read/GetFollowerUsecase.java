@@ -19,12 +19,12 @@ public class GetFollowerUsecase {
 
     public List<UserDto> execute(GetFollowerUserCommand command) {
         FollowGetDto followGetDto = FollowGetDto.fromId(command.getFollowingId());
-        List<Long> followingIds = followReadService.getFollowers(followGetDto)
+        List<Long> followerIds = followReadService.getFollowers(followGetDto)
                 .stream()
-                .map(FollowDto::getFollowingId)
+                .map(FollowDto::getFollowerId)
                 .collect(Collectors.toList());
 
-        return userReadService.getUsers(followingIds);
+        return userReadService.getUsers(followerIds);
     }
 
 }

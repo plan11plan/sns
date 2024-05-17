@@ -1,18 +1,15 @@
 package com.example.sns.core.post.domain.entity;
 
 import java.util.List;
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 public class CursorResponse<T> {
     private final CursorRequest nextCursorRequest;
-    private final List<T> body;
+    private final List<T> data;
 
-
-    @Builder
-    public CursorResponse(CursorRequest nextCursorRequest, List<T> body) {
+    public CursorResponse(CursorRequest nextCursorRequest, List<T> data) {
         this.nextCursorRequest = nextCursorRequest;
-        this.body = body;
+        this.data = data;
     }
 }

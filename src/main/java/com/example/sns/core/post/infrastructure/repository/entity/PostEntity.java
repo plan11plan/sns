@@ -64,6 +64,9 @@ public class PostEntity {
                 .writerId(new WriterId(writerId))
                 .title(new Title(title))
                 .content(new Content(content))
+                .status(status)
+                .createdAt(createdAt)
+                .modifiedAt(modifiedAt)
                 .build();
 
     }

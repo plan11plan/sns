@@ -17,6 +17,12 @@ import org.springframework.stereotype.Repository;
 public class PostQueryDslRepository {
     private final JPAQueryFactory queryFactory;
 
+    public List<PostEntity> findAllByInIdOrderByIdDesc(List<Long> postIds) {
+        return queryFactory.selectFrom(postEntity)
+                .where(postEntity.id.in(postIds))
+                .orderBy(postEntity.id.desc())
+                .fetch();
+    }
     public List<PostEntity> findLatestPostsByWriterAndStatus(Long writerId, PostStatus statusCon, int limit) {
         return queryFactory.selectFrom(postEntity)
                 .where(allEq(writerId,statusCon))

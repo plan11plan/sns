@@ -21,9 +21,8 @@ public class GetFollowingUsecase {
         FollowGetDto followGetDto = FollowGetDto.fromId(command.getFollowerId());
         List<Long> followingIds = followReadService.getFollowings(followGetDto)
                 .stream()
-                .map(FollowDto::getFollowerId)
+                .map(FollowDto::getFollowingId)
                 .collect(Collectors.toList());
-
         return userReadService.getUsers(followingIds);
     }
 }

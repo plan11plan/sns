@@ -31,13 +31,13 @@
 //        FakeUserRepository fakeUserRepository = new FakeUserRepository();
 //        // DI
 //        this.postCommandService = PostCommandServiceImpl.builder()
-//                .postRepository(fakePostRepository)
+//                .postWriteRepository(fakePostRepository)
 //                .userRepository(fakeUserRepository)
 //                .clockHolder(new TestClockHolder(1679530673958L))
 //                .build();
 //        // DI
 //        this.postReadService = PostReadService.builder()
-//                .postRepository(fakePostRepository)
+//                .postWriteRepository(fakePostRepository)
 //                .build();
 //        // input1
 //        User user1 = User.builder()

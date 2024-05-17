@@ -1,6 +1,7 @@
 package com.example.sns.core.post.infrastructure.repository.entity;
 
 import com.example.sns.core.post.domain.entity.Timeline;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,28 +19,33 @@ import lombok.NoArgsConstructor;
 public class TimelineEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "user_id")
     private Long userId;
+
+    @Column(name = "post_id")
     private Long postId;
+
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public static TimelineEntity from(Timeline timeline){
+    public static TimelineEntity from(Timeline timeline) {
         TimelineEntity timelineEntity = new TimelineEntity();
-        timelineEntity.id = timeline.getId();
         timelineEntity.userId = timeline.getUserId();
         timelineEntity.postId = timeline.getPostId();
         timelineEntity.createdAt = timeline.getCreatedAt();
         return timelineEntity;
     }
 
-    public Timeline toModel(){
-        return  Timeline.builder()
+    public Timeline toModel() {
+        return Timeline.builder()
                 .id(id)
                 .userId(userId)
                 .postId(postId)
                 .createdAt(createdAt)
                 .build();
     }
-
 }

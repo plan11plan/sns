@@ -23,15 +23,15 @@ public class FollowReadController {
     private final GetFollowingUsecase getFollowingUsecase;
     private final GetFollowerUsecase getFollowerUsecase;
 
-    @GetMapping("/following/{followerId}")
-    public List<UserDto> getFollowing(@PathVariable("followerId") Long followerId) {
-        GetFollowingUserCommand command = new GetFollowingUserCommand(Follower.fromId(followerId));
+    @GetMapping("/following")
+    public List<UserDto> getFollowing(@PathVariable("userId") Long userId) {
+        GetFollowingUserCommand command = new GetFollowingUserCommand(Follower.fromId(userId));
         return getFollowingUsecase.execute(command);
     }
 
-    @GetMapping("/follower/{followingId}")
-    public List<UserDto> getFollower(@PathVariable("followingId") Long followingId) {
-        GetFollowerUserCommand command = new GetFollowerUserCommand(Following.fromId(followingId));
+    @GetMapping("/follower")
+    public List<UserDto> getFollower(@PathVariable("userId") Long userId) {
+        GetFollowerUserCommand command = new GetFollowerUserCommand(Following.fromId(userId));
         return getFollowerUsecase.execute(command);
     }
 }

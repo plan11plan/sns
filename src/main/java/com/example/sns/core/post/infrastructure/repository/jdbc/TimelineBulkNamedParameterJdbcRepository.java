@@ -1,4 +1,4 @@
-package com.example.sns.core.post.infrastructure.repository.queryDsl;
+package com.example.sns.core.post.infrastructure.repository.jdbc;
 
 import com.example.sns.core.post.infrastructure.repository.entity.TimelineEntity;
 import java.util.List;
@@ -35,12 +35,12 @@ public class TimelineBulkNamedParameterJdbcRepository {
 //                }
 //        );
 //    }
-    public void bulkInsert(List<TimelineEntity> timelineEntities){
-        String sql = "INSERT INTO timelines (id, user_id, post_id, created_at) VALUES (:id, :userId, :postId, :createdAt)";
-        SqlParameterSource[] params = timelineEntities.stream()
-                .map(timeline -> new BeanPropertySqlParameterSource(timeline))
-                .toArray(SqlParameterSource[]::new);
-        namedParameterJdbcTemplate.batchUpdate(sql, params);
-    }
+public void bulkInsert(List<TimelineEntity> timelineEntities) {
+    String sql = "INSERT INTO timelines (user_id, post_id, created_at) VALUES (:userId, :postId, :createdAt)";
+    SqlParameterSource[] params = timelineEntities.stream()
+            .map(timeline -> new BeanPropertySqlParameterSource(timeline))
+            .toArray(SqlParameterSource[]::new);
+    namedParameterJdbcTemplate.batchUpdate(sql, params);
+}
 }
 

@@ -2,7 +2,7 @@
 //
 //import com.example.sns.common.service.port.ClockHolder;
 //import com.example.sns.common.service.port.UuidHolder;
-//import com.example.sns.core.post.service.port.PostRepository;
+//import com.example.sns.core.post.service.port.PostWriteRepository;
 //import com.example.sns.core.user.service.AuthenticationService;
 //import com.example.sns.core.user.service.CertificationService;
 //import com.example.sns.core.user.service.UserCreateService;
@@ -16,7 +16,7 @@
 //
 //    public final MailSender mailSender;
 //    public final UserRepository userRepository;
-//    public final PostRepository postRepository;
+//    public final PostWriteRepository postWriteRepository;
 //    /// UserService
 //    private final UserUpdateService userUpdateService;
 //    private final UserCreateService userCreateService;
@@ -31,9 +31,9 @@
 //    public TestContainer(ClockHolder clockHolder, UuidHolder uuidHolder) {
 //        this.mailSender = new FakeMailSender();
 //        this.userRepository = new FakeUserRepository();
-//        this.postRepository = new FakePostRepository();
+//        this.postWriteRepository = new FakePostRepository();
 //        this.postCommandService = PostCommandServiceImpl.builder()
-//                .postRepository(this.postRepository)
+//                .postWriteRepository(this.postWriteRepository)
 //                .userRepository(this.userRepository)
 //                .clockHolder(clockHolder)
 //                .build();
