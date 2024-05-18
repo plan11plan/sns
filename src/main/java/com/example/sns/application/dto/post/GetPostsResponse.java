@@ -1,6 +1,7 @@
 package com.example.sns.application.dto.post;
 
 import com.example.sns.core.post.domain.entity.Post;
+import com.example.sns.core.post.service.dto.PostDto;
 import com.example.sns.core.user.domain.entity.vo.UserProfile;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -28,6 +29,18 @@ public class GetPostsResponse {
         this.userProfile = userProfile;
     }
     public static GetPostsResponse convertToGetPostsResponse(Post post, Map<Long, UserProfile> userProfiles) {
+        UserProfile userProfile = userProfiles.get(post.getWriterId().getValue());
+        return GetPostsResponse.builder()
+                .postId(post.getId())
+                .title(post.getTitle().getValue())
+                .content(post.getContent().getValue())
+                .createdAt(post.getCreatedAt())
+                .modifiedAt(post.getModifiedAt())
+                .userProfile(userProfile)
+                .build();
+    }
+
+    public static GetPostsResponse convertToGetPostsResponse(PostDto post, Map<Long, UserProfile> userProfiles) {
         UserProfile userProfile = userProfiles.get(post.getWriterId().getValue());
         return GetPostsResponse.builder()
                 .postId(post.getId())
