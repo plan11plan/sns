@@ -1,6 +1,7 @@
 package com.example.sns.core.post.controller;
 
 import com.example.sns.application.dto.post.GetPostsByCursorCommand;
+import com.example.sns.application.dto.post.GetPostsResponse;
 import com.example.sns.application.dto.post.GetTimelineByCursorCommand;
 import com.example.sns.application.usercaseImpl.post.GetPostUsecase;
 import com.example.sns.application.usercaseImpl.post.GetPostsByCursorUsecase;
@@ -9,7 +10,6 @@ import com.example.sns.core.post.controller.request.GetPostsByCursorRequest;
 import com.example.sns.core.post.controller.response.PostResponse;
 import com.example.sns.core.post.domain.entity.CursorRequest;
 import com.example.sns.core.post.domain.entity.CursorResponse;
-import com.example.sns.core.post.domain.entity.Post;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,13 +37,13 @@ public class PostReadController {
 
 
     @GetMapping("/users/{userId}/by-cursor")
-    public ResponseEntity<CursorResponse<Post>> getPosts(
+    public ResponseEntity<CursorResponse<GetPostsResponse>> getPosts(
             @PathVariable("userId") Long writerId,
             @Valid @RequestBody GetPostsByCursorRequest request) {
 
         var command = GetPostsByCursorCommand.of(writerId, new CursorRequest(request.getSize(), request.getKey()));
 
-        CursorResponse<Post> posts = getPostsByCursorUsecase.execute(command);
+        CursorResponse<GetPostsResponse> posts = getPostsByCursorUsecase.execute(command);
         return ResponseEntity.ok(posts);
     }
 

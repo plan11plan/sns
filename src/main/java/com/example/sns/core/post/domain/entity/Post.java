@@ -50,4 +50,5 @@ public class Post {
                 .createdAt(createdAt)
                 .build();
     }
+
 }

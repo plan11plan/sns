@@ -4,11 +4,13 @@ import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.user.domain.entity.NicknameHistory;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
+import com.example.sns.core.user.domain.entity.vo.UserProfile;
 import com.example.sns.core.user.service.dto.NicknameHistoryDto;
 import com.example.sns.core.user.service.dto.UserDto;
 import com.example.sns.core.user.service.port.NicknameHistoryRepository;
 import com.example.sns.core.user.service.port.UserRepository;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,24 @@ import org.springframework.stereotype.Service;
 public class UserReadService {
     private final UserRepository userRepository;
     private final NicknameHistoryRepository nicknameHistoryRepository;
-
+    public Map<Long, UserProfile> getUserProfiles(List<Long> userIds) {
+        List<User> users = userRepository.findAllByIdIn(userIds).get();
+        return users.stream()
+                .collect(Collectors.toMap(User::getId, user -> UserProfile.builder()
+                        .userId(user.getId())
+                        .nickname(user.getNickname().getValue())
+                        .sex(user.getSex())
+                        .build()));
+    }
+    public UserProfile getUserProfile(Long userId) {
+        User user = userRepository.findByIdAndStatus(userId, UserStatus.ACTIVE)
+                .orElseThrow(() -> new ResourceNotFoundException("Users", userId));
+        return UserProfile.builder()
+                .userId(user.getId())
+                .nickname(user.getNickname().getValue())
+                .sex(user.getSex())
+                .build();
+    }
     public UserDto getByEmail(String email) {
         User user = userRepository.findByEmailAndStatus(email, UserStatus.ACTIVE)
                 .orElseThrow(() -> new ResourceNotFoundException("Users", email));
@@ -51,5 +70,10 @@ public class UserReadService {
                 .map(NicknameHistoryDto::from)
                 .collect(Collectors.toList());
         return dto;
+    }
+    // 새로운 메서드 추가
+    public void ensureWriterExists(Long writerId) {
+        userRepository.findByIdAndStatus(writerId, UserStatus.ACTIVE)
+                .orElseThrow(() -> new ResourceNotFoundException("User", writerId));
     }
 }

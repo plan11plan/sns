@@ -21,14 +21,7 @@ public class GetTimelinePostUsecase {
         CursorResponse<Timeline> pagedTimelines = timelineReadService.getTimelines(command.getUserId(),
                 command.getCursorRequest());
         List<Long> postIds = pagedTimelines.getData().stream().map(Timeline::getPostId).toList();
-        //
-        System.out.println("zz");
-        postIds.stream().forEach(i-> System.out.println(i.intValue()));
-        System.out.println("zzzz");
-        //
         List<PostDto> posts = postReadService.getPosts(postIds);
-        posts.stream().forEach(i-> System.out.println(i.getId()));
-        //
         return new CursorResponse<>(pagedTimelines.getNextCursorRequest(),posts);
     }
 }

@@ -8,6 +8,7 @@ import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.Password;
 import com.example.sns.core.user.domain.entity.Sex;
 import com.example.sns.core.user.domain.entity.UserStatus;
+import com.example.sns.core.user.domain.entity.vo.UserProfile;
 import com.example.sns.core.user.domain.request.UserCreate;
 import com.example.sns.core.user.domain.request.UserUpdate;
 import java.time.LocalDateTime;
@@ -118,5 +119,12 @@ public class User {
 
     public String getNicknameValue() {
         return nickname.getValue();
+    }
+    public UserProfile toUserProfile(){
+        return UserProfile.builder()
+                .userId(this.id)
+                .nickname(this.nickname.getNickname())
+                .sex(this.sex)
+                .build();
     }
 }
