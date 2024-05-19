@@ -17,7 +17,7 @@ public class PostCreateService {
     private final TimeHolder timeHolder;
     public PostDto create(PostCreate postCreate){
         Post post = Post.from(postCreate, timeHolder.nowDateTime());
-        return PostDto.from(postWriteRepository.save(post));
+        return PostDto.from(postWriteRepository.save(post),0L);
 
     }
 }

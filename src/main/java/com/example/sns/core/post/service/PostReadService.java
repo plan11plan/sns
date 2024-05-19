@@ -20,17 +20,20 @@ import org.springframework.stereotype.Service;
 public class PostReadService {
     private final PostReadRepository postReadRepository;
     private final PostQueryDslRepository postQueryDslRepository;
+    private final PostLikeReadService postLikeReadService;
 
     public Post getById(Long id) {
         return postReadRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("post",id));
     }
     public List<PostDto> getPosts(List<Long> postIds) {
-        return postReadRepository.findAllByInId(postIds).stream().map(PostDto::from).toList();
+        return postReadRepository.findAllByInId(postIds).stream().map(
+               i->PostDto.from(i,postLikeReadService.getPostLike(i.getId()))).toList();
     }
 
     //TODO
     public CursorResponse<Post> getPostsByCursor(PostGeyByCursor request) {
         List<Post> posts = findAllBy(request.getWriterId(), request.getStatus(),request.getCursorRequest());
+
         Long nextKey = request.getCursorRequest().getNextKey(posts);
 
         return new CursorResponse<>(request.getCursorRequest().next(nextKey), posts);

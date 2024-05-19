@@ -13,14 +13,16 @@ public class Post {
     private final Title title;
     private final Content content;
     private final PostStatus postStatus;
+    private final Long likeCount;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
 
 
     @Builder
-    public Post(Long id, WriterId writerId, Title title, Content content, PostStatus status, LocalDateTime createdAt,
+    public Post(Long id, WriterId writerId, Title title, Long likeCount, Content content, PostStatus status, LocalDateTime createdAt,
                 LocalDateTime modifiedAt) {
         this.id = id;
+        this.likeCount =0L;
         this.writerId = writerId;
         this.title = title;
         this.postStatus = status;
@@ -28,6 +30,20 @@ public class Post {
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }
+    public Post upLikeCount(Long count){
+        Long updatedCount = this.likeCount + count;
+        return Post.builder()
+                .title(title)
+                .content(content)
+                .status(postStatus)
+                .modifiedAt(modifiedAt)
+                .id(id)
+                .likeCount(updatedCount)
+                .writerId(writerId)
+                .createdAt(createdAt)
+                .build();
+    }
+
 
     public static Post from(PostCreate postCreate, LocalDateTime localDateTime) {
         return Post.builder()

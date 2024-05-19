@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "posts")
 public class PostEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "writer_Id")

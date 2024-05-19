@@ -13,18 +13,20 @@ public class GetPostsResponse {
     Long postId;
     String title;
     String content;
+    Long likeCount;
     LocalDateTime createdAt;
     LocalDateTime modifiedAt;
     UserProfile userProfile;
 
     @Builder
     public GetPostsResponse(Long postId, String title, String content, LocalDateTime createdAt,
-                            LocalDateTime modifiedAt,
+                            LocalDateTime modifiedAt,Long likeCount,
                             UserProfile userProfile) {
         this.postId = postId;
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
+        this.likeCount = likeCount;
         this.modifiedAt = modifiedAt;
         this.userProfile = userProfile;
     }
@@ -40,8 +42,10 @@ public class GetPostsResponse {
                 .build();
     }
 
-    public static GetPostsResponse convertToGetPostsResponse(PostDto post, Map<Long, UserProfile> userProfiles) {
+    public static GetPostsResponse convertToGetPostsResponse(PostDto post, Map<Long, UserProfile> userProfiles,Map<Long, Long> postLikes) {
         UserProfile userProfile = userProfiles.get(post.getWriterId().getValue());
+        Long likeCount = postLikes.get(post.getId());
+
         return GetPostsResponse.builder()
                 .postId(post.getId())
                 .title(post.getTitle().getValue())
@@ -49,6 +53,7 @@ public class GetPostsResponse {
                 .createdAt(post.getCreatedAt())
                 .modifiedAt(post.getModifiedAt())
                 .userProfile(userProfile)
+                .likeCount(likeCount)
                 .build();
     }
 }

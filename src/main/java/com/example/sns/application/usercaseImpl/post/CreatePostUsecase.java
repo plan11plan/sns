@@ -22,6 +22,7 @@ public class CreatePostUsecase {
     private final PostCreateService postCreateService;
     private final TimelineWriteService timelineWriteService;
 
+    //TODO : 트랜잭션을 붙여야할까?  포스트 생성 후, delivery할 대상이 100만명이라면? 생성 속도가 늦다. 트랜잭션 동안 커넥션풀을 차지하고 있는 문제발생.
     public void execute(CreatePostCommand command){
         Long writerId = userReadService.getById(command.getWriterId()).getId();
         PostCreate postCreate = getPostCreate(command);

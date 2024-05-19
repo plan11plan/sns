@@ -15,15 +15,17 @@ public class PostDto {
     private final WriterId writerId;
     private final Title title;
     private final Content content;
+    private final Long likeCount;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
 
 
-    public static PostDto from(Post post) {
+    public static PostDto from(Post post,Long likeCount) {
         return PostDto.builder()
                 .id(post.getId())
                 .writerId(post.getWriterId())
                 .title(post.getTitle())
+                .likeCount(likeCount)
                 .content(post.getContent())
                 .createdAt(post.getCreatedAt())
                 .modifiedAt(post.getModifiedAt())

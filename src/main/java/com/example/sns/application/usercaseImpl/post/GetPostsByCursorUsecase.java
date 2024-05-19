@@ -29,6 +29,7 @@ public class GetPostsByCursorUsecase {
         var postGeyByCursor = createPostGeyByCursor(command);
         var posts = postReadService.getPostsByCursor(postGeyByCursor);
         var userProfiles = getUserProfiles(posts);
+
         List<GetPostsResponse> postResponses = convertToGetPostsResponses(posts, userProfiles);
 
         return new CursorResponse<>(posts.getNextCursorRequest(), postResponses);
