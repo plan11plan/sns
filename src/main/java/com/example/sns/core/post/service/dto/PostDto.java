@@ -5,6 +5,7 @@ import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
 import java.time.LocalDateTime;
+import java.util.Map;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,7 +21,7 @@ public class PostDto {
     private final LocalDateTime modifiedAt;
 
 
-    public static PostDto from(Post post,Long likeCount) {
+    public static PostDto from(Post post, Long likeCount) {
         return PostDto.builder()
                 .id(post.getId())
                 .writerId(post.getWriterId())
@@ -32,5 +33,19 @@ public class PostDto {
                 .build();
 
     }
+
+    public static PostDto toPostDto(Post post, Map<Long, Long> postLikes) {
+        Long postLikeCount = postLikes.get(post.getId());
+        return PostDto.builder()
+                .id(post.getId())
+                .writerId(post.getWriterId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .likeCount(postLikeCount)
+                .modifiedAt(post.getModifiedAt())
+                .createdAt(post.getCreatedAt())
+                .build();
+    }
+
 
 }

@@ -5,9 +5,9 @@ import static com.example.sns.application.dto.post.GetPostsResponse.convertToGet
 import com.example.sns.application.dto.post.GetPostsByCursorCommand;
 import com.example.sns.application.dto.post.GetPostsResponse;
 import com.example.sns.core.post.domain.entity.CursorResponse;
-import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.service.PostReadService;
+import com.example.sns.core.post.service.dto.PostDto;
 import com.example.sns.core.post.service.dto.PostGeyByCursor;
 import com.example.sns.core.user.domain.entity.vo.UserProfile;
 import com.example.sns.core.user.service.UserReadService;
@@ -46,7 +46,7 @@ public class GetPostsByCursorUsecase {
                 .build();
     }
 
-    private Map<Long, UserProfile> getUserProfiles(CursorResponse<Post> posts) {
+    private Map<Long, UserProfile> getUserProfiles(CursorResponse<PostDto> posts) {
         List<Long> writerIds = posts.getData().stream()
                 .map(post -> post.getWriterId().getValue())
                 .distinct()
@@ -54,7 +54,7 @@ public class GetPostsByCursorUsecase {
         return userReadService.getUserProfiles(writerIds);
     }
 
-    private List<GetPostsResponse> convertToGetPostsResponses(CursorResponse<Post> posts,
+    private List<GetPostsResponse> convertToGetPostsResponses(CursorResponse<PostDto> posts,
                                                               Map<Long, UserProfile> userProfiles) {
         return posts.getData().stream()
                 .map(post -> convertToGetPostsResponse(post, userProfiles))

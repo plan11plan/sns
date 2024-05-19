@@ -6,7 +6,6 @@ import com.example.sns.application.dto.post.GetPostsResponse;
 import com.example.sns.application.dto.post.GetTimelineByCursorCommand;
 import com.example.sns.core.post.domain.entity.CursorResponse;
 import com.example.sns.core.post.domain.entity.Timeline;
-import com.example.sns.core.post.service.PostLikeReadService;
 import com.example.sns.core.post.service.PostReadService;
 import com.example.sns.core.post.service.TimelineReadService;
 import com.example.sns.core.post.service.dto.PostDto;
@@ -24,7 +23,6 @@ public class GetTimelinePostUsecase {
     private final UserReadService userReadService;
     private final PostReadService postReadService;
     private final TimelineReadService timelineReadService;
-    private final PostLikeReadService postLikeReadService;
 
     //TODO 1. Timeline 조회, timeline에 해당하는 게시물을 조회한다.
     public CursorResponse execute(GetTimelineByCursorCommand command){
@@ -35,8 +33,7 @@ public class GetTimelinePostUsecase {
         List<Long> postIds = pagedTimelines.getData().stream().map(Timeline::getPostId).toList();
         List<PostDto> posts = postReadService.getPosts(postIds);
         Map<Long, UserProfile> userProfiles = getUserProfiles(posts);
-        Map<Long, Long> postLikes = postLikeReadService.getPostLikes(postIds);
-        List<GetPostsResponse> postResponses = convertToGetTimelinesResponses(posts, userProfiles,postLikes);
+        List<GetPostsResponse> postResponses = convertToGetTimelinesResponses(posts, userProfiles);
 
 
         return new CursorResponse<>(pagedTimelines.getNextCursorRequest(),postResponses);
@@ -54,10 +51,9 @@ public class GetTimelinePostUsecase {
     }
 
     private List<GetPostsResponse> convertToGetTimelinesResponses(List<PostDto> posts,
-                                                              Map<Long, UserProfile> userProfiles,
-                                                                  Map<Long, Long> postLikes) {
+                                                              Map<Long, UserProfile> userProfiles) {
         return posts.stream()
-                .map(post -> convertToGetPostsResponse(post, userProfiles,postLikes))
+                .map(post -> convertToGetPostsResponse(post, userProfiles))
                 .collect(Collectors.toList());
     }
 }

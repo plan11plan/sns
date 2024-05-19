@@ -10,6 +10,8 @@ import com.example.sns.core.post.service.dto.PostDto;
 import com.example.sns.core.post.service.dto.PostGeyByCursor;
 import com.example.sns.core.post.service.port.PostReadRepository;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,31 +25,42 @@ public class PostReadService {
     private final PostLikeReadService postLikeReadService;
 
     public Post getById(Long id) {
-        return postReadRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("post",id));
+        return postReadRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("post", id));
     }
+
     public List<PostDto> getPosts(List<Long> postIds) {
         return postReadRepository.findAllByInId(postIds).stream().map(
-               i->PostDto.from(i,postLikeReadService.getPostLike(i.getId()))).toList();
+                i -> PostDto.from(i, postLikeReadService.getPostLike(i.getId()))).toList();
     }
 
     //TODO
-    public CursorResponse<Post> getPostsByCursor(PostGeyByCursor request) {
-        List<Post> posts = findAllBy(request.getWriterId(), request.getStatus(),request.getCursorRequest());
+    public CursorResponse<PostDto> getPostsByCursor(PostGeyByCursor request) {
+        List<Post> posts = findAllBy(request.getWriterId(), request.getStatus(), request.getCursorRequest());
+        List<Long> postIds = posts.stream().map(Post::getId).toList();
+        Map<Long, Long> postLikes = postLikeReadService.getPostLikes(postIds);
+        List<PostDto> postDtos = convertToPostDto(posts, postLikes);
 
         Long nextKey = request.getCursorRequest().getNextKey(posts);
 
-        return new CursorResponse<>(request.getCursorRequest().next(nextKey), posts);
+        return new CursorResponse<>(request.getCursorRequest().next(nextKey), postDtos);
     }
 
     private List<Post> findAllBy(Long writerId, PostStatus status, CursorRequest cursorRequest) {
         if (cursorRequest.hasKey()) {
-          return  postReadRepository.findPostsByWriterAndStatusBeforeId(writerId,status, cursorRequest.getKey(), cursorRequest.getSize());
+            return postReadRepository.findPostsByWriterAndStatusBeforeId(writerId, status, cursorRequest.getKey(),
+                    cursorRequest.getSize());
 //            return postWriteRepository.findAllByWriterId(cursorRequest.getKey(), writerId, cursorRequest.getSize()
         }
-        return postReadRepository.findLatestPostsByWriterAndStatus(writerId,status,cursorRequest.getSize());
+        return postReadRepository.findLatestPostsByWriterAndStatus(writerId, status, cursorRequest.getSize());
     }
 
-     //TODO : 타임라인을 위한 포스트 조회
+    private List<PostDto> convertToPostDto(List<Post> posts, Map<Long, Long> postLikes) {
+        return posts.stream()
+                .map(post -> PostDto.toPostDto(post, postLikes))
+                .collect(Collectors.toList());
+    }
+
+    //TODO : 타임라인을 위한 포스트 조회
 
 //    public CursorResponse<PostDto> getPostDtos(List<Long> writerIds, CursorRequest cursorRequest) {
 //        var posts = findAllBy(writerIds, cursorRequest);
