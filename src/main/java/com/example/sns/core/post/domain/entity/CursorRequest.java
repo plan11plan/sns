@@ -33,7 +33,7 @@ public class CursorRequest {
     // 아무 포스트도 없을시, NONE KEY
     public  Long getNextKey(List<Post> posts) {
         return posts.stream()
-                .mapToLong(Post::getId)
+                .mapToLong(Post::getPostIdValue)
                 .min()
                 .orElse(CursorRequest.NONE_KEY);
     }

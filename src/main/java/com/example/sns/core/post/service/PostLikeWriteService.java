@@ -18,7 +18,7 @@ public class PostLikeWriteService {
     public void create(Post post, UserDto dto){
         PostLike postLike = PostLike.builder()
                 .writerId(dto.getId())
-                .postId(post.getId())
+                .postId(post.getPostIdValue())
                 .createdAt(timeHolder.nowDateTime())
                 .build();
         postLikeWriteRepository.save(postLike);

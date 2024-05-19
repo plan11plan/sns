@@ -2,6 +2,7 @@ package com.example.sns.core.post.infrastructure.repository.jdbc;
 
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
+import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
 import java.sql.ResultSet;
@@ -31,7 +32,7 @@ public class PostJdbcRepository {
             LocalDateTime modifiedAt = resultSet.getObject("modifiedAt", LocalDateTime.class);
 
             return Post.builder()
-                    .id(id)
+                    .id(new PostId(id))
                     .writerId(writerId)
                     .title(title)
                     .content(content)

@@ -30,13 +30,13 @@ public class PostReadService {
 
     public List<PostDto> getPosts(List<Long> postIds) {
         return postReadRepository.findAllByInId(postIds).stream().map(
-                i -> PostDto.from(i, postLikeReadService.getPostLike(i.getId()))).toList();
+                i -> PostDto.from(i, postLikeReadService.getPostLike(i.getPostIdValue()))).toList();
     }
 
     //TODO
     public CursorResponse<PostDto> getPostsByCursor(PostGeyByCursor request) {
         List<Post> posts = findAllBy(request.getWriterId(), request.getStatus(), request.getCursorRequest());
-        List<Long> postIds = posts.stream().map(Post::getId).toList();
+        List<Long> postIds = posts.stream().map(Post::getPostIdValue).toList();
         Map<Long, Long> postLikes = postLikeReadService.getPostLikes(postIds);
         List<PostDto> postDtos = convertToPostDto(posts, postLikes);
 
@@ -59,27 +59,6 @@ public class PostReadService {
                 .map(post -> PostDto.toPostDto(post, postLikes))
                 .collect(Collectors.toList());
     }
-
-    //TODO : 타임라인을 위한 포스트 조회
-
-//    public CursorResponse<PostDto> getPostDtos(List<Long> writerIds, CursorRequest cursorRequest) {
-//        var posts = findAllBy(writerIds, cursorRequest);
-//        long nextKey = cursorRequest.getNextKey(posts);
-//        var postDtos = posts.stream().map(i -> PostDto.from(i)).toList();
-//        return new CursorResponse(cursorRequest.next(nextKey), postDtos);
-//    }
-//
-//    private List<Post> findAllBy(List<Long> writerIds, CursorRequest cursorRequest) {
-//        if (cursorRequest.hasKey()) {
-//            return postWriteRepository.findAllByLessThanIdAndWriterIdInAndOrderByIdDesc(
-//                    cursorRequest.getKey(),
-//                    writerIds,
-//                    cursorRequest.getSize()
-//            );
-//        }
-//
-//        return postWriteRepository.findAllByWriterIdInAndOrderByIdDesc(writerIds, cursorRequest.getSize());
-//    }
 
 
 }

@@ -2,6 +2,7 @@ package com.example.sns.core.post.service.dto;
 
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
+import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class PostDto {
-    private final Long id;
+    private final PostId id;
     private final WriterId writerId;
     private final Title title;
     private final Content content;
@@ -46,6 +47,5 @@ public class PostDto {
                 .createdAt(post.getCreatedAt())
                 .build();
     }
-
 
 }

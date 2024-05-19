@@ -20,7 +20,7 @@ public class PostResponse {
 
     public static PostResponse from(PostDto postDto, UserResponse writer) {
         return PostResponse.builder()
-                .id(postDto.getId())
+                .id(postDto.getId().getId())
                 .likeCount(postDto.getLikeCount())
                 .title(postDto.getTitle().getValue())
                 .content(postDto.getContent().getValue())

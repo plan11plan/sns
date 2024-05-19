@@ -3,6 +3,7 @@ package com.example.sns.core.post.infrastructure.repository.entity;
 
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
+import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
@@ -48,7 +49,6 @@ public class PostEntity {
 
     public static PostEntity from(Post post) {
         PostEntity postEntity = new PostEntity();
-        postEntity.id = post.getId();
         postEntity.writerId = post.getWriterId().getValue();
         postEntity.status = post.getPostStatus();
         postEntity.title = post.getTitle().getValue();
@@ -60,7 +60,7 @@ public class PostEntity {
 
     public Post toModel() {
         return Post.builder()
-                .id(id)
+                .id(new PostId(id))
                 .writerId(new WriterId(writerId))
                 .title(new Title(title))
                 .content(new Content(content))

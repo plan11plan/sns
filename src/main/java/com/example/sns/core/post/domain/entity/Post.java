@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 public class Post {
-    private final Long id;
+    private final PostId id;
     private final WriterId writerId;
     private final Title title;
     private final Content content;
@@ -19,7 +19,7 @@ public class Post {
 
 
     @Builder
-    public Post(Long id, WriterId writerId, Title title, Long likeCount, Content content, PostStatus status, LocalDateTime createdAt,
+    public Post(PostId id, WriterId writerId, Title title, Long likeCount, Content content, PostStatus status, LocalDateTime createdAt,
                 LocalDateTime modifiedAt) {
         this.id = id;
         this.likeCount =0L;
@@ -66,5 +66,7 @@ public class Post {
                 .createdAt(createdAt)
                 .build();
     }
-
+    public Long getPostIdValue(){
+        return id.getId();
+    }
 }

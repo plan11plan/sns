@@ -32,7 +32,7 @@ public class GetPostsResponse {
     public static GetPostsResponse convertToGetPostsResponse(PostDto post, Map<Long, UserProfile> userProfiles) {
         UserProfile userProfile = userProfiles.get(post.getWriterId().getValue());
         return GetPostsResponse.builder()
-                .postId(post.getId())
+                .postId(post.getId().getId())
                 .title(post.getTitle().getValue())
                 .content(post.getContent().getValue())
                 .createdAt(post.getCreatedAt())
@@ -47,7 +47,7 @@ public class GetPostsResponse {
         Long likeCount = postLikes.get(post.getId());
 
         return GetPostsResponse.builder()
-                .postId(post.getId())
+                .postId(post.getId().getId())
                 .title(post.getTitle().getValue())
                 .content(post.getContent().getValue())
                 .createdAt(post.getCreatedAt())

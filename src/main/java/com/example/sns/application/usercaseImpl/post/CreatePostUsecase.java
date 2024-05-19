@@ -26,7 +26,7 @@ public class CreatePostUsecase {
     public void execute(CreatePostCommand command){
         Long writerId = userReadService.getById(command.getWriterId()).getId();
         PostCreate postCreate = getPostCreate(command);
-        Long postId = postCreateService.create(postCreate).getId();
+        Long postId = postCreateService.create(postCreate).getId().getId();
         List<Long> followerIds = followReadService.getFollowers(FollowGetDto.fromId(writerId))
                 .stream()
                 .map(FollowDto::getFollowerId)
