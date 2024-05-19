@@ -1,10 +1,8 @@
 package com.example.sns.core.post.infrastructure.repository.queryDsl;
 
 
-
 import static com.example.sns.core.post.infrastructure.repository.entity.QPostEntity.postEntity;
 
-import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.infrastructure.repository.entity.PostEntity;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -23,7 +21,7 @@ public class PostQueryDslRepository {
                 .orderBy(postEntity.id.desc())
                 .fetch();
     }
-    public List<PostEntity> findLatestPostsByWriterAndStatus(Long writerId, PostStatus statusCon, int limit) {
+    public List<PostEntity> findLatestPostsByWriterAndStatus(Long writerId, String statusCon, int limit) {
         return queryFactory.selectFrom(postEntity)
                 .where(allEq(writerId,statusCon))
                 .orderBy(postEntity.id.desc())
@@ -31,7 +29,7 @@ public class PostQueryDslRepository {
                 .fetch();
     }
 
-    public List<PostEntity> findPostsByWriterAndStatusBeforeId(Long writerId, PostStatus statusCon, Long lastId, int limit) {
+    public List<PostEntity> findPostsByWriterAndStatusBeforeId(Long writerId, String statusCon, Long lastId, int limit) {
         return queryFactory.selectFrom(postEntity)
                 .where(allEq(writerId,statusCon).and(postEntity.id.lt(lastId)))
                 .orderBy(postEntity.id.desc())
@@ -39,11 +37,11 @@ public class PostQueryDslRepository {
                 .fetch();
     }
 
-    private BooleanExpression allEq(List<Long> writerIds, PostStatus statusCon) {
+    private BooleanExpression allEq(List<Long> writerIds, String statusCon) {
         return idsIn(writerIds).and(postStatusEq(statusCon));
     }
 
-    private BooleanExpression allEq(Long writerId, PostStatus statusCon) {
+    private BooleanExpression allEq(Long writerId, String statusCon) {
         return writerIdEq(writerId).and(postStatusEq(statusCon));
     }
 
@@ -51,7 +49,7 @@ public class PostQueryDslRepository {
         return ids != null && !ids.isEmpty() ? postEntity.id.in(ids) : null;
     }
 
-    private BooleanExpression postStatusEq(PostStatus statusCon) {
+    private BooleanExpression postStatusEq(String statusCon) {
         return statusCon != null ? postEntity.status.eq(statusCon) : null;
 
     }

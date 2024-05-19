@@ -1,14 +1,23 @@
 package com.example.sns.core.post.domain.entity;
 
-public class PostLikeCount {
-    private Long postId;
-    private Long likeCount;
+import lombok.Getter;
 
-    public Long getPostId() {
-        return postId;
+public class PostLikeCount {
+    private PostId postId;
+    private LikeCount likeCount;
+
+    public Long getPostIdValue() {
+        return postId.getId();
     }
 
-    public Long getLikeCount() {
-        return likeCount;
+    public Long getLikeCountValue() {
+        return likeCount.value;
+    }
+
+
+    @Getter
+    public class LikeCount{
+        Long value;
+
     }
 }

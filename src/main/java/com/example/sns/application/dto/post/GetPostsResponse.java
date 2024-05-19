@@ -30,11 +30,11 @@ public class GetPostsResponse {
         this.userProfile = userProfile;
     }
     public static GetPostsResponse convertToGetPostsResponse(PostDto post, Map<Long, UserProfile> userProfiles) {
-        UserProfile userProfile = userProfiles.get(post.getWriterId().getValue());
+        UserProfile userProfile = userProfiles.get(post.getWriterId());
         return GetPostsResponse.builder()
-                .postId(post.getId().getId())
-                .title(post.getTitle().getValue())
-                .content(post.getContent().getValue())
+                .postId(post.getId())
+                .title(post.getTitle())
+                .content(post.getContent())
                 .createdAt(post.getCreatedAt())
                 .modifiedAt(post.getModifiedAt())
                 .userProfile(userProfile)
@@ -43,13 +43,13 @@ public class GetPostsResponse {
     }
 
     public static GetPostsResponse convertToGetPostsResponse(PostDto post, Map<Long, UserProfile> userProfiles,Map<Long, Long> postLikes) {
-        UserProfile userProfile = userProfiles.get(post.getWriterId().getValue());
+        UserProfile userProfile = userProfiles.get(post.getWriterId());
         Long likeCount = postLikes.get(post.getId());
 
         return GetPostsResponse.builder()
-                .postId(post.getId().getId())
-                .title(post.getTitle().getValue())
-                .content(post.getContent().getValue())
+                .postId(post.getId())
+                .title(post.getTitle())
+                .content(post.getContent())
                 .createdAt(post.getCreatedAt())
                 .modifiedAt(post.getModifiedAt())
                 .userProfile(userProfile)

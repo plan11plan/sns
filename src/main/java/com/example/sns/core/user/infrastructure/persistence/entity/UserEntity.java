@@ -9,8 +9,6 @@ import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,11 +31,10 @@ public class UserEntity {
     private String email;
     private String password;
     private String nickname;
-    private Sex sex;
+    private String sex;
     private LocalDate birthday;
     @Column(name = "status")
-    @Enumerated(EnumType.STRING)
-    private UserStatus status;
+    private String status;
     @Column(name = "certification_code")
     private String certificationCode;
     private LocalDateTime createdAt;
@@ -45,12 +42,12 @@ public class UserEntity {
     public static UserEntity from(User user) {
         UserEntity userEntity = new UserEntity();
         userEntity.id = user.getId();
-        userEntity.email = user.getEmail().getValue();
-        userEntity.password = user.getPassword().getValue();
-        userEntity.nickname = user.getNickname().getValue();
-        userEntity.sex = user.getSex();
-        userEntity.birthday = user.getBirthday().getBirthday();
-        userEntity.status = user.getStatus();
+        userEntity.email = user.getEmailValue();
+        userEntity.password = user.getPasswordValue();
+        userEntity.nickname = user.getNicknameValue();
+        userEntity.sex = user.getSexValue();
+        userEntity.birthday = user.getBirthdayValue();
+        userEntity.status = user.getStatusValue();
         userEntity.certificationCode = user.getCertificationCode();
         userEntity.createdAt = user.getCreatedAt();
         return userEntity;
@@ -63,9 +60,9 @@ public class UserEntity {
                 .email(new Email(email))
                 .password(new Password(password))
                 .nickname(new Nickname(nickname))
-                .sex(sex)
+                .sex(Sex.valueOf(sex))
                 .birthday(new Birthday(birthday))
-                .status(status)
+                .status(UserStatus.valueOf(status))
                 .certificationCode(certificationCode)
                 .createdAt(createdAt)
                 .build();

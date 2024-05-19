@@ -43,11 +43,11 @@ class UserTest {
 
         // then
         assertThat(userCreate.getNickname().getValue()).isEqualTo("nickname");
-        assertThat(userCreate.getEmail().getEmail()).isEqualTo("email@gmail.com");
-        assertThat(userCreate.getPassword().getPassword()).isEqualTo("password");
+        assertThat(userCreate.getEmail().getValue()).isEqualTo("email@gmail.com");
+        assertThat(userCreate.getPassword().getValue()).isEqualTo("password");
         assertThat(userCreate.getSex().toString()).isEqualTo("M");
         assertThat(userCreate.getStatus()).isEqualTo(UserStatus.PENDING);
-        assertThat(userCreate.getBirthday().getBirthday()).isEqualTo("1999-07-28");
+        assertThat(userCreate.getBirthday().getValue()).isEqualTo("1999-07-28");
 
 
     }
@@ -87,15 +87,15 @@ class UserTest {
 
         // then
         assertThat(user.getNickname().getValue()).isEqualTo("changeNickname");
-        assertThat(user.getPassword().getPassword()).isEqualTo("changePassword");
-        assertThat(user.getEmail().getEmail()).isEqualTo("changeEmail@gmail.com");
+        assertThat(user.getPassword().getValue()).isEqualTo("changePassword");
+        assertThat(user.getEmail().getValue()).isEqualTo("changeEmail@gmail.com");
         // and
         assertThat(user.getId()).isEqualTo(1L);
         assertThat(user.getSex().toString()).isEqualTo("W");
         assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
         assertThat(user.getCertificationCode()).isEqualTo(certificationCode);
         assertThat(user.getCreatedAt()).isEqualTo(now);
-        assertThat(user.getBirthday().getBirthday()).isEqualTo("1999-07-28");
+        assertThat(user.getBirthday().getValue()).isEqualTo("1999-07-28");
     }
 
     @DisplayName("User는 로그인을 할 수 있고, 로그인시 마지막 로그인 시간이 변경된다.")
@@ -123,10 +123,10 @@ class UserTest {
         // then
         assertThat(user.getId()).isEqualTo(1L);
         assertThat(user.getNickname().getValue()).isEqualTo("nickname");
-        assertThat(user.getEmail().getEmail()).isEqualTo("email@gmail.com");
-        assertThat(user.getPassword().getPassword()).isEqualTo("password");
+        assertThat(user.getEmail().getValue()).isEqualTo("email@gmail.com");
+        assertThat(user.getPassword().getValue()).isEqualTo("password");
         assertThat(user.getSex().toString()).isEqualTo("M");
-        assertThat(user.getBirthday().getBirthday()).isEqualTo("1999-07-28");
+        assertThat(user.getBirthday().getValue()).isEqualTo("1999-07-28");
         assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
         assertThat(user.getCertificationCode()).isEqualTo(certificationCode);
         assertThat(user.getLastLoginAt()).isEqualTo(loginTime);
@@ -162,10 +162,10 @@ class UserTest {
         // and
         assertThat(user.getId()).isEqualTo(1L);
         assertThat(user.getNickname().getValue()).isEqualTo("nickname");
-        assertThat(user.getEmail().getEmail()).isEqualTo("email@gmail.com");
-        assertThat(user.getPassword().getPassword()).isEqualTo("password");
+        assertThat(user.getEmail().getValue()).isEqualTo("email@gmail.com");
+        assertThat(user.getPassword().getValue()).isEqualTo("password");
         assertThat(user.getSex().toString()).isEqualTo("M");
-        assertThat(user.getBirthday().getBirthday()).isEqualTo("1999-07-28");
+        assertThat(user.getBirthday().getValue()).isEqualTo("1999-07-28");
         assertThat(user.getCertificationCode()).isEqualTo(certificationCode);
         assertThat(user.getLastLoginAt()).isEqualTo(now);
         assertThat(user.getCreatedAt()).isEqualTo(now);

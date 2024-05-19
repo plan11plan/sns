@@ -2,7 +2,6 @@ package com.example.sns.core.user.service;
 
 import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.user.domain.entity.NicknameHistory;
-import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.domain.entity.vo.UserProfile;
 import com.example.sns.core.user.service.dto.NicknameHistoryDto;
@@ -22,6 +21,7 @@ import org.springframework.stereotype.Service;
 public class UserReadService {
     private final UserRepository userRepository;
     private final NicknameHistoryRepository nicknameHistoryRepository;
+    private final String USER_STATUS_ACTIVE = "ACTIVE";
     public Map<Long, UserProfile> getUserProfiles(List<Long> userIds) {
         List<User> users = userRepository.findAllByIdIn(userIds).get();
         return users.stream()
@@ -32,7 +32,7 @@ public class UserReadService {
                         .build()));
     }
     public UserProfile getUserProfile(Long userId) {
-        User user = userRepository.findByIdAndStatus(userId, UserStatus.ACTIVE)
+        User user = userRepository.findByIdAndStatus(userId, USER_STATUS_ACTIVE)
                 .orElseThrow(() -> new ResourceNotFoundException("Users", userId));
         return UserProfile.builder()
                 .userId(user.getId())
@@ -41,19 +41,19 @@ public class UserReadService {
                 .build();
     }
     public UserDto getByEmail(String email) {
-        User user = userRepository.findByEmailAndStatus(email, UserStatus.ACTIVE)
+        User user = userRepository.findByEmailAndStatus(email, USER_STATUS_ACTIVE)
                 .orElseThrow(() -> new ResourceNotFoundException("Users", email));
         return UserDto.from(user);
     }
 
     public UserDto getById(Long id) {
-        User user = userRepository.findByIdAndStatus(id, UserStatus.ACTIVE)
+        User user = userRepository.findByIdAndStatus(id, USER_STATUS_ACTIVE)
                 .orElseThrow(() -> new ResourceNotFoundException("Users", id));
         return UserDto.from(user);
     }
 
     public UserDto getByIdAndStatus(long id) {
-        User user = userRepository.findByIdAndStatus(id, UserStatus.ACTIVE).get();
+        User user = userRepository.findByIdAndStatus(id, USER_STATUS_ACTIVE).get();
         return UserDto.from(user);
     }
     //TODO : 예외 처리 해야함
@@ -73,7 +73,7 @@ public class UserReadService {
     }
     // 새로운 메서드 추가
     public void ensureWriterExists(Long writerId) {
-        userRepository.findByIdAndStatus(writerId, UserStatus.ACTIVE)
+        userRepository.findByIdAndStatus(writerId, USER_STATUS_ACTIVE)
                 .orElseThrow(() -> new ResourceNotFoundException("User", writerId));
     }
 }

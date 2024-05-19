@@ -30,7 +30,7 @@ public class PostLikeQueryDslRepository {
                 .groupBy(postLikeEntity.postId)
                 .fetch()
                 .stream()
-                .collect(Collectors.toMap(PostLikeCount::getPostId, PostLikeCount::getLikeCount));
+                .collect(Collectors.toMap(PostLikeCount::getPostIdValue, PostLikeCount::getLikeCountValue));
     }
 
 

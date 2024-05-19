@@ -9,15 +9,15 @@ import lombok.Getter;
 public class Title {
     public static final int LENGTH_MIN = 2;
     public static final int LENGTH_MAX = 20;
-    private String title;
+    private String value;
 
-    public Title(String title) {
-        TitleValidatorFactory.blankValidator().validate(title);
-        TitleValidatorFactory.lengthValidator().validate(title);
-        this.title = title;
+    public Title(String value) {
+        TitleValidatorFactory.blankValidator().validate(value);
+        TitleValidatorFactory.lengthValidator().validate(value);
+        this.value = value;
     }
 
     public String getValue() {
-        return this.title;
+        return this.value;
     }
 }

@@ -5,7 +5,6 @@ import com.example.sns.application.dto.post.CreatePostCommand;
 import com.example.sns.core.follow.service.read.FollowReadService;
 import com.example.sns.core.follow.service.request.FollowGetDto;
 import com.example.sns.core.follow.service.response.FollowDto;
-import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.domain.entity.request.PostCreate;
 import com.example.sns.core.post.service.PostCreateService;
 import com.example.sns.core.post.service.TimelineWriteService;
@@ -26,7 +25,7 @@ public class CreatePostUsecase {
     public void execute(CreatePostCommand command){
         Long writerId = userReadService.getById(command.getWriterId()).getId();
         PostCreate postCreate = getPostCreate(command);
-        Long postId = postCreateService.create(postCreate).getId().getId();
+        Long postId = postCreateService.create(postCreate).getId();
         List<Long> followerIds = followReadService.getFollowers(FollowGetDto.fromId(writerId))
                 .stream()
                 .map(FollowDto::getFollowerId)
@@ -37,9 +36,9 @@ public class CreatePostUsecase {
 
     private static PostCreate getPostCreate(CreatePostCommand command) {
         PostCreate postCreate = PostCreate.builder()
-                .writerId(command.getWriter())
+                .writerId(command.getWriterId())
                 .title(command.getTitle())
-                .status(PostStatus.PUBLISHED)
+                .status("PUBLISHED")
                 .content(command.getContent())
                 .build();
         return postCreate;

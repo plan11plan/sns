@@ -4,7 +4,6 @@ import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.post.domain.entity.CursorRequest;
 import com.example.sns.core.post.domain.entity.CursorResponse;
 import com.example.sns.core.post.domain.entity.Post;
-import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.infrastructure.repository.queryDsl.PostQueryDslRepository;
 import com.example.sns.core.post.service.dto.PostDto;
 import com.example.sns.core.post.service.dto.PostGeyByCursor;
@@ -45,7 +44,7 @@ public class PostReadService {
         return new CursorResponse<>(request.getCursorRequest().next(nextKey), postDtos);
     }
 
-    private List<Post> findAllBy(Long writerId, PostStatus status, CursorRequest cursorRequest) {
+    private List<Post> findAllBy(Long writerId, String status, CursorRequest cursorRequest) {
         if (cursorRequest.hasKey()) {
             return postReadRepository.findPostsByWriterAndStatusBeforeId(writerId, status, cursorRequest.getKey(),
                     cursorRequest.getSize());

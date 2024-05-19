@@ -1,8 +1,5 @@
 package com.example.sns.presentation.post.controller.request;
 
-import com.example.sns.core.post.domain.entity.Content;
-import com.example.sns.core.post.domain.entity.Title;
-import com.example.sns.core.post.domain.entity.WriterId;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,16 +7,17 @@ import lombok.Getter;
 @Getter
 public class PostCreateRequest {
     @JsonProperty("writerId")
-    WriterId writerId;
+    Long writerId;
     @JsonProperty("title")
-    Title title;
+    String title;
     @JsonProperty("content")
-    Content content;
+    String content;
 
     @Builder
-    public PostCreateRequest(WriterId writerId, Title title, Content content) {
+    public PostCreateRequest(Long writerId, String title, String content) {
         this.writerId = writerId;
         this.title = title;
         this.content = content;
     }
 }
+

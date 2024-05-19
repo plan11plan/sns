@@ -20,10 +20,10 @@ public class PostResponse {
 
     public static PostResponse from(PostDto postDto, UserResponse writer) {
         return PostResponse.builder()
-                .id(postDto.getId().getId())
+                .id(postDto.getId())
                 .likeCount(postDto.getLikeCount())
-                .title(postDto.getTitle().getValue())
-                .content(postDto.getContent().getValue())
+                .title(postDto.getTitle())
+                .content(postDto.getContent())
                 .createdAt(postDto.getCreatedAt())
                 .modifiedAt(postDto.getModifiedAt())
                 .writer(writer)

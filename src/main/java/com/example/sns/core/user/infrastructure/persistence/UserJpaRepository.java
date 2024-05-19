@@ -1,7 +1,6 @@
 package com.example.sns.core.user.infrastructure.persistence;
 
 
-import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.infrastructure.persistence.entity.UserEntity;
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserJpaRepository extends JpaRepository<UserEntity,Long> {
 
-    Optional<UserEntity> findByIdAndStatus(Long id, UserStatus status);
+    Optional<UserEntity> findByIdAndStatus(Long id, String status);
 
-    Optional<UserEntity> findByEmailAndStatus(String email, UserStatus status);
+    Optional<UserEntity> findByEmailAndStatus(String email, String status);
 
     Optional<UserEntity> findByEmail(String email);
 

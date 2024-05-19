@@ -17,22 +17,22 @@ import lombok.NoArgsConstructor;
 public class Nickname {
     public static final int LENGTH_MIN = 2;
     public static final int LENGTH_MAX = 20;
-    private String nickname;
+    private String value;
 
     @Builder
-    public Nickname(String nickname)  {
+    public Nickname(String value)  {
 //        blankValidator().validate(nickname);
 //        lengthValidator().validate(nickname);
-        this.nickname = nickname;
+        this.value = value;
     }
 
     public void editTo(Nickname to) {
         duplicateValidator().validate(new Pair<>(to,this));
-        this.nickname = to.getValue();
+        this.value = to.getValue();
     }
 
     public String getValue() {
-        return this.nickname;
+        return this.value;
     }
 
 }

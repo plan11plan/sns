@@ -44,7 +44,7 @@ public class GetTimelinePostUsecase {
     }
     private Map<Long, UserProfile> getUserProfiles(List<PostDto> posts) {
         List<Long> writerIds = posts.stream()
-                .map(post -> post.getWriterId().getValue())
+                .map(post -> post.getWriterId())
                 .distinct()
                 .collect(Collectors.toList());
         return userReadService.getUserProfiles(writerIds);

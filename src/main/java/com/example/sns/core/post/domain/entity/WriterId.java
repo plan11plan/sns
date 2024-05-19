@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class WriterId {
-    Long writerId;
+    Long value;
 
     public Long getValue(){
-        return this.writerId;
+        return this.value;
     }
 
     @Builder
-    public WriterId(long writerId) {
-        this.writerId = writerId;
+    public WriterId(long value) {
+        this.value = value;
     }
 }

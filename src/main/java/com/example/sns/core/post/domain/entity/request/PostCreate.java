@@ -16,10 +16,10 @@ public class PostCreate {
         private final PostStatus status;
 
         @Builder
-        public PostCreate(WriterId writerId, Title title, Content content, PostStatus status) {
-                this.writerId = writerId;
-                this.title = title;
-                this.content = content;
-                this.status = status;
+        public PostCreate(Long writerId, String title, String content, String status) {
+                this.writerId = new WriterId(writerId);
+                this.title = new Title(title);
+                this.content = new Content(content);
+                this.status = PostStatus.valueOf(status);
         }
 }

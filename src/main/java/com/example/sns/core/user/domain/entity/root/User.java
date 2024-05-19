@@ -11,6 +11,7 @@ import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.vo.UserProfile;
 import com.example.sns.core.user.domain.request.UserCreate;
 import com.example.sns.core.user.domain.request.UserUpdate;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
@@ -123,8 +124,23 @@ public class User {
     public UserProfile toUserProfile(){
         return UserProfile.builder()
                 .userId(this.id)
-                .nickname(this.nickname.getNickname())
+                .nickname(this.nickname.getValue())
                 .sex(this.sex)
                 .build();
+    }
+    public String getPasswordValue(){
+        return password.getValue();
+    }
+    public String getEmailValue(){
+        return email.getValue();
+    }
+    public LocalDate getBirthdayValue(){
+        return birthday.getValue();
+    }
+    public String getSexValue(){
+        return sex.name();
+    }
+    public String getStatusValue(){
+        return status.name();
     }
 }

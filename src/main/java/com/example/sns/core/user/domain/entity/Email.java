@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Embeddable
 public class Email {
-    String email;
+    String value;
 
     public String getValue() {
-        return email;
+        return value;
     }
 }

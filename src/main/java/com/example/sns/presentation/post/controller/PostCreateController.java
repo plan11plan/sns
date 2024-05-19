@@ -31,6 +31,7 @@ public class PostCreateController {
         createPostUsecase.execute(command);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(request.getWriterId().getWriterId());
+                .body(request.getWriterId());
     }
+
 }

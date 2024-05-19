@@ -27,7 +27,7 @@ public class QPostEntity extends EntityPathBase<PostEntity> {
 
     public final DateTimePath<java.time.LocalDateTime> modifiedAt = createDateTime("modifiedAt", java.time.LocalDateTime.class);
 
-    public final EnumPath<com.example.sns.core.post.domain.entity.PostStatus> status = createEnum("status", com.example.sns.core.post.domain.entity.PostStatus.class);
+    public final StringPath status = createString("status");
 
     public final StringPath title = createString("title");
 

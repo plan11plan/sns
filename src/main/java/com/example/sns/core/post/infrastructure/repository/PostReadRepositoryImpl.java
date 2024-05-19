@@ -23,12 +23,12 @@ public class PostReadRepositoryImpl implements PostReadRepository {
     }
 
 
-    public List<Post> findLatestPostsByWriterAndStatus(Long writerId, PostStatus status, int limit) {
+    public List<Post> findLatestPostsByWriterAndStatus(Long writerId, String status, int limit) {
         return postQueryDslRepository.findLatestPostsByWriterAndStatus(writerId,status,limit)
                 .stream().map(PostEntity::toModel).toList();
     }
 
-    public List<Post> findPostsByWriterAndStatusBeforeId(Long writerId, PostStatus status, Long lastId, int limit) {
+    public List<Post> findPostsByWriterAndStatusBeforeId(Long writerId, String  status, Long lastId, int limit) {
         return postQueryDslRepository.findPostsByWriterAndStatusBeforeId(writerId,status,lastId,limit)
                 .stream().map(PostEntity::toModel).toList();
     }

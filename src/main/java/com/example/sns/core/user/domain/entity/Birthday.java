@@ -8,12 +8,12 @@ import lombok.Getter;
 
 @Getter
 public class Birthday {
-    private final LocalDate birthday;
+    private final LocalDate value;
 
     // Use @JsonCreator to indicate that this constructor should be used when deserializing.
     @Builder
     @JsonCreator
-    public Birthday(LocalDate birthday) {
-        this.birthday = birthday;
+    public Birthday(LocalDate value) {
+        this.value = value;
     }
 }

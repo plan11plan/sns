@@ -4,6 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
+import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
 import com.example.sns.core.post.domain.entity.request.PostCreate;
@@ -18,9 +19,9 @@ public class PostTest {
         // given
         LocalDateTime createTime = LocalDateTime.now();
         PostCreate postCreate = PostCreate.builder()
-                .writerId(new WriterId(1L))
-                .title(new Title("title"))
-                .content(new Content("content"))
+                .writerId(1L)
+                .title("title")
+                .content("content")
                 .build();
         // when
         Post post = Post.from(postCreate, createTime);
@@ -43,7 +44,7 @@ public class PostTest {
         LocalDateTime updatedAt = LocalDateTime.now();
 
         Post post = Post.builder()
-                .id(1L)
+                .id(new PostId(1L))
                 .writerId(new WriterId(1L))
                 .title(new Title("title"))
                 .content(new Content("content"))

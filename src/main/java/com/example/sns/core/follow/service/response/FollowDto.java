@@ -2,8 +2,6 @@ package com.example.sns.core.follow.service.response;
 
 import com.example.sns.core.follow.domain.Follow;
 import com.example.sns.core.follow.domain.FollowStatus;
-import com.example.sns.core.follow.domain.Following;
-import com.example.sns.core.follow.domain.Follower;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,14 +11,14 @@ import lombok.Getter;
 @Getter
 public class FollowDto {
     private final Long id;
-    private final Follower follower;
-    private final Following following;
+    private final Long follower;
+    private final Long following;
     private final FollowStatus status;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
 
     @Builder
-    public FollowDto(Long id, Follower follower, Following following, FollowStatus status, LocalDateTime createdAt,
+    public FollowDto(Long id, Long follower, Long following, FollowStatus status, LocalDateTime createdAt,
                      LocalDateTime modifiedAt) {
         this.id = id;
         this.follower = follower;
@@ -32,8 +30,8 @@ public class FollowDto {
     public static FollowDto from(Follow follow){
         return FollowDto.builder()
                 .id(follow.getId())
-                .follower(follow.getFollower())
-                .following(follow.getFollowing())
+                .follower(follow.getFollowerValue())
+                .following(follow.getFollowingValue())
                 .status(follow.getStatus())
                 .createdAt(follow.getCreatedAt())
                 .modifiedAt(follow.getModifiedAt())
@@ -43,10 +41,10 @@ public class FollowDto {
     public static List<FollowDto> from(List<Follow> follows){
        return follows.stream().map(FollowDto::from).collect(Collectors.toList());
     }
-    public java.lang.Long getFollowerId(){
-        return this.getFollower().getId();
+    public Long getFollowerId(){
+        return this.getFollower();
     }
-    public java.lang.Long getFollowingId(){
-        return this.getFollowing().getId();
+    public Long getFollowingId(){
+        return this.getFollowing();
     }
 }

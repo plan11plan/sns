@@ -17,24 +17,24 @@ import lombok.NoArgsConstructor;
 public class Password {
     public static final int LENGTH_MIN = 4;
     public static final int LENGTH_MAX = 20;
-    private String password;
+    private String value;
 
     @Builder
     public Password(String input) {
         PasswordValidatorFactory.blankValidator().validate(input);
         PasswordValidatorFactory.lengthValidator().validate(input);
-        this.password =input;
+        this.value =input;
     }
 
 
     public void editTo(Password to){
         PasswordValidatorFactory.duplicateCurrentPasswordValidator().validate(new Pair<>(this,to));
-        this.password=to.getValue();
+        this.value =to.getValue();
 
     }
 
 
     public String getValue() {
-        return this.password;
+        return this.value;
     }
 }

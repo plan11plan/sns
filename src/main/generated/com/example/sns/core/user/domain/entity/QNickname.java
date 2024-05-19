@@ -17,9 +17,7 @@ public class QNickname extends BeanPath<Nickname> {
 
     private static final long serialVersionUID = 1982980042L;
 
-    public static final QNickname nickname1 = new QNickname("nickname1");
-
-    public final StringPath nickname = createString("nickname");
+    public static final QNickname nickname = new QNickname("nickname");
 
     public final StringPath value = createString("value");
 

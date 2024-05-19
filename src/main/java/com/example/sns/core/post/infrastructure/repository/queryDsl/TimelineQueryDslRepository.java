@@ -3,7 +3,6 @@ package com.example.sns.core.post.infrastructure.repository.queryDsl;
 import static com.example.sns.core.post.infrastructure.repository.entity.QPostEntity.postEntity;
 import static com.example.sns.core.post.infrastructure.repository.entity.QTimelineEntity.timelineEntity;
 
-import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.infrastructure.repository.entity.TimelineEntity;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -35,7 +34,7 @@ public class TimelineQueryDslRepository {
                 .limit(limit)
                 .fetch();
     }
-    private BooleanExpression allEq(List<Long> userIds, PostStatus statusCon) {
+    private BooleanExpression allEq(List<Long> userIds, String statusCon) {
         return idsIn(userIds).and(postStatusEq(statusCon));
     }
 
@@ -44,7 +43,7 @@ public class TimelineQueryDslRepository {
         return ids != null && !ids.isEmpty() ? timelineEntity.id.in(ids) : null;
     }
 
-    private BooleanExpression postStatusEq(PostStatus statusCon) {
+    private BooleanExpression postStatusEq(String statusCon) {
         return statusCon != null ? postEntity.status.eq(statusCon) : null;
 
     }

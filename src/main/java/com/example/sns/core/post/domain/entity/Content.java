@@ -8,13 +8,13 @@ import lombok.Getter;
 @Getter
 public class Content {
     @Lob
-    String contents;
+    String value;
 
-    public Content(String contents) {
-        this.contents = Objects.requireNonNull(contents,"내용을 입력해주세요)");
+    public Content(String value) {
+        this.value = Objects.requireNonNull(value,"내용을 입력해주세요)");
     }
 
     public String getValue(){
-        return this.contents;
+        return this.value;
     }
 }

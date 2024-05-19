@@ -1,7 +1,6 @@
 package com.example.sns.mock;
 
 import com.example.sns.core.common.exception.ResourceNotFoundException;
-import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.service.port.UserRepository;
 import java.util.ArrayList;
@@ -16,23 +15,23 @@ public class FakeUserRepository implements UserRepository {
     private final List<User> data = Collections.synchronizedList(new ArrayList<>());
 
     @Override
-    public User getById(long id) {
+    public User getById(Long id) {
         return findById(id).orElseThrow(() -> new ResourceNotFoundException("Users", id));
     }
 
     @Override
-    public Optional<User> findById(long id) {
+    public Optional<User> findById(Long id) {
         return data.stream().filter(item -> item.getId().equals(id)).findAny();
     }
 
     @Override
-    public Optional<User> findByIdAndStatus(long id, UserStatus userStatus) {
-        return data.stream().filter(item -> item.getId().equals(id) && item.getStatus() == userStatus).findAny();
+    public Optional<User> findByIdAndStatus(Long id, String userStatus) {
+        return data.stream().filter(item -> item.getId().equals(id) && item.getStatusValue() == userStatus).findAny();
     }
 
     @Override
-    public Optional<User> findByEmailAndStatus(String email, UserStatus userStatus) {
-        return data.stream().filter(item -> item.getEmail().equals(email) && item.getStatus() == userStatus).findAny();
+    public Optional<User> findByEmailAndStatus(String email,String userStatus) {
+        return data.stream().filter(item -> item.getEmail().equals(email) && item.getStatusValue() == userStatus).findAny();
     }
 
     @Override

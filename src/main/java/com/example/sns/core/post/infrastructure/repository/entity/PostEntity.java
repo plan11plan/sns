@@ -9,8 +9,6 @@ import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,8 +31,7 @@ public class PostEntity {
     private Long writerId;
 
     @Column(name ="status")
-    @Enumerated(EnumType.STRING)
-    private PostStatus status;
+    private String status;
 
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
@@ -49,10 +46,10 @@ public class PostEntity {
 
     public static PostEntity from(Post post) {
         PostEntity postEntity = new PostEntity();
-        postEntity.writerId = post.getWriterId().getValue();
-        postEntity.status = post.getPostStatus();
-        postEntity.title = post.getTitle().getValue();
-        postEntity.content = post.getContent().getValue();
+        postEntity.writerId = post.getWriterIdValue();
+        postEntity.status = post.getStatusValue();
+        postEntity.title = post.getTitleValue();
+        postEntity.content = post.getContentValue();
         postEntity.createdAt=post.getCreatedAt();
         postEntity.modifiedAt=post.getModifiedAt();
         return postEntity;
@@ -64,7 +61,7 @@ public class PostEntity {
                 .writerId(new WriterId(writerId))
                 .title(new Title(title))
                 .content(new Content(content))
-                .status(status)
+                .status(PostStatus.valueOf(status))
                 .createdAt(createdAt)
                 .modifiedAt(modifiedAt)
                 .build();

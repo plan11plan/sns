@@ -5,7 +5,6 @@ import static com.example.sns.application.dto.post.GetPostsResponse.convertToGet
 import com.example.sns.application.dto.post.GetPostsByCursorCommand;
 import com.example.sns.application.dto.post.GetPostsResponse;
 import com.example.sns.core.post.domain.entity.CursorResponse;
-import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.service.PostReadService;
 import com.example.sns.core.post.service.dto.PostDto;
 import com.example.sns.core.post.service.dto.PostGeyByCursor;
@@ -22,6 +21,7 @@ import org.springframework.stereotype.Service;
 public class GetPostsByCursorUsecase {
     private final UserReadService userReadService;
     private final PostReadService postReadService;
+    private final String POST_STATUS_PUBLISHED = "PUBLISHED";
 
     public CursorResponse<GetPostsResponse> execute(GetPostsByCursorCommand command) {
         ensureWriterExists(command.getWriterId());
@@ -41,14 +41,14 @@ public class GetPostsByCursorUsecase {
     private PostGeyByCursor createPostGeyByCursor(GetPostsByCursorCommand command) {
         return PostGeyByCursor.builder()
                 .writerId(command.getWriterId())
-                .status(PostStatus.PUBLISHED)
+                .status(POST_STATUS_PUBLISHED)
                 .cursorRequest(command.getCursorRequest())
                 .build();
     }
 
     private Map<Long, UserProfile> getUserProfiles(CursorResponse<PostDto> posts) {
         List<Long> writerIds = posts.getData().stream()
-                .map(post -> post.getWriterId().getValue())
+                .map(post -> post.getWriterId())
                 .distinct()
                 .collect(Collectors.toList());
         return userReadService.getUserProfiles(writerIds);

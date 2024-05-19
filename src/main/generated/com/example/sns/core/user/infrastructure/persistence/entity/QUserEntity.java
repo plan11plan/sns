@@ -33,9 +33,9 @@ public class QUserEntity extends EntityPathBase<UserEntity> {
 
     public final StringPath password = createString("password");
 
-    public final EnumPath<com.example.sns.core.user.domain.entity.Sex> sex = createEnum("sex", com.example.sns.core.user.domain.entity.Sex.class);
+    public final StringPath sex = createString("sex");
 
-    public final EnumPath<com.example.sns.core.user.domain.entity.UserStatus> status = createEnum("status", com.example.sns.core.user.domain.entity.UserStatus.class);
+    public final StringPath status = createString("status");
 
     public QUserEntity(String variable) {
         super(UserEntity.class, forVariable(variable));

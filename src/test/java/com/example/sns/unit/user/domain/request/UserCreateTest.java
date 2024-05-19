@@ -41,11 +41,11 @@ class UserCreateTest {
         // then
         assertAll(
                 () -> assertThat(user.getNickname().getValue()).isEqualTo("nickname"),
-                () -> assertThat(user.getEmail().getEmail()).isEqualTo("email@gmail.com"),
-                () -> assertThat(user.getPassword().getPassword()).isEqualTo("password"),
+                () -> assertThat(user.getEmail().getValue()).isEqualTo("email@gmail.com"),
+                () -> assertThat(user.getPassword().getValue()).isEqualTo("password"),
                 () -> assertThat(user.getSex().toString()).isEqualTo("M"),
                 () -> assertThat(user.getStatus()).isEqualTo(UserStatus.PENDING),
-                () -> assertThat(user.getBirthday().getBirthday()).isEqualTo("1999-07-28"),
+                () -> assertThat(user.getBirthday().getValue()).isEqualTo("1999-07-28"),
                 () -> assertThat(user.getLastLoginAt()).isNull()
         );
     }

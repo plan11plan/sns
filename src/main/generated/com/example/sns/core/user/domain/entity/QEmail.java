@@ -17,9 +17,7 @@ public class QEmail extends BeanPath<Email> {
 
     private static final long serialVersionUID = 894808512L;
 
-    public static final QEmail email1 = new QEmail("email1");
-
-    public final StringPath email = createString("email");
+    public static final QEmail email = new QEmail("email");
 
     public final StringPath value = createString("value");
 
