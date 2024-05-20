@@ -5,7 +5,7 @@ import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.NicknameHistory;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.domain.request.UserUpdate;
-import com.example.sns.core.user.service.dto.UserDto;
+import com.example.sns.core.user.service.output.UserOutput;
 import com.example.sns.core.user.service.port.NicknameHistoryRepository;
 import com.example.sns.core.user.service.port.UserRepository;
 import lombok.Builder;
@@ -21,11 +21,11 @@ public class UserUpdateService {
     private final TimeHolder timeHolder;
 
     @Transactional
-    public UserDto update(Long id, UserUpdate userUpdate) {
+    public UserOutput update(Long id, UserUpdate userUpdate) {
         User user = userRepository.getById(id);
         user = user.update(userUpdate);
         userRepository.save(user);
-        return UserDto.from(user);
+        return UserOutput.from(user);
     }
     @Transactional
     public void changeNickname(Long userId, Nickname nickname){

@@ -1,4 +1,4 @@
-package com.example.sns.core.follow.service.request;
+package com.example.sns.core.follow.service.input;
 
 import com.example.sns.core.follow.domain.FollowStatus;
 import com.example.sns.core.follow.domain.Follower;
@@ -7,21 +7,23 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class FollowAcceptDto {
-    private final Following fromUser;
-    private final Follower toFollower;
-    private final FollowStatus status;
+public class FollowCancelInput {
+    Follower fromUser;
+    Following toFollowing;
+
+    FollowStatus status;
 
     @Builder
-    public FollowAcceptDto(Following fromUser, Follower toFollower) {
+    public FollowCancelInput(Follower fromUser, Following toFollowing) {
         this.fromUser = fromUser;
-        this.toFollower = toFollower;
+        this.toFollowing = toFollowing;
         this.status = FollowStatus.PENDING;
     }
+
     public Long getFromUserId(){
         return fromUser.getId();
     }
-    public Long getToFollowerId(){
-        return toFollower.getId();
+    public Long getToFollowingId(){
+        return toFollowing.getId();
     }
 }

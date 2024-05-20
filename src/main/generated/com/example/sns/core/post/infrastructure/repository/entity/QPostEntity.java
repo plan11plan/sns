@@ -25,6 +25,8 @@ public class QPostEntity extends EntityPathBase<PostEntity> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final NumberPath<Long> likeCount = createNumber("likeCount", Long.class);
+
     public final DateTimePath<java.time.LocalDateTime> modifiedAt = createDateTime("modifiedAt", java.time.LocalDateTime.class);
 
     public final StringPath status = createString("status");

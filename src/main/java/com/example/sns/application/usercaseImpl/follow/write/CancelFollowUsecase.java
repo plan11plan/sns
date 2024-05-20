@@ -5,7 +5,7 @@ import com.example.sns.application.dto.follow.CancelFollowCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
 import com.example.sns.core.follow.service.write.FollowCancelService;
-import com.example.sns.core.follow.service.request.FollowCancelDto;
+import com.example.sns.core.follow.service.input.FollowCancelInput;
 import com.example.sns.core.user.service.UserReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,11 +23,11 @@ public class CancelFollowUsecase {
         Follower fromUser = Follower.fromUserId(userId);
         Following toFollowing = Following.fromId(followingId);
 
-        FollowCancelDto followCancelDto = FollowCancelDto.builder()
+        FollowCancelInput followCancelInput = FollowCancelInput.builder()
                 .fromUser(fromUser)
                 .toFollowing(toFollowing)
                 .build();
 
-        followCancelService.cancel(followCancelDto);
+        followCancelService.cancel(followCancelInput);
     }
 }

@@ -40,7 +40,6 @@ public class PostReadController {
     public ResponseEntity<CursorResponse<GetPostsResponse>> getPosts(
             @PathVariable("userId") Long writerId,
             @Valid @RequestBody GetPostsByCursorRequest request) {
-
         var command = GetPostsByCursorCommand.of(writerId, new CursorRequest(request.getSize(), request.getKey()));
 
         CursorResponse<GetPostsResponse> posts = getPostsByCursorUsecase.execute(command);
@@ -48,22 +47,7 @@ public class PostReadController {
     }
 
     //TODO : 생성 시에 큰 부하, 캐시 쓰거나, 나중에 NoSQL DB로 바꾸기.
-//    @GetMapping("/users/{userId}/timeline")
-//    public ResponseEntity<List<PostDto>> getTimeline(@PathVariable("userId") Long userId, @RequestBody GetTimelineByCursorRequest request) {
-//        var command = GetTimelineByCursorCommand.of(userId, new CursorRequest(request.getSize(), request.getKey()));
-//        List<PostDto> execute = getTimelinePostUsecase.execute(command);
-//        return ResponseEntity.ok(execute);
-//    }
 
-    //    @GetMapping("/users/{userId}/timeline")
-//    public ResponseEntity<List<PostDto>> getTimeline(
-//            @PathVariable("userId") Long userId,
-//            @RequestParam(defaultValue = "10") int size,
-//            @RequestParam(required = false) Long key) {
-//        var command = GetTimelineByCursorCommand.of(userId, new CursorRequest(size, key));
-//        List<PostDto> execute = getTimelinePostUsecase.execute(command);
-//        return ResponseEntity.ok(execute);
-//    }
     @GetMapping("/users/{userId}/timeline")
     public ResponseEntity<CursorResponse> getTimeline(
             @PathVariable("userId") Long userId,

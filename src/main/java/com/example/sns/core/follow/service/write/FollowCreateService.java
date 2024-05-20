@@ -5,7 +5,7 @@ import com.example.sns.core.follow.domain.Follow;
 import com.example.sns.core.follow.domain.FollowStatus;
 import com.example.sns.core.follow.domain.request.FollowCreationDetails;
 import com.example.sns.core.follow.service.port.FollowRepository;
-import com.example.sns.core.follow.service.request.FollowCreateDto;
+import com.example.sns.core.follow.service.input.FollowCreateInput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class FollowCreateService {
       그래서 방법2 DTO로 가야겠다.
      */
 
-    public void create(FollowCreateDto dto) {
+    public void create(FollowCreateInput dto) {
         //TODO : 팔로우가 이미 생성돼있는지 DB 체크.
         if (followRepository.findFollowByFollowerIdAndFollowingId(dto.fromUserId(), dto.getToFollowingId()).isPresent()) {
             throw new IllegalArgumentException("이미 팔로우 요청을 한적이 있습니다");

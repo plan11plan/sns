@@ -1,6 +1,6 @@
 package com.example.sns.presentation.user.controller.response;
 
-import com.example.sns.core.user.service.dto.UserDto;
+import com.example.sns.core.user.service.output.UserOutput;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +23,7 @@ public class UserResponse {
         this.lastLoginAt = lastLoginAt;
     }
 
-    public static UserResponse from(UserDto user){
+    public static UserResponse from(UserOutput user){
         return UserResponse.builder()
                 .id(user.getId())
                 .email(user.getEmail())

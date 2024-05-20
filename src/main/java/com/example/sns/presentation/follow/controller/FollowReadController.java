@@ -6,7 +6,7 @@ import com.example.sns.application.usercaseImpl.follow.read.GetFollowerUsecase;
 import com.example.sns.application.usercaseImpl.follow.read.GetFollowingUsecase;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
-import com.example.sns.core.user.service.dto.UserDto;
+import com.example.sns.core.user.service.output.UserOutput;
 import java.util.List;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +24,13 @@ public class FollowReadController {
     private final GetFollowerUsecase getFollowerUsecase;
 
     @GetMapping("/following")
-    public List<UserDto> getFollowing(@PathVariable("userId") Long userId) {
+    public List<UserOutput> getFollowing(@PathVariable("userId") Long userId) {
         GetFollowingUserCommand command = new GetFollowingUserCommand(Follower.fromId(userId));
         return getFollowingUsecase.execute(command);
     }
 
     @GetMapping("/follower")
-    public List<UserDto> getFollower(@PathVariable("userId") Long userId) {
+    public List<UserOutput> getFollower(@PathVariable("userId") Long userId) {
         GetFollowerUserCommand command = new GetFollowerUserCommand(Following.fromId(userId));
         return getFollowerUsecase.execute(command);
     }

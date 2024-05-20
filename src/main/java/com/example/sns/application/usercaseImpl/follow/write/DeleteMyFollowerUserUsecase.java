@@ -3,8 +3,8 @@ package com.example.sns.application.usercaseImpl.follow.write;
 import com.example.sns.application.dto.follow.DeleteFollowerUserCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
+import com.example.sns.core.follow.service.input.FollowerDeleteInput;
 import com.example.sns.core.follow.service.write.FollowDeleteService;
-import com.example.sns.core.follow.service.request.FollowerDeleteDto;
 import com.example.sns.core.user.service.UserReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class DeleteMyFollowerUserUsecase {
         Following fromUser = Following.fromUserId(userId);
         Follower toFollower = Follower.fromId(followerId);
 
-        var followerDeleteDto = FollowerDeleteDto.builder()
+        var followerDeleteDto = FollowerDeleteInput.builder()
                 .fromUser(fromUser)
                 .toFollower(toFollower)
                 .build();

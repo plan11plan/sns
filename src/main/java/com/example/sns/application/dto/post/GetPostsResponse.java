@@ -1,9 +1,9 @@
 package com.example.sns.application.dto.post;
 
-import com.example.sns.core.post.service.dto.PostDto;
-import com.example.sns.core.user.domain.entity.vo.UserProfile;
+import com.example.sns.core.post.service.output.PostOutput;
+import com.example.sns.core.user.service.output.UserProfileOutput;
+import com.example.sns.core.user.service.output.UserProfilesOutput;
 import java.time.LocalDateTime;
-import java.util.Map;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,12 +15,11 @@ public class GetPostsResponse {
     Long likeCount;
     LocalDateTime createdAt;
     LocalDateTime modifiedAt;
-    UserProfile userProfile;
+    UserProfileOutput userProfile;
 
     @Builder
     public GetPostsResponse(Long postId, String title, String content, LocalDateTime createdAt,
-                            LocalDateTime modifiedAt,Long likeCount,
-                            UserProfile userProfile) {
+                            LocalDateTime modifiedAt, Long likeCount, UserProfileOutput userProfile) {
         this.postId = postId;
         this.title = title;
         this.content = content;
@@ -29,8 +28,9 @@ public class GetPostsResponse {
         this.modifiedAt = modifiedAt;
         this.userProfile = userProfile;
     }
-    public static GetPostsResponse convertToGetPostsResponse(PostDto post, Map<Long, UserProfile> userProfiles) {
-        UserProfile userProfile = userProfiles.get(post.getWriterId());
+
+    public static GetPostsResponse convertToGetPostsResponse(PostOutput post, UserProfilesOutput userProfiles) {
+        UserProfileOutput userProfile = userProfiles.getUserProfile(post.getWriterId());
         return GetPostsResponse.builder()
                 .postId(post.getId())
                 .title(post.getTitle())
@@ -39,21 +39,6 @@ public class GetPostsResponse {
                 .modifiedAt(post.getModifiedAt())
                 .userProfile(userProfile)
                 .likeCount(post.getLikeCount())
-                .build();
-    }
-
-    public static GetPostsResponse convertToGetPostsResponse(PostDto post, Map<Long, UserProfile> userProfiles,Map<Long, Long> postLikes) {
-        UserProfile userProfile = userProfiles.get(post.getWriterId());
-        Long likeCount = postLikes.get(post.getId());
-
-        return GetPostsResponse.builder()
-                .postId(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .createdAt(post.getCreatedAt())
-                .modifiedAt(post.getModifiedAt())
-                .userProfile(userProfile)
-                .likeCount(likeCount)
                 .build();
     }
 }

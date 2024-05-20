@@ -1,14 +1,14 @@
 package com.example.sns.application.usercaseImpl.post;
 
 
-import com.example.sns.presentation.post.controller.response.PostResponse;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.service.PostLikeReadService;
 import com.example.sns.core.post.service.PostReadService;
-import com.example.sns.core.post.service.dto.PostDto;
-import com.example.sns.presentation.user.controller.response.UserResponse;
+import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.core.user.service.UserReadService;
-import com.example.sns.core.user.service.dto.UserDto;
+import com.example.sns.core.user.service.output.UserOutput;
+import com.example.sns.presentation.post.controller.response.PostResponse;
+import com.example.sns.presentation.user.controller.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,11 +21,11 @@ public class GetPostUsecase {
     private final PostLikeReadService postLikeReadService;
 
     public ResponseEntity<PostResponse> getById(Long id) {
-        UserDto userDto = userReadService.getById(id);
+        UserOutput userOutput = userReadService.getById(id);
         Post post = postReadService.getById(id);
-        Long postLike = postLikeReadService.getPostLike(post.getId().getId());
+        Long postLike = postLikeReadService.getPostLike(post.getId().getId()).getLikeCount();
 
-        PostDto postDto = PostDto.from(post,postLike);
-        return ResponseEntity.ok(PostResponse.from(postDto, UserResponse.from(userDto)));
+        PostOutput postOutput = PostOutput.from(post,postLike);
+        return ResponseEntity.ok(PostResponse.from(postOutput, UserResponse.from(userOutput)));
     }
 }

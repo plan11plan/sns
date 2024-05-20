@@ -5,7 +5,7 @@ import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.service.PostLikeWriteService;
 import com.example.sns.core.post.service.PostReadService;
 import com.example.sns.core.user.service.UserReadService;
-import com.example.sns.core.user.service.dto.UserDto;
+import com.example.sns.core.user.service.output.UserOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +17,9 @@ public class CreatePostLikeUsecase {
     private final PostLikeWriteService postLikeWriteService;
 
     public void execute(Long postId, Long writerId){
-        UserDto userDto = userReadService.getById(writerId);
+        UserOutput userOutput = userReadService.getById(writerId);
         Post post = postReadService.getById(postId);
-        postLikeWriteService.create(post,userDto);
+        postLikeWriteService.create(post, userOutput);
     }
 
 }

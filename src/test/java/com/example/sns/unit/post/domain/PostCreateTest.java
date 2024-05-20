@@ -2,10 +2,7 @@ package com.example.sns.unit.post.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
-import com.example.sns.core.post.domain.entity.Title;
-import com.example.sns.core.post.domain.entity.WriterId;
 import com.example.sns.core.post.domain.entity.request.PostCreate;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
@@ -20,9 +17,9 @@ class PostCreateTest {
         LocalDateTime now = LocalDateTime.now();
 
         PostCreate postCreate = PostCreate.builder()
-                .writerId(new WriterId(1L))
-                .title(new Title("title"))
-                .content(new Content("content"))
+                .writerId(1L)
+                .title("title")
+                .content("content")
                 .build();
 
         // when

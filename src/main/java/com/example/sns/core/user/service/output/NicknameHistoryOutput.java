@@ -1,4 +1,4 @@
-package com.example.sns.core.user.service.dto;
+package com.example.sns.core.user.service.output;
 
 import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.NicknameHistory;
@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class NicknameHistoryDto {
+public class NicknameHistoryOutput {
     private final Long id;
 
     private final Long userId;
@@ -16,14 +16,14 @@ public class NicknameHistoryDto {
 
 
     @Builder
-    public NicknameHistoryDto(Long id, Long userId, Nickname nickname, LocalDateTime createdAt) {
+    public NicknameHistoryOutput(Long id, Long userId, Nickname nickname, LocalDateTime createdAt) {
         this.id = id;
         this.userId = userId;
         this.nickname = nickname;
         this.createdAt = createdAt;
     }
-    public static NicknameHistoryDto from(NicknameHistory nicknameHistory){
-       return NicknameHistoryDto.builder()
+    public static NicknameHistoryOutput from(NicknameHistory nicknameHistory){
+       return NicknameHistoryOutput.builder()
                 .id(nicknameHistory.getId())
                 .userId(nicknameHistory.getUserId())
                 .nickname(nicknameHistory.getNickname())

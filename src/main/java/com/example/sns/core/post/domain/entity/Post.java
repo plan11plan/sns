@@ -13,18 +13,22 @@ public class Post {
     private final Title title;
     private final Content content;
     private final PostStatus status;
+    private final Long likeCount;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
 
 
     @Builder
-    public Post(PostId id, WriterId writerId, Title title, Content content, PostStatus status, LocalDateTime createdAt,
+    public Post(PostId id, WriterId writerId, Title title, Content content, PostStatus status,
+                Long likeCount,
+                LocalDateTime createdAt,
                 LocalDateTime modifiedAt) {
         this.id = id;
         this.writerId = writerId;
         this.title = title;
         this.status = status;
         this.content = content;
+        this.likeCount = 0L;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }

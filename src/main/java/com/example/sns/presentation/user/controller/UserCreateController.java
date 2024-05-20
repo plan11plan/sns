@@ -4,7 +4,7 @@ import com.example.sns.presentation.user.controller.request.UserCreateRequest;
 import com.example.sns.presentation.user.controller.response.UserResponse;
 import com.example.sns.core.user.service.AuthenticationService;
 import com.example.sns.core.user.service.UserCreateService;
-import com.example.sns.core.user.service.dto.UserDto;
+import com.example.sns.core.user.service.output.UserOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,10 +32,10 @@ public class UserCreateController {
      */
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody UserCreateRequest request) {
-        UserDto userDto = userCreateService.create(request.toDomainRequest());
+        UserOutput userOutput = userCreateService.create(request.toDomainRequest());
         return ResponseEntity
             .status(HttpStatus.CREATED)
-            .body(UserResponse.from(userDto));
+            .body(UserResponse.from(userOutput));
     }
     @GetMapping("/{id}/verify")
     public ResponseEntity<Void> verifyEmail(@PathVariable("id") Long id, @RequestParam String certificationCode) {

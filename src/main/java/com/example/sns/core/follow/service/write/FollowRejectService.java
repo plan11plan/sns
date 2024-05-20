@@ -5,7 +5,7 @@ import com.example.sns.core.follow.domain.Follow;
 import com.example.sns.core.follow.domain.FollowStatus;
 import com.example.sns.core.follow.domain.request.FollowRejectionDetails;
 import com.example.sns.core.follow.service.port.FollowRepository;
-import com.example.sns.core.follow.service.request.FollowRejectDto;
+import com.example.sns.core.follow.service.input.FollowRejectInput;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class FollowRejectService {
     private final FollowRepository followRepository;
     private final TimeHolder timeHolder;
 
-    public void reject(FollowRejectDto dto){
+    public void reject(FollowRejectInput dto){
         Follow follow = followRepository.findFollowByFollowerIdAndFollowingIdAndStatus(
                 dto.getToFollowerId(), dto.getFromUserId(), dto.getStatus()
                 ).orElseThrow(() -> new NoSuchElementException("Follow with ID " + dto.getStatus() + " not found."));

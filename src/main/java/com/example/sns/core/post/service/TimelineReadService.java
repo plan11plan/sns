@@ -15,9 +15,7 @@ public class TimelineReadService {
 
     public CursorResponse<Timeline> getTimelines(Long userId, CursorRequest cursorRequest){
         List<Timeline> timelines = findAllBy(userId, cursorRequest);
-        //
-        timelines.stream().forEach(i->System.out.println(i.getId()));
-        //
+
         Long nextKey = timelines.stream().mapToLong(Timeline::getId)
                 .min().orElse(CursorRequest.NONE_KEY);
         return new CursorResponse<>(cursorRequest.next(nextKey), timelines);

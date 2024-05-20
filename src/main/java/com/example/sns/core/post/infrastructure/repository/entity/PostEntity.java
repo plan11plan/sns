@@ -36,6 +36,8 @@ public class PostEntity {
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
 
+    private Long likeCount;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -47,6 +49,7 @@ public class PostEntity {
     public static PostEntity from(Post post) {
         PostEntity postEntity = new PostEntity();
         postEntity.writerId = post.getWriterIdValue();
+        postEntity.likeCount = post.getLikeCount();
         postEntity.status = post.getStatusValue();
         postEntity.title = post.getTitleValue();
         postEntity.content = post.getContentValue();

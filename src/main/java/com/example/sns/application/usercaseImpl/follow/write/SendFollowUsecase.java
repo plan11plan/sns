@@ -3,7 +3,7 @@ package com.example.sns.application.usercaseImpl.follow.write;
 import com.example.sns.application.dto.follow.SendFollowCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
-import com.example.sns.core.follow.service.request.FollowCreateDto;
+import com.example.sns.core.follow.service.input.FollowCreateInput;
 import com.example.sns.core.follow.service.write.FollowCreateService;
 import com.example.sns.core.user.service.UserReadService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class SendFollowUsecase {
         Follower fromUser = Follower.fromUserId(userId);
         Following toFollowing = Following.fromId(followingId);
 
-        var followCreateDto = FollowCreateDto.builder()
+        var followCreateDto = FollowCreateInput.builder()
                 .fromUser(fromUser)
                 .toFollowing(toFollowing)
                 .build();

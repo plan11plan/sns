@@ -5,7 +5,7 @@ import com.example.sns.core.follow.domain.Follow;
 import com.example.sns.core.follow.domain.FollowStatus;
 import com.example.sns.core.follow.domain.request.FollowAcceptionDetails;
 import com.example.sns.core.follow.service.port.FollowRepository;
-import com.example.sns.core.follow.service.request.FollowAcceptDto;
+import com.example.sns.core.follow.service.input.FollowAcceptInput;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class FollowAcceptService {
     private final TimeHolder timeHolder;
 
 
-    public void accept(FollowAcceptDto dto){
+    public void accept(FollowAcceptInput dto){
         Follow follow = followRepository.findFollowByFollowerIdAndFollowingIdAndStatus(
                 dto.getToFollowerId(),dto.getFromUserId(), dto.getStatus())
         .orElseThrow(() -> new IllegalArgumentException("DB에서 못찾았어용"));

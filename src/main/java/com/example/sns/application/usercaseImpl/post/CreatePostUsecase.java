@@ -3,8 +3,8 @@ package com.example.sns.application.usercaseImpl.post;
 
 import com.example.sns.application.dto.post.CreatePostCommand;
 import com.example.sns.core.follow.service.read.FollowReadService;
-import com.example.sns.core.follow.service.request.FollowGetDto;
-import com.example.sns.core.follow.service.response.FollowDto;
+import com.example.sns.core.follow.service.input.FollowGetInput;
+import com.example.sns.core.follow.service.output.FollowOutput;
 import com.example.sns.core.post.domain.entity.request.PostCreate;
 import com.example.sns.core.post.service.PostCreateService;
 import com.example.sns.core.post.service.TimelineWriteService;
@@ -26,9 +26,9 @@ public class CreatePostUsecase {
         Long writerId = userReadService.getById(command.getWriterId()).getId();
         PostCreate postCreate = getPostCreate(command);
         Long postId = postCreateService.create(postCreate).getId();
-        List<Long> followerIds = followReadService.getFollowers(FollowGetDto.fromId(writerId))
+        List<Long> followerIds = followReadService.getFollowers(FollowGetInput.fromId(writerId))
                 .stream()
-                .map(FollowDto::getFollowerId)
+                .map(FollowOutput::getFollowerId)
                 .toList();
        timelineWriteService.deliveryToTimeline(postId,followerIds);
 

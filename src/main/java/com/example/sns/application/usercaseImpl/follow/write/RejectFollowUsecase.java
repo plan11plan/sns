@@ -4,7 +4,7 @@ import com.example.sns.application.dto.follow.RejectFollowCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
 import com.example.sns.core.follow.service.write.FollowRejectService;
-import com.example.sns.core.follow.service.request.FollowRejectDto;
+import com.example.sns.core.follow.service.input.FollowRejectInput;
 import com.example.sns.core.user.service.UserReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class RejectFollowUsecase {
         Following fromUser = Following.fromUserId(userId);
         Follower toFollower = Follower.fromId(followerId);
 
-        var followRejectDto = FollowRejectDto.builder()
+        var followRejectDto = FollowRejectInput.builder()
                 .fromUser(fromUser)
                 .toFollower(toFollower)
                 .build();

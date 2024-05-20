@@ -15,25 +15,33 @@ import org.springframework.stereotype.Repository;
 public class PostQueryDslRepository {
     private final JPAQueryFactory queryFactory;
 
-    public List<PostEntity> findAllByInIdOrderByIdDesc(List<Long> postIds) {
+    public List<PostEntity> findPostsByWriterAndStatusBeforeId(Long writerId, String status, Long lastId, int limit) {
         return queryFactory.selectFrom(postEntity)
-                .where(postEntity.id.in(postIds))
-                .orderBy(postEntity.id.desc())
-                .fetch();
-    }
-    public List<PostEntity> findLatestPostsByWriterAndStatus(Long writerId, String statusCon, int limit) {
-        return queryFactory.selectFrom(postEntity)
-                .where(allEq(writerId,statusCon))
+                .where(
+                        postEntity.writerId.eq(writerId)
+                                .and(postEntity.status.eq(status))
+                                .and(postEntity.id.lt(lastId))
+                )
                 .orderBy(postEntity.id.desc())
                 .limit(limit)
                 .fetch();
     }
 
-    public List<PostEntity> findPostsByWriterAndStatusBeforeId(Long writerId, String statusCon, Long lastId, int limit) {
+    public List<PostEntity> findLatestPostsByWriterAndStatus(Long writerId, String status, int limit) {
         return queryFactory.selectFrom(postEntity)
-                .where(allEq(writerId,statusCon).and(postEntity.id.lt(lastId)))
+                .where(
+                        postEntity.writerId.eq(writerId)
+                                .and(postEntity.status.eq(status))
+                )
                 .orderBy(postEntity.id.desc())
                 .limit(limit)
+                .fetch();
+    }
+
+    public List<PostEntity> findAllByInIdOrderByIdDesc(List<Long> postIds) {
+        return queryFactory.selectFrom(postEntity)
+                .where(postEntity.id.in(postIds))
+                .orderBy(postEntity.id.desc())
                 .fetch();
     }
 

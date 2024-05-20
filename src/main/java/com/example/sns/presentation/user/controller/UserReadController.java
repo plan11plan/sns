@@ -4,7 +4,7 @@ import com.example.sns.presentation.user.controller.response.UserResponse;
 import com.example.sns.core.user.service.AuthenticationService;
 import com.example.sns.core.user.service.UserReadService;
 import com.example.sns.core.user.service.UserUpdateService;
-import com.example.sns.core.user.service.dto.NicknameHistoryDto;
+import com.example.sns.core.user.service.output.NicknameHistoryOutput;
 import java.util.List;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,7 @@ public class UserReadController {
 
     @ResponseStatus
     @GetMapping("/info/{id}")
-    public ResponseEntity<List<NicknameHistoryDto>> getNicknameHistories(@PathVariable("id") Long id) {
+    public ResponseEntity<List<NicknameHistoryOutput>> getNicknameHistories(@PathVariable("id") Long id) {
         return ResponseEntity
                 .ok()
                 .body(userReadService.getNicknameHistories(id));

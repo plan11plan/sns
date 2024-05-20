@@ -1,6 +1,6 @@
 package com.example.sns.presentation.post.controller.response;
 
-import com.example.sns.core.post.service.dto.PostDto;
+import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.presentation.user.controller.response.UserResponse;
 import java.time.LocalDateTime;
 import lombok.Builder;
@@ -18,14 +18,14 @@ public class PostResponse {
     private LocalDateTime modifiedAt;
     private UserResponse writer;
 
-    public static PostResponse from(PostDto postDto, UserResponse writer) {
+    public static PostResponse from(PostOutput postOutput, UserResponse writer) {
         return PostResponse.builder()
-                .id(postDto.getId())
-                .likeCount(postDto.getLikeCount())
-                .title(postDto.getTitle())
-                .content(postDto.getContent())
-                .createdAt(postDto.getCreatedAt())
-                .modifiedAt(postDto.getModifiedAt())
+                .id(postOutput.getId())
+                .likeCount(postOutput.getLikeCount())
+                .title(postOutput.getTitle())
+                .content(postOutput.getContent())
+                .createdAt(postOutput.getCreatedAt())
+                .modifiedAt(postOutput.getModifiedAt())
                 .writer(writer)
                 .build();
     }

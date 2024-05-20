@@ -14,7 +14,7 @@ public class PostUpdateController {
 
 //    @PutMapping("/{id}")
 //    public ResponseEntity<PostResponse> update(@PathVariable Long id, @RequestBody PostUpdateRequest request){
-//        return ResponseEntity.ok(PostResponse.from(PostDto.from(postUpdateService.update(id,request.toDomainRequest())),null));
+//        return ResponseEntity.ok(PostResponse.from(PostOutput.from(postUpdateService.update(id,request.toDomainRequest())),null));
 //    }
 
 }

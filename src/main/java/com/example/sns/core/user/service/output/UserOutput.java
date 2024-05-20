@@ -1,4 +1,4 @@
-package com.example.sns.core.user.service.dto;
+package com.example.sns.core.user.service.output;
 
 import com.example.sns.core.user.domain.entity.root.User;
 import java.time.LocalDate;
@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class UserDto {
+public class UserOutput {
     private final Long id;
 
     private final String email;
@@ -25,8 +25,8 @@ public class UserDto {
     private final String certificationCode;
     private final LocalDateTime createdAt;
 
-    public static UserDto from(User user) {
-        return UserDto.builder()
+    public static UserOutput from(User user) {
+        return UserOutput.builder()
                 .id(user.getId())
                 .email(user.getEmailValue())
                 .password(user.getPasswordValue())
@@ -39,7 +39,7 @@ public class UserDto {
                 .createdAt(user.getCreatedAt())
                 .build();
     }
-    public static List<UserDto> from(List<User> users){
-        return users.stream().map(UserDto::from).collect(Collectors.toList());
+    public static List<UserOutput> from(List<User> users){
+        return users.stream().map(UserOutput::from).collect(Collectors.toList());
     }
 }

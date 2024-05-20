@@ -2,10 +2,10 @@ package com.example.sns.application.usercaseImpl.follow.read;
 
 import com.example.sns.application.dto.follow.GetFollowerUserCommand;
 import com.example.sns.core.follow.service.read.FollowReadService;
-import com.example.sns.core.follow.service.request.FollowGetDto;
-import com.example.sns.core.follow.service.response.FollowDto;
+import com.example.sns.core.follow.service.input.FollowGetInput;
+import com.example.sns.core.follow.service.output.FollowOutput;
 import com.example.sns.core.user.service.UserReadService;
-import com.example.sns.core.user.service.dto.UserDto;
+import com.example.sns.core.user.service.output.UserOutput;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +17,11 @@ public class GetFollowerUsecase {
     private final UserReadService userReadService;
     private final FollowReadService followReadService;
 
-    public List<UserDto> execute(GetFollowerUserCommand command) {
-        FollowGetDto followGetDto = FollowGetDto.fromId(command.getFollowingId());
-        List<Long> followerIds = followReadService.getFollowers(followGetDto)
+    public List<UserOutput> execute(GetFollowerUserCommand command) {
+        FollowGetInput followGetInput = FollowGetInput.fromId(command.getFollowingId());
+        List<Long> followerIds = followReadService.getFollowers(followGetInput)
                 .stream()
-                .map(FollowDto::getFollowerId)
+                .map(FollowOutput::getFollowerId)
                 .collect(Collectors.toList());
 
         return userReadService.getUsers(followerIds);

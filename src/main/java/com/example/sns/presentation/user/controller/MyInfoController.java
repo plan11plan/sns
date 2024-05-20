@@ -5,7 +5,7 @@ import com.example.sns.core.user.domain.request.UserUpdate;
 import com.example.sns.core.user.service.AuthenticationService;
 import com.example.sns.core.user.service.UserReadService;
 import com.example.sns.core.user.service.UserUpdateService;
-import com.example.sns.core.user.service.dto.UserDto;
+import com.example.sns.core.user.service.output.UserOutput;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -37,7 +37,7 @@ public class MyInfoController {
 //            @RequestHeader("EMAIL") String email // 일반적으로 스프링 시큐리티를 사용한다면 UserPrincipal 에서 가져옵니다.
             @RequestParam String email
     ) {
-        UserDto user = userReadService.getByEmail(email);
+        UserOutput user = userReadService.getByEmail(email);
         authenticationService.login(user.getId());
         user = userReadService.getByEmail(email);
         return ResponseEntity
@@ -53,7 +53,7 @@ public class MyInfoController {
             @RequestParam String email,
             @RequestBody UserUpdate userUpdate
     ) {
-        UserDto user = userReadService.getByEmail(email);
+        UserOutput user = userReadService.getByEmail(email);
         user = userUpdateService.update(user.getId(), userUpdate);
         return ResponseEntity
                 .ok()
