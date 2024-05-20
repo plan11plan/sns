@@ -3,7 +3,7 @@ package com.example.sns.application.usercaseImpl.post;
 import com.example.sns.application.dto.post.GetPostsByCursorCommand;
 import com.example.sns.application.dto.post.GetPostsResponse;
 import com.example.sns.core.post.domain.entity.CursorResponse;
-import com.example.sns.core.post.service.CursorPagingService;
+import com.example.sns.core.post.service.CursorPagingPostService;
 import com.example.sns.core.post.service.input.PostGetByCursorInput;
 import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.core.user.service.UserReadService;
@@ -17,14 +17,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GetPostsByCursorUsecase {
     private final UserReadService userReadService;
-    private final CursorPagingService cursorPagingService;
+    private final CursorPagingPostService cursorPagingPostService;
     private final String POST_STATUS_PUBLISHED = "PUBLISHED";
 
     public CursorResponse<GetPostsResponse> execute(GetPostsByCursorCommand command) {
         ensureWriterExists(command.getWriterId());
 
         PostGetByCursorInput postGetByCursor = createPostGetByCursor(command);
-        var posts = cursorPagingService.getPostsByCursor(postGetByCursor.getWriterId(),
+        var posts = cursorPagingPostService.getPostsByCursor(postGetByCursor.getWriterId(),
                 postGetByCursor.getStatus(),
                 postGetByCursor.getCursorRequest());
         var userProfiles = getUserProfiles(posts);

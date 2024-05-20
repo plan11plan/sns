@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CursorPagingService {
+public class CursorPagingPostService {
     private final PostReadRepository postReadRepository;
     private final PostLikeReadService postLikeReadService;
     private final TimelineReadService timelineReadService;

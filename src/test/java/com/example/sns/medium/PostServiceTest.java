@@ -6,7 +6,7 @@
 //import com.example.sns.core.post.domain.entity.Post;
 //import com.example.sns.core.post.domain.entity.request.PostCreate;
 //import com.example.sns.core.post.domain.entity.request.PostUpdate;
-//import com.example.sns.core.post.service.PostReadService;
+//import com.example.sns.core.post.service.PostGetService;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +24,7 @@
 //public class PostServiceTest {
 //
 //    @Autowired
-//    private PostReadService postReadService;
+//    private PostGetService postReadService;
 //    @Autowired
 //    private PostCommandServiceImpl postCommandService;
 //

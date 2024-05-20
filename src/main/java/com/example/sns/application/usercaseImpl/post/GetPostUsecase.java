@@ -2,8 +2,8 @@ package com.example.sns.application.usercaseImpl.post;
 
 
 import com.example.sns.core.post.domain.entity.Post;
+import com.example.sns.core.post.service.PostGetService;
 import com.example.sns.core.post.service.PostLikeReadService;
-import com.example.sns.core.post.service.PostReadService;
 import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.core.user.service.UserReadService;
 import com.example.sns.core.user.service.output.UserOutput;
@@ -16,13 +16,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class GetPostUsecase {
-    private final PostReadService postReadService;
+    private final PostGetService postGetService;
     private final UserReadService userReadService;
     private final PostLikeReadService postLikeReadService;
 
     public ResponseEntity<PostResponse> getById(Long id) {
         UserOutput userOutput = userReadService.getById(id);
-        Post post = postReadService.getById(id);
+        Post post = postGetService.getById(id);
         Long postLike = postLikeReadService.getPostLike(post.getId().getId()).getLikeCount();
 
         PostOutput postOutput = PostOutput.from(post,postLike);

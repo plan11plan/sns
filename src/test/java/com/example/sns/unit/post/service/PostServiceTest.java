@@ -7,7 +7,7 @@
 //import com.example.sns.core.post.domain.entity.Post;
 //import com.example.sns.core.post.domain.entity.request.PostCreate;
 //import com.example.sns.core.post.domain.entity.request.PostUpdate;
-//import com.example.sns.core.post.service.PostReadService;
+//import com.example.sns.core.post.service.PostGetService;
 //import com.example.sns.core.user.domain.entity.Email;
 //import com.example.sns.core.user.domain.entity.Nickname;
 //import com.example.sns.core.user.domain.entity.Sex;
@@ -23,7 +23,7 @@
 //public class PostServiceTest {
 //
 //    private PostCommandService postCommandService;
-//    private PostReadService postReadService;
+//    private PostGetService postReadService;
 //
 //    @BeforeEach
 //    void init() {
@@ -36,7 +36,7 @@
 //                .clockHolder(new TestClockHolder(1679530673958L))
 //                .build();
 //        // DI
-//        this.postReadService = PostReadService.builder()
+//        this.postReadService = PostGetService.builder()
 //                .postWriteRepository(fakePostRepository)
 //                .build();
 //        // input1

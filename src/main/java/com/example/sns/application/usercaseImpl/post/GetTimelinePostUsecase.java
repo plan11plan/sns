@@ -3,7 +3,7 @@ package com.example.sns.application.usercaseImpl.post;
 import com.example.sns.application.dto.post.GetPostsResponse;
 import com.example.sns.application.dto.post.GetTimelineByCursorCommand;
 import com.example.sns.core.post.domain.entity.CursorResponse;
-import com.example.sns.core.post.service.CursorPagingService;
+import com.example.sns.core.post.service.CursorPagingPostService;
 import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.core.user.service.UserReadService;
 import com.example.sns.core.user.service.output.UserProfilesOutput;
@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GetTimelinePostUsecase {
     private final UserReadService userReadService;
-    private final CursorPagingService cursorPagingService;
+    private final CursorPagingPostService cursorPagingPostService;
 
     public CursorResponse<GetPostsResponse> execute(GetTimelineByCursorCommand command) {
         ensureUserExists(command.getUserId());
 
-        CursorResponse<PostOutput> posts = cursorPagingService.getPostsByTimeline(command.getUserId(), command.getCursorRequest());
+        CursorResponse<PostOutput> posts = cursorPagingPostService.getPostsByTimeline(command.getUserId(), command.getCursorRequest());
         UserProfilesOutput userProfiles = getUserProfiles(posts);
 
         List<GetPostsResponse> postResponses = convertToGetTimelinesResponses(posts, userProfiles);
