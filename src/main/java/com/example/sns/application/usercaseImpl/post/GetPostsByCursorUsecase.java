@@ -1,12 +1,10 @@
 package com.example.sns.application.usercaseImpl.post;
 
-import static com.example.sns.application.dto.post.GetPostsResponse.convertToGetPostsResponse;
-
 import com.example.sns.application.dto.post.GetPostsByCursorCommand;
 import com.example.sns.application.dto.post.GetPostsResponse;
 import com.example.sns.core.post.domain.entity.CursorResponse;
-import com.example.sns.core.post.service.PostReadService;
-import com.example.sns.core.post.service.input.PostGeyByCursorInput;
+import com.example.sns.core.post.service.CursorPagingService;
+import com.example.sns.core.post.service.input.PostGetByCursorInput;
 import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.core.user.service.UserReadService;
 import com.example.sns.core.user.service.output.UserProfilesOutput;
@@ -19,20 +17,19 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GetPostsByCursorUsecase {
     private final UserReadService userReadService;
-    private final PostReadService postReadService;
+    private final CursorPagingService cursorPagingService;
     private final String POST_STATUS_PUBLISHED = "PUBLISHED";
 
     public CursorResponse<GetPostsResponse> execute(GetPostsByCursorCommand command) {
         ensureWriterExists(command.getWriterId());
 
-        var postGeyByCursor = createPostGeyByCursor(command);
-        var posts = postReadService.getPostsByCursor(postGeyByCursor);
-        System.out.println("Posts from getPostsByCursor: " + posts.getData()); // 로그 추가
+        PostGetByCursorInput postGetByCursor = createPostGetByCursor(command);
+        var posts = cursorPagingService.getPostsByCursor(postGetByCursor.getWriterId(),
+                postGetByCursor.getStatus(),
+                postGetByCursor.getCursorRequest());
         var userProfiles = getUserProfiles(posts);
-        System.out.println("User Profiles: " + userProfiles.getUserProfiles().entrySet()); // 로그 추가
 
         List<GetPostsResponse> postResponses = convertToGetPostsResponses(posts, userProfiles);
-        System.out.println("Post Responses: " + postResponses.stream().map(GetPostsResponse::getTitle)); // 로그 추가
 
         return new CursorResponse<>(posts.getNextCursorRequest(), postResponses);
     }
@@ -41,8 +38,8 @@ public class GetPostsByCursorUsecase {
         userReadService.ensureWriterExists(writerId);
     }
 
-    private PostGeyByCursorInput createPostGeyByCursor(GetPostsByCursorCommand command) {
-        return PostGeyByCursorInput.builder()
+    private PostGetByCursorInput createPostGetByCursor(GetPostsByCursorCommand command) {
+        return PostGetByCursorInput.builder()
                 .writerId(command.getWriterId())
                 .status(POST_STATUS_PUBLISHED)
                 .cursorRequest(command.getCursorRequest())
@@ -59,7 +56,7 @@ public class GetPostsByCursorUsecase {
 
     private List<GetPostsResponse> convertToGetPostsResponses(CursorResponse<PostOutput> posts, UserProfilesOutput userProfiles) {
         return posts.getData().stream()
-                .map(post -> convertToGetPostsResponse(post, userProfiles))
+                .map(post -> GetPostsResponse.convertToGetPostsResponse(post, userProfiles))
                 .collect(Collectors.toList());
     }
 }
