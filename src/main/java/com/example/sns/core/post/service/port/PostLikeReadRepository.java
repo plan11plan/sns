@@ -1,11 +1,14 @@
 package com.example.sns.core.post.service.port;
 
-import com.example.sns.core.post.domain.entity.PostLike;
+import com.example.sns.core.post.infrastructure.repository.entity.outputVo.PostLikeCountDaoResponse;
 import java.util.List;
 
 public interface PostLikeReadRepository {
     Long getCount(Long postId);
 
-    List<PostLike> findLikesByPostIds(List<Long> postIds);
+    PostLikeCountDaoResponse countByPostId(Long postId);
+
+    List<PostLikeCountDaoResponse> findLikesByPostIds(List<Long> postIds);
+
 }
 

@@ -1,22 +1,22 @@
 package com.example.sns.core.post.service;
 
 import com.example.sns.core.post.infrastructure.repository.entity.outputVo.PostLikeCountDaoResponse;
-import com.example.sns.core.post.infrastructure.repository.queryDsl.PostLikeQueryDslRepository;
 import com.example.sns.core.post.service.output.PostLikeCountOutput;
 import com.example.sns.core.post.service.output.PostLikeCountsOutput;
+import com.example.sns.core.post.service.port.PostLikeReadRepository;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class PostLikeReadService {
-    private final PostLikeQueryDslRepository postLikeQueryDslRepository;
+    private final PostLikeReadRepository postLikeReadRepository;
 
     public PostLikeCountOutput getPostLike(Long postId) {
-        PostLikeCountDaoResponse daoResponse = postLikeQueryDslRepository.countByPostId(postId);
+        PostLikeCountDaoResponse daoResponse = postLikeReadRepository.countByPostId(postId);
         return PostLikeCountOutput.builder()
                 .postId(daoResponse.getPostId())
                 .likeCount(daoResponse.getLikeCount())
@@ -24,13 +24,15 @@ public class PostLikeReadService {
     }
 
     public PostLikeCountsOutput getPostLikes(List<Long> postIds) {
-        List<PostLikeCountDaoResponse> daoResponses = postLikeQueryDslRepository.findLikesByPostIds(postIds);
-        List<PostLikeCountOutput> postLikeCounts = daoResponses.stream()
-                .map(daoResponse -> PostLikeCountOutput.builder()
-                        .postId(daoResponse.getPostId())
-                        .likeCount(daoResponse.getLikeCount())
-                        .build())
-                .collect(Collectors.toList());
+        List<PostLikeCountDaoResponse> daoResponses = postLikeReadRepository.findLikesByPostIds(postIds);
+        Map<Long, PostLikeCountOutput> postLikeCounts = daoResponses.stream()
+                .collect(Collectors.toMap(
+                        PostLikeCountDaoResponse::getPostId,
+                        daoResponse -> PostLikeCountOutput.builder()
+                                .postId(daoResponse.getPostId())
+                                .likeCount(daoResponse.getLikeCount())
+                                .build()
+                ));
         return new PostLikeCountsOutput(postLikeCounts);
     }
 }

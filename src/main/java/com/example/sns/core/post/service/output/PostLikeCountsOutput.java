@@ -1,17 +1,15 @@
 package com.example.sns.core.post.service.output;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import lombok.Getter;
 
 @Getter
 public class PostLikeCountsOutput {
     private final Map<Long, PostLikeCountOutput> postLikes;
 
-    public PostLikeCountsOutput(List<PostLikeCountOutput> postLikeCountList) {
-        this.postLikes = postLikeCountList.stream()
-                .collect(Collectors.toMap(PostLikeCountOutput::getPostId, likeCount -> likeCount));
+
+    public PostLikeCountsOutput(Map<Long, PostLikeCountOutput> postLikes) {
+        this.postLikes = postLikes;
     }
 
     public PostLikeCountOutput getPostLike(Long postId) {
