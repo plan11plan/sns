@@ -27,7 +27,7 @@ public class UserOutput {
 
     public static UserOutput from(User user) {
         return UserOutput.builder()
-                .id(user.getId())
+                .id(user.getUserIdValue())
                 .email(user.getEmailValue())
                 .password(user.getPasswordValue())
                 .nickname(user.getNicknameValue())

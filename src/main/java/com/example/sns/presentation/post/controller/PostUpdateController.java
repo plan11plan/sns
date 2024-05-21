@@ -1,7 +1,12 @@
 package com.example.sns.presentation.post.controller;
 
+import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.service.PostUpdateService;
+import com.example.sns.presentation.post.controller.request.PostUpdateRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,9 +17,10 @@ public class PostUpdateController {
     private final PostUpdateService postUpdateService;
 
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<PostResponse> update(@PathVariable Long id, @RequestBody PostUpdateRequest request){
-//        return ResponseEntity.ok(PostResponse.from(PostOutput.from(postUpdateService.update(id,request.toDomainRequest())),null));
-//    }
+    @PutMapping("/{id}")
+    public Post update(@PathVariable Long id, @RequestBody PostUpdateRequest request){
+        Post update = postUpdateService.update(id, request.toDomainRequest());
+        return update;
+    }
 
 }

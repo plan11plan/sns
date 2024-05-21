@@ -1,6 +1,6 @@
 package com.example.sns.presentation.post.controller;
 
-import com.example.sns.application.dto.post.CreatePostCommand;
+import com.example.sns.application.command.post.CreatePostCommand;
 import com.example.sns.application.usercaseImpl.post.CreatePostUsecase;
 import com.example.sns.presentation.post.controller.request.PostCreateRequest;
 import lombok.Builder;

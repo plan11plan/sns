@@ -1,4 +1,4 @@
-package com.example.sns.application.dto.follow;
+package com.example.sns.application.command.follow;
 
 import com.example.sns.core.follow.domain.FollowStatus;
 import com.example.sns.core.follow.domain.Following;

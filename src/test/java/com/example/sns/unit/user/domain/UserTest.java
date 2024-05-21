@@ -90,7 +90,7 @@ class UserTest {
         assertThat(user.getPassword().getValue()).isEqualTo("changePassword");
         assertThat(user.getEmail().getValue()).isEqualTo("changeEmail@gmail.com");
         // and
-        assertThat(user.getId()).isEqualTo(1L);
+        assertThat(user.getUserIdValue()).isEqualTo(1L);
         assertThat(user.getSex().toString()).isEqualTo("W");
         assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
         assertThat(user.getCertificationCode()).isEqualTo(certificationCode);
@@ -121,7 +121,7 @@ class UserTest {
         LocalDateTime loginTime = LocalDateTime.now();
         user = user.login(loginTime);
         // then
-        assertThat(user.getId()).isEqualTo(1L);
+        assertThat(user.getUserIdValue()).isEqualTo(1L);
         assertThat(user.getNickname().getValue()).isEqualTo("nickname");
         assertThat(user.getEmail().getValue()).isEqualTo("email@gmail.com");
         assertThat(user.getPassword().getValue()).isEqualTo("password");
@@ -160,7 +160,7 @@ class UserTest {
         // then
         assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
         // and
-        assertThat(user.getId()).isEqualTo(1L);
+        assertThat(user.getUserIdValue()).isEqualTo(1L);
         assertThat(user.getNickname().getValue()).isEqualTo("nickname");
         assertThat(user.getEmail().getValue()).isEqualTo("email@gmail.com");
         assertThat(user.getPassword().getValue()).isEqualTo("password");

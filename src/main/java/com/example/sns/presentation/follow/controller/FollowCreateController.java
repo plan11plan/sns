@@ -1,6 +1,6 @@
 package com.example.sns.presentation.follow.controller;
 
-import com.example.sns.application.dto.follow.SendFollowCommand;
+import com.example.sns.application.command.follow.SendFollowCommand;
 import com.example.sns.application.usercaseImpl.follow.write.SendFollowUsecase;
 import com.example.sns.presentation.follow.controller.request.FollowCreateRequest;
 import lombok.Builder;

@@ -7,6 +7,7 @@ import com.example.sns.core.user.domain.entity.Email;
 import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.Password;
 import com.example.sns.core.user.domain.entity.Sex;
+import com.example.sns.core.user.domain.entity.UserId;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.vo.UserProfile;
 import com.example.sns.core.user.domain.request.UserCreate;
@@ -19,7 +20,7 @@ import lombok.Getter;
 @Getter
 public class User {
 
-    private final Long id;
+    private final UserId id;
 
     private final Email email;
     private final Password password;
@@ -33,7 +34,7 @@ public class User {
     private final LocalDateTime createdAt;
 
     @Builder
-    public User(Long id, Email email, Password password, Nickname nickname, Sex sex, Birthday birthday,
+    public User(UserId id, Email email, Password password, Nickname nickname, Sex sex, Birthday birthday,
                 UserStatus status, LocalDateTime lastLoginAt, String certificationCode, LocalDateTime createdAt) {
         this.id = id;
         ///
@@ -123,10 +124,14 @@ public class User {
     }
     public UserProfile toUserProfile(){
         return UserProfile.builder()
-                .userId(this.id)
-                .nickname(this.nickname.getValue())
+                .userId(this.getUserIdValue())
+                .nickname(this.getNicknameValue())
                 .sex(this.sex)
                 .build();
+    }
+    public Long getUserIdValue(){
+        return this.id != null ? this.id.getValue() : null;
+
     }
     public String getPasswordValue(){
         return password.getValue();

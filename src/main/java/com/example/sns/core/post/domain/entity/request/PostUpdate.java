@@ -16,6 +16,6 @@ public class PostUpdate {
     public PostUpdate(Title title, Content content, PostStatus status) {
         this.title = title;
         this.content = content;
-        this.status = status;
+        this.status = PostStatus.UPDATED;
     }
 }

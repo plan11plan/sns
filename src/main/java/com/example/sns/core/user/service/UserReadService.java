@@ -27,7 +27,7 @@ public class UserReadService {
         List<User> users = userRepository.findAllByIdIn(userIds).get();
         List<UserProfileOutput> userProfileOutputs = users.stream()
                 .map(user -> UserProfileOutput.builder()
-                        .userId(user.getId())
+                        .userId(user.getUserIdValue())
                         .nickname(user.getNickname().getValue())
                         .sex(user.getSex().name())
                         .build())
@@ -39,7 +39,7 @@ public class UserReadService {
         User user = userRepository.findByIdAndStatus(userId, USER_STATUS_ACTIVE)
                 .orElseThrow(() -> new ResourceNotFoundException("Users", userId));
         return UserProfileOutput.builder()
-                .userId(user.getId())
+                .userId(user.getUserIdValue())
                 .nickname(user.getNickname().getValue())
                 .sex(user.getSex().name())
                 .build();

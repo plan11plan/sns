@@ -5,6 +5,7 @@ import com.example.sns.core.user.domain.entity.Email;
 import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.Password;
 import com.example.sns.core.user.domain.entity.Sex;
+import com.example.sns.core.user.domain.entity.UserId;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
 import jakarta.persistence.Column;
@@ -41,7 +42,7 @@ public class UserEntity {
 
     public static UserEntity from(User user) {
         UserEntity userEntity = new UserEntity();
-        userEntity.id = user.getId();
+        userEntity.id = user.getUserIdValue();
         userEntity.email = user.getEmailValue();
         userEntity.password = user.getPasswordValue();
         userEntity.nickname = user.getNicknameValue();
@@ -56,7 +57,7 @@ public class UserEntity {
 
     public User toModel() {
         return User.builder()
-                .id(id)
+                .id(new UserId(id))
                 .email(new Email(email))
                 .password(new Password(password))
                 .nickname(new Nickname(nickname))

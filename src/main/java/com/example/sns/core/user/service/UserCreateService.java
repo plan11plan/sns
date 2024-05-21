@@ -23,7 +23,7 @@ public class UserCreateService {
         User user = User.from(userCreate, uuidHolder);
         user = userRepository.save(user);
 
-        certificationService.send(userCreate.getEmail().getValue(),user.getId(), user.getCertificationCode());
+        certificationService.send(userCreate.getEmail().getValue(),user.getUserIdValue(), user.getCertificationCode());
         return UserOutput.from(user);
     }
 

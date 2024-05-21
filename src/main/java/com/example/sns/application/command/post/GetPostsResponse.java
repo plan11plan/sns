@@ -1,4 +1,4 @@
-package com.example.sns.application.dto.post;
+package com.example.sns.application.command.post;
 
 import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.core.user.service.output.UserProfileOutput;

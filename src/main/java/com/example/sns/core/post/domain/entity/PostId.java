@@ -5,10 +5,10 @@ import lombok.Getter;
 
 @Getter
 public class PostId {
-    private final Long id;
+    private final Long value;
 
     public PostId(Long id) {
-        this.id = id;
+        this.value = id;
     }
 
 }

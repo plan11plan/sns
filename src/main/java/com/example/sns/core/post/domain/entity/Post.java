@@ -57,7 +57,7 @@ public class Post {
                 .build();
     }
     public Long getPostIdValue(){
-        return id.getId();
+        return this.id != null ? this.id.getValue() : null;
     }
     public Long getWriterIdValue(){
         return writerId.getValue();

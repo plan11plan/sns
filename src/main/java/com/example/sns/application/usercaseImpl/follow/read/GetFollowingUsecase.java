@@ -1,6 +1,6 @@
 package com.example.sns.application.usercaseImpl.follow.read;
 
-import com.example.sns.application.dto.follow.GetFollowingUserCommand;
+import com.example.sns.application.command.follow.GetFollowingUserCommand;
 import com.example.sns.core.follow.service.read.FollowReadService;
 import com.example.sns.core.follow.service.input.FollowGetInput;
 import com.example.sns.core.follow.service.output.FollowOutput;

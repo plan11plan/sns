@@ -14,6 +14,9 @@ public class PostUpdateRequest {
     @JsonProperty("content")
     Content content;
 
+    public PostUpdateRequest() {
+    }
+
     @Builder
     public PostUpdateRequest(Title title, Content content) {
         this.title = title;

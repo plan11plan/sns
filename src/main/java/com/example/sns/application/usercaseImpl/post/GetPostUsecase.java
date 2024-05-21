@@ -23,7 +23,7 @@ public class GetPostUsecase {
     public ResponseEntity<PostResponse> getById(Long id) {
         UserOutput userOutput = userReadService.getById(id);
         Post post = postGetService.getById(id);
-        Long postLike = postLikeReadService.getPostLike(post.getId().getId()).getLikeCount();
+        Long postLike = postLikeReadService.getPostLike(post.getPostIdValue()).getLikeCount();
 
         PostOutput postOutput = PostOutput.from(post,postLike);
         return ResponseEntity.ok(PostResponse.from(postOutput, UserResponse.from(userOutput)));

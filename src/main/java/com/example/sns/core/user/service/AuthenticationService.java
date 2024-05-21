@@ -33,7 +33,7 @@ public class AuthenticationService {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Users", id));
         user = user.certificate(certificationCode);
         NicknameHistory nicknameHistory = NicknameHistory.builder()
-                .userId(user.getId())
+                .userId(user.getUserIdValue())
                 .nickname(user.getNickname())
                 .createdAt(timeHolder.nowDateTime())
                 .build();

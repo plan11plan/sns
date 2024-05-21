@@ -1,8 +1,8 @@
 package com.example.sns.presentation.post.controller;
 
-import com.example.sns.application.dto.post.GetPostsByCursorCommand;
-import com.example.sns.application.dto.post.GetPostsResponse;
-import com.example.sns.application.dto.post.GetTimelineByCursorCommand;
+import com.example.sns.application.command.post.GetPostsByCursorCommand;
+import com.example.sns.application.command.post.GetPostsResponse;
+import com.example.sns.application.command.post.GetTimelineByCursorCommand;
 import com.example.sns.application.usercaseImpl.post.GetPostUsecase;
 import com.example.sns.application.usercaseImpl.post.GetPostsByCursorUsecase;
 import com.example.sns.application.usercaseImpl.post.GetTimelinePostUsecase;

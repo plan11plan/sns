@@ -1,7 +1,7 @@
 package com.example.sns.application.usercaseImpl.post;
 
-import com.example.sns.application.dto.post.GetPostsResponse;
-import com.example.sns.application.dto.post.GetTimelineByCursorCommand;
+import com.example.sns.application.command.post.GetPostsResponse;
+import com.example.sns.application.command.post.GetTimelineByCursorCommand;
 import com.example.sns.core.post.domain.entity.CursorResponse;
 import com.example.sns.core.post.service.CursorPagingPostService;
 import com.example.sns.core.post.service.output.PostOutput;
