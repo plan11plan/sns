@@ -26,7 +26,7 @@ import lombok.Getter;
  */
 @Getter
 public class Follow {
-    private final Long id;
+    private final FollowId id;
     private final Follower follower;
     private final Following following;
     private final FollowStatus status;
@@ -35,7 +35,7 @@ public class Follow {
 
 
     @Builder
-    public Follow(Long id, Follower follower, Following following, FollowStatus status, LocalDateTime createdAt,
+    public Follow(FollowId id, Follower follower, Following following, FollowStatus status, LocalDateTime createdAt,
                   LocalDateTime modifiedAt) {
         if(follower.getId().equals(following.getId())){
             throw new IllegalArgumentException();
@@ -112,6 +112,9 @@ public class Follow {
                 .createdAt(createdAt)
                 .modifiedAt(followDeleteDetails.getModifiedAt())
                 .build();
+    }
+    public Long getFollowIdValue() {
+        return this.id != null ? this.id.getValue() : null;
     }
     public Long getFollowerValue(){
         return follower.getId();

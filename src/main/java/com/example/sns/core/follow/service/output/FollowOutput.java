@@ -28,7 +28,7 @@ public class FollowOutput {
     }
     public static FollowOutput from(Follow follow){
         return FollowOutput.builder()
-                .id(follow.getId())
+                .id(follow.getFollowIdValue())
                 .follower(follow.getFollowerValue())
                 .following(follow.getFollowingValue())
                 .status(follow.getStatus().name())

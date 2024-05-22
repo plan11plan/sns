@@ -1,6 +1,7 @@
 package com.example.sns.core.follow.infrastructure.persistence;
 
 import com.example.sns.core.follow.domain.Follow;
+import com.example.sns.core.follow.domain.FollowId;
 import com.example.sns.core.follow.domain.FollowStatus;
 import com.example.sns.core.follow.domain.Following;
 import com.example.sns.core.follow.domain.Follower;
@@ -48,7 +49,7 @@ public class FollowEntity {
 
     public static FollowEntity from(Follow follow) {
         return FollowEntity.builder()
-                .id(follow.getId())
+                .id(follow.getFollowIdValue())
                 .follower(follow.getFollower())
                 .following(follow.getFollowing())
                 .status(follow.getStatus())
@@ -59,7 +60,7 @@ public class FollowEntity {
 
     public Follow toModel() {
         return Follow.builder()
-                .id(id)
+                .id(new FollowId(id))
                 .follower(Follower.fromUserId(followerId))
                 .following(Following.fromUserId(followingId))
                 .status(status)

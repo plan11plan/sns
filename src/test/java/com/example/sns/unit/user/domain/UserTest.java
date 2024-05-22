@@ -9,6 +9,7 @@ import com.example.sns.core.user.domain.entity.Email;
 import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.Password;
 import com.example.sns.core.user.domain.entity.Sex;
+import com.example.sns.core.user.domain.entity.UserId;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.domain.request.UserCreate;
@@ -66,7 +67,7 @@ class UserTest {
                 .password(new Password("password"))
                 .nickname(new Nickname("nickname"))
                 ///
-                .id(1L)
+                .id(new UserId(1L))
                 .sex(Sex.W)
                 .status(UserStatus.ACTIVE)
                 .certificationCode(certificationCode)
@@ -106,7 +107,7 @@ class UserTest {
         LocalDateTime now = LocalDateTime.now();
         //
         User user = User.builder()
-                .id(1L)
+                .id(new UserId(1L))
                 .nickname(new Nickname("nickname"))
                 .email(new Email("email@gmail.com"))
                 .password(new Password("password"))
@@ -142,7 +143,7 @@ class UserTest {
         LocalDateTime now = LocalDateTime.now();
         //
         User user = User.builder()
-                .id(1L)
+                .id(new UserId(1L))
                 .nickname(new Nickname("nickname"))
                 .email(new Email("email@gmail.com"))
                 .password(new Password("password"))
@@ -179,7 +180,7 @@ class UserTest {
         LocalDateTime now = LocalDateTime.now();
 
         User user = User.builder()
-                .id(1L)
+                .id(new UserId(1L))
                 .nickname(new Nickname("nickname"))
                 .email(new Email("email@gmail.com"))
                 .password(new Password("password"))
