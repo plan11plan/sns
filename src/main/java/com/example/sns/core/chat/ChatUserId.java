@@ -9,4 +9,5 @@ public class ChatUserId {
     public ChatUserId(Long value) {
         this.value = value;
     }
+
 }

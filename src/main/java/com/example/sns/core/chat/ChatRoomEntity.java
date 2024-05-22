@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
-import java.util.UUID;
 import lombok.Getter;
 
 @Entity
@@ -13,7 +12,7 @@ import lombok.Getter;
 public class ChatRoomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private Long userId1;
     private Long userId2;
     private LocalDateTime createdAt;

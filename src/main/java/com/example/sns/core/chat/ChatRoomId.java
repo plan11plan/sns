@@ -1,13 +1,15 @@
 package com.example.sns.core.chat;
 
-import java.util.UUID;
 import lombok.Getter;
 
 @Getter
 public class ChatRoomId {
-    private final UUID value;
+    private final Long value;
 
-    public ChatRoomId(UUID value) {
+    public ChatRoomId(Long value) {
         this.value = value;
     }
+
+
+
 }

@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
-import java.util.UUID;
 import lombok.Getter;
 
 @Entity
@@ -13,8 +12,8 @@ import lombok.Getter;
 public class MessageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-    private UUID chatRoomId;
+    private Long id;
+    private Long chatRoomId;
     private Long senderId;
     private String content;
     private LocalDateTime sentAt;
@@ -22,7 +21,7 @@ public class MessageEntity {
 
     public static MessageEntity from(Message message) {
         MessageEntity entity = new MessageEntity();
-        entity.id = message.getId().getValue();
+        entity.id = message.getMessageIdValue();
         entity.chatRoomId = message.getChatRoomId().getValue();
         entity.senderId = message.getSenderId().getValue();
         entity.content = message.getContent();

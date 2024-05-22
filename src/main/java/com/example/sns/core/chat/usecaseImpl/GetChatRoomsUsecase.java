@@ -14,7 +14,9 @@ public class GetChatRoomsUsecase {
 
     public List<ChatRoomResponse> execute(Long userId) {
         var outputs = chatRoomReadService.getChatRooms(userId);
-        return outputs.stream().map(output -> new ChatRoomResponse(output.getId(), output.getUserId1(), output.getUserId2(), output.getCreatedAt())).collect(
+        return outputs.stream().map(output ->
+                new ChatRoomResponse(output.getId(),
+                        output.getUserId1(), output.getUserId2(), output.getCreatedAt())).collect(
                 Collectors.toList());
     }
 }

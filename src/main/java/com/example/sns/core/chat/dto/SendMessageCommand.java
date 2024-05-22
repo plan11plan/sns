@@ -1,17 +1,33 @@
 package com.example.sns.core.chat.dto;
 
-import java.util.UUID;
-import lombok.Getter;
-
-@Getter
 public class SendMessageCommand {
-    private final UUID chatRoomId;
-    private final Long senderId;
-    private final String content;
+    private Long chatRoomId; // Change type to Long
+    private Long senderId; // Change type to Long
+    private String content;
 
-    public SendMessageCommand(UUID chatRoomId, Long senderId, String content) {
+    // Getters and setters
+
+    public Long getChatRoomId() {
+        return chatRoomId;
+    }
+
+    public void setChatRoomId(Long chatRoomId) {
         this.chatRoomId = chatRoomId;
+    }
+
+    public Long getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(Long senderId) {
         this.senderId = senderId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
         this.content = content;
     }
 }

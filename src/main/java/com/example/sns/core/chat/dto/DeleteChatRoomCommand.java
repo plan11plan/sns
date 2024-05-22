@@ -1,13 +1,12 @@
 package com.example.sns.core.chat.dto;
 
-import java.util.UUID;
 import lombok.Getter;
 
 @Getter
 public class DeleteChatRoomCommand {
-    private final UUID chatRoomId;
+    private final Long chatRoomId;
 
-    public DeleteChatRoomCommand(UUID chatRoomId) {
+    public DeleteChatRoomCommand(Long chatRoomId) {
         this.chatRoomId = chatRoomId;
     }
 }

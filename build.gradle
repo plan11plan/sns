@@ -52,6 +52,11 @@
 		//test 롬복 추가
 		testCompileOnly 'org.projectlombok:lombok:'
 		testAnnotationProcessor 'org.projectlombok:lombok:'
+
+		//채팅 웹소캣
+		implementation 'org.springframework.boot:spring-boot-starter-websocket'
+		implementation 'org.webjars:sockjs-client:1.1.2'
+		implementation 'org.webjars:stomp-websocket:2.3.3-1'
 	}
 	// Querydsl 설정부
 	def generated = 'src/main/generated'

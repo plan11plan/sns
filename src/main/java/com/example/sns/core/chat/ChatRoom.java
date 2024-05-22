@@ -1,7 +1,6 @@
 package com.example.sns.core.chat;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -22,10 +21,14 @@ public class ChatRoom {
 
     public static ChatRoom create(Long userId1, Long userId2, LocalDateTime createdAt) {
         return ChatRoom.builder()
-                .id(new ChatRoomId(UUID.randomUUID()))
                 .userId1(new ChatUserId(userId1))
                 .userId2(new ChatUserId(userId2))
                 .createdAt(createdAt)
                 .build();
     }
+    public Long getChatRoomIdValue(){
+        return this.id != null ? this.id.getValue() : null;
+
+    }
+
 }

@@ -7,7 +7,6 @@ import com.example.sns.core.chat.usecaseImpl.CreateChatRoomUsecase;
 import com.example.sns.core.chat.usecaseImpl.DeleteChatRoomUsecase;
 import com.example.sns.core.chat.usecaseImpl.GetChatRoomsUsecase;
 import java.util.List;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +40,7 @@ public class ChatRoomController {
     }
 
     @DeleteMapping("/room/{chatRoomId}")
-    public ResponseEntity<Void> deleteChatRoom(@PathVariable UUID chatRoomId) {
+    public ResponseEntity<Void> deleteChatRoom(@PathVariable Long chatRoomId) {
         deleteChatRoomUsecase.execute(new DeleteChatRoomCommand(chatRoomId));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -19,9 +19,9 @@ public class QUserChatRoomEntity extends EntityPathBase<UserChatRoomEntity> {
 
     public static final QUserChatRoomEntity userChatRoomEntity = new QUserChatRoomEntity("userChatRoomEntity");
 
-    public final ComparablePath<java.util.UUID> chatRoomId = createComparable("chatRoomId", java.util.UUID.class);
+    public final NumberPath<Long> chatRoomId = createNumber("chatRoomId", Long.class);
 
-    public final ComparablePath<java.util.UUID> id = createComparable("id", java.util.UUID.class);
+    public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final NumberPath<Long> userId = createNumber("userId", Long.class);
 

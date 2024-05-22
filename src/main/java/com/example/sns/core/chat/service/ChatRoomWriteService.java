@@ -6,7 +6,6 @@ import com.example.sns.core.chat.dto.ChatRoomOutput;
 import com.example.sns.core.chat.dto.CreateChatRoomInput;
 import com.example.sns.core.chat.repository.ChatRoomJpaRepository;
 import java.time.LocalDateTime;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,7 @@ public class ChatRoomWriteService {
         ChatRoomEntity savedEntity = chatRoomJpaRepository.save(ChatRoomEntity.from(chatRoom));
         return ChatRoomOutput.from(savedEntity.toModel());
     }
-    public void deleteChatRoom(UUID chatRoomId) {
+    public void deleteChatRoom(Long chatRoomId) {
         chatRoomJpaRepository.deleteById(chatRoomId);
     }
 }

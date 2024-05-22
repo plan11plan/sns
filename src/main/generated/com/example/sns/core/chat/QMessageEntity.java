@@ -19,11 +19,11 @@ public class QMessageEntity extends EntityPathBase<MessageEntity> {
 
     public static final QMessageEntity messageEntity = new QMessageEntity("messageEntity");
 
-    public final ComparablePath<java.util.UUID> chatRoomId = createComparable("chatRoomId", java.util.UUID.class);
+    public final NumberPath<Long> chatRoomId = createNumber("chatRoomId", Long.class);
 
     public final StringPath content = createString("content");
 
-    public final ComparablePath<java.util.UUID> id = createComparable("id", java.util.UUID.class);
+    public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final BooleanPath isRead = createBoolean("isRead");
 

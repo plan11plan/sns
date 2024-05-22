@@ -1,13 +1,12 @@
 package com.example.sns.core.chat.dto;
 
-import java.util.UUID;
 import lombok.Getter;
 
 @Getter
 public class MarkMessageAsReadInput {
-    private final UUID messageId;
+    private final Long messageId;
 
-    public MarkMessageAsReadInput(UUID messageId) {
+    public MarkMessageAsReadInput(Long messageId) {
         this.messageId = messageId;
     }
 

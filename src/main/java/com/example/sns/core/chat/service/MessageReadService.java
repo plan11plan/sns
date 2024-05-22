@@ -4,7 +4,6 @@ import com.example.sns.core.chat.MessageEntity;
 import com.example.sns.core.chat.dto.MessageOutput;
 import com.example.sns.core.chat.repository.MessageJpaRepository;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class MessageReadService {
     private final MessageJpaRepository messageRepository;
 
-    public List<MessageOutput> getMessages(UUID chatRoomId) {
+    public List<MessageOutput> getMessages(Long chatRoomId) {
         List<MessageEntity> messages = messageRepository.findByChatRoomId(chatRoomId);
         return messages.stream().map(entity -> MessageOutput.from(entity.toModel())).collect(Collectors.toList());
     }

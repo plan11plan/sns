@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Application</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+<h1>Chat Room</h1>
+<div id="messages"></div>
+<input type="text" id="messageInput" placeholder="Type a message..."/>
+<button onclick="sendMessage()">Send</button>
+
+<script type="text/javascript">
+    var stompClient = null;
+
+    function connect() {
+        var socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/messages', function (messageOutput) {
+                showMessage(JSON.parse(messageOutput.body));
+            });
+        });
+    }
+
+    function sendMessage() {
+        var content = document.getElementById('messageInput').value;
+        stompClient.send("/app/sendMessage", {}, JSON.stringify({
+            'chatRoomId': 1, // Example chat room ID
+            'senderId': 1, // Example sender ID
+            'content': content
+        }));
+        document.getElementById('messageInput').value = '';
+    }
+
+    function showMessage(message) {
+        var messagesDiv = document.getElementById('messages');
+        var messageElement = document.createElement('div');
+        messageElement.appendChild(document.createTextNode(message.content));
+        messagesDiv.appendChild(messageElement);
+    }
+
+    connect();
+</script>
+</body>
+</html>

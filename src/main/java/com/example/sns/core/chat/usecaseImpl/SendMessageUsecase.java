@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SendMessageUsecase {
     private final MessageWriteService messageWriteService;
-
     public MessageResponse execute(SendMessageCommand command) {
         var output = messageWriteService.sendMessage(new SendMessageInput(command.getChatRoomId(), command.getSenderId(), command.getContent()));
         return new MessageResponse(output.getId(), output.getChatRoomId(), output.getSenderId(), output.getContent(), output.getSentAt(), output.isRead());

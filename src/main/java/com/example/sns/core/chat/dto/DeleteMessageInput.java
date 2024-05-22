@@ -1,13 +1,12 @@
 package com.example.sns.core.chat.dto;
 
-import java.util.UUID;
 import lombok.Getter;
 
 @Getter
 public class DeleteMessageInput {
-    private final UUID messageId;
+    private final Long messageId;
 
-    public DeleteMessageInput(UUID messageId) {
+    public DeleteMessageInput(Long messageId) {
         this.messageId = messageId;
     }
 }

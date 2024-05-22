@@ -12,9 +12,9 @@ import lombok.Getter;
 public class UserChatRoomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private Long userId;
-    private UUID chatRoomId;
+    private Long  chatRoomId;
 
     public static UserChatRoomEntity from(UserChatRoom userChatRoom) {
         UserChatRoomEntity entity = new UserChatRoomEntity();

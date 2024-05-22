@@ -21,7 +21,7 @@ public class QChatRoomEntity extends EntityPathBase<ChatRoomEntity> {
 
     public final DateTimePath<java.time.LocalDateTime> createdAt = createDateTime("createdAt", java.time.LocalDateTime.class);
 
-    public final ComparablePath<java.util.UUID> id = createComparable("id", java.util.UUID.class);
+    public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final NumberPath<Long> userId1 = createNumber("userId1", Long.class);
 

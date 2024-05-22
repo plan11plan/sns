@@ -7,10 +7,11 @@ import com.example.sns.core.chat.usecaseImpl.DeleteMessageUsecase;
 import com.example.sns.core.chat.usecaseImpl.GetMessagesUsecase;
 import com.example.sns.core.chat.usecaseImpl.SendMessageUsecase;
 import java.util.List;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,13 @@ public class ChatMessageController {
     private final SendMessageUsecase sendMessageUsecase;
     private final GetMessagesUsecase getMessagesUsecase;
     private final DeleteMessageUsecase deleteMessageUsecase;
-
+    //
+    @MessageMapping("/sendMessage")
+    @SendTo("/topic/messages")
+    public MessageResponse sendMessageV2(SendMessageCommand command) {
+        return sendMessageUsecase.execute(command);
+    }
+    //
     @PostMapping("/message")
     public ResponseEntity<MessageResponse> sendMessage(@RequestBody SendMessageCommand command) {
         MessageResponse response = sendMessageUsecase.execute(command);
@@ -34,14 +41,14 @@ public class ChatMessageController {
     }
 
     @GetMapping("/messages/{chatRoomId}")
-    public ResponseEntity<List<MessageResponse>> getMessages(@PathVariable UUID chatRoomId) {
+    public ResponseEntity<List<MessageResponse>> getMessages(@PathVariable Long chatRoomId) {
         List<MessageResponse> responses = getMessagesUsecase.execute(chatRoomId);
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
 
     @DeleteMapping("/message/{messageId}")
-    public ResponseEntity<Void> deleteMessage(@PathVariable UUID messageId) {
+    public ResponseEntity<Void> deleteMessage(@PathVariable Long  messageId) {
         deleteMessageUsecase.execute(new DeleteMessageCommand(messageId));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

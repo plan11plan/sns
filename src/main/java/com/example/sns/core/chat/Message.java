@@ -1,7 +1,6 @@
 package com.example.sns.core.chat;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -24,9 +23,8 @@ public class Message {
         this.isRead = isRead;
     }
 
-    public static Message create(UUID chatRoomId, Long senderId, String content, LocalDateTime sentAt) {
+    public static Message create(Long chatRoomId, Long senderId, String content, LocalDateTime sentAt) {
         return Message.builder()
-                .id(new MessageId(UUID.randomUUID()))
                 .chatRoomId(new ChatRoomId(chatRoomId))
                 .senderId(new ChatUserId(senderId))
                 .content(content)
@@ -53,5 +51,9 @@ public class Message {
                 .sentAt(sentAt)
                 .isRead(true)
                 .build();
+    }
+    public Long getMessageIdValue(){
+        return this.id != null ? this.id.getValue() : null;
+
     }
 }
