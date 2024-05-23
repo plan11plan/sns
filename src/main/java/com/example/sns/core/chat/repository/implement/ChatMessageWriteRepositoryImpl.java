@@ -1,0 +1,24 @@
+package com.example.sns.core.chat.repository.implement;
+
+import com.example.sns.core.chat.domain.ChatMessage;
+import com.example.sns.core.chat.repository.entity.ChatMessageEntity;
+import com.example.sns.core.chat.repository.jpa.ChatMessageJpaRepository;
+import com.example.sns.core.chat.service.port.ChatMessageWriteRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@RequiredArgsConstructor
+public class ChatMessageWriteRepositoryImpl implements ChatMessageWriteRepository {
+    private final ChatMessageJpaRepository chatMessageJpaRepository;
+    @Override
+    public ChatMessage save(ChatMessage chatMessage) {
+        return chatMessageJpaRepository.save(ChatMessageEntity.from(chatMessage)).toModel();
+    }
+
+    public void deleteById(Long chatRoomId) {
+        chatMessageJpaRepository.deleteById(chatRoomId);
+    }
+
+
+}

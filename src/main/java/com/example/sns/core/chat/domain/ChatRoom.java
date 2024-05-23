@@ -1,5 +1,6 @@
 package com.example.sns.core.chat.domain;
 
+import com.example.sns.core.chat.domain.request.ChatRoomCreate;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,16 +20,22 @@ public class ChatRoom {
         this.createdAt = createdAt;
     }
 
-    public static ChatRoom create(Long userId1, Long userId2, LocalDateTime createdAt) {
+    public static ChatRoom create(ChatRoomCreate chatRoomCreate, LocalDateTime createdAt) {
         return ChatRoom.builder()
-                .userId1(new ChatUserId(userId1))
-                .userId2(new ChatUserId(userId2))
+                .userId1(chatRoomCreate.getUserId1())
+                .userId2(chatRoomCreate.getUserId2())
                 .createdAt(createdAt)
                 .build();
     }
     public Long getChatRoomIdValue(){
         return this.id != null ? this.id.getValue() : null;
 
+    }
+    public Long getUserId1Value(){
+        return userId1.getValue();
+    }
+    public Long getUserId2Value(){
+        return userId2.getValue();
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.sns.core.chat.usecaseImpl;
 
 import com.example.sns.core.chat.dto.MessageResponse;
 import com.example.sns.core.chat.service.ChatMessageReadService;
+import com.example.sns.core.chat.service.output.ChatMessagesOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +15,9 @@ public class GetMessagesUsecase {
     private final ChatMessageReadService chatMessageReadService;
 
     public List<MessageResponse> execute(Long chatRoomId) {
-        return chatMessageReadService.getMessagesByChatRoomId(chatRoomId).stream()
-                .map(message -> new MessageResponse(
-                        message.getId(),
-                        message.getChatRoomId(),
-                        message.getSenderId(),
-                        message.getContent(),
-                        message.getSentAt(),
-                        message.isRead(),
-                        message.getStatus().name()
-                ))
+        ChatMessagesOutput chatMessagesOutput = chatMessageReadService.getMessagesByChatRoomId(chatRoomId);
+        return chatMessagesOutput.getChatMessages().stream()
+                .map(MessageResponse::from)
                 .collect(Collectors.toList());
     }
 }

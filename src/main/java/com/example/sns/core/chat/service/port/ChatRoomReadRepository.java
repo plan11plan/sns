@@ -1,11 +1,12 @@
-package com.example.sns.core.chat.repository;
+package com.example.sns.core.chat.service.port;
 
 import com.example.sns.core.chat.domain.ChatRoom;
+import java.util.List;
 import java.util.Optional;
 
-public interface ChatRoomRepository {
-    ChatRoom save(ChatRoom chatRoom);
+public interface ChatRoomReadRepository {
     Optional<ChatRoom> findByUserIds(Long userId1, Long userId2);
-    void deleteById(Long chatRoomId);
     Optional<ChatRoom> findById(Long chatRoomId);
+    List<ChatRoom> findByUserId(Long userId);
+
 }

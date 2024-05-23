@@ -14,6 +14,6 @@ public class CreateChatRoomUsecase {
 
     public ChatRoomResponse execute(CreateChatRoomCommand command) {
         var output = chatRoomWriteService.createChatRoom(command.getUserId1(), command.getUserId2());
-        return new ChatRoomResponse(output.getId(), output.getUserId1(), output.getUserId2(),output.getCreatedAt());
+        return ChatRoomResponse.from(output);
     }
 }

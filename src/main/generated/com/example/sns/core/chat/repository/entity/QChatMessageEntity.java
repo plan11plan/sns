@@ -10,14 +10,14 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QMessageEntity is a Querydsl query type for MessageEntity
+ * QChatMessageEntity is a Querydsl query type for ChatMessageEntity
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QMessageEntity extends EntityPathBase<MessageEntity> {
+public class QChatMessageEntity extends EntityPathBase<ChatMessageEntity> {
 
-    private static final long serialVersionUID = -210668747L;
+    private static final long serialVersionUID = -1628958403L;
 
-    public static final QMessageEntity messageEntity = new QMessageEntity("messageEntity");
+    public static final QChatMessageEntity chatMessageEntity = new QChatMessageEntity("chatMessageEntity");
 
     public final NumberPath<Long> chatRoomId = createNumber("chatRoomId", Long.class);
 
@@ -31,18 +31,18 @@ public class QMessageEntity extends EntityPathBase<MessageEntity> {
 
     public final DateTimePath<java.time.LocalDateTime> sentAt = createDateTime("sentAt", java.time.LocalDateTime.class);
 
-    public final EnumPath<com.example.sns.core.chat.domain.MessageStatus> status = createEnum("status", com.example.sns.core.chat.domain.MessageStatus.class);
+    public final StringPath status = createString("status");
 
-    public QMessageEntity(String variable) {
-        super(MessageEntity.class, forVariable(variable));
+    public QChatMessageEntity(String variable) {
+        super(ChatMessageEntity.class, forVariable(variable));
     }
 
-    public QMessageEntity(Path<? extends MessageEntity> path) {
+    public QChatMessageEntity(Path<? extends ChatMessageEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QMessageEntity(PathMetadata metadata) {
-        super(MessageEntity.class, metadata);
+    public QChatMessageEntity(PathMetadata metadata) {
+        super(ChatMessageEntity.class, metadata);
     }
 
 }

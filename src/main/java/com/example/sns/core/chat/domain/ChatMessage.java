@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class Message {
+public class ChatMessage {
     private final MessageId id;
     private final ChatRoomId chatRoomId;
     private final ChatUserId senderId;
@@ -14,8 +14,20 @@ public class Message {
     private final boolean isRead;
     private final MessageStatus status;
 
+    public Long getChatRoomIdValue(){
+        return chatRoomId.getValue();
+    }
+    public Long getSenderIdValue(){
+        return senderId.getValue();
+    }
+    public String getContentValue(){
+        return content;
+    }
+    public String getStatusValue(){
+        return status.name();
+    }
     @Builder
-    public Message(MessageId id, ChatRoomId chatRoomId, ChatUserId senderId, String content, LocalDateTime sentAt, boolean isRead, MessageStatus status) {
+    public ChatMessage(MessageId id, ChatRoomId chatRoomId, ChatUserId senderId, String content, LocalDateTime sentAt, boolean isRead, MessageStatus status) {
         this.id = id;
         this.chatRoomId = chatRoomId;
         this.senderId = senderId;
@@ -25,8 +37,8 @@ public class Message {
         this.status = status;
     }
 
-    public static Message create(Long chatRoomId, Long senderId, String content, LocalDateTime sentAt) {
-        return Message.builder()
+    public static ChatMessage create(Long chatRoomId, Long senderId, String content, LocalDateTime sentAt) {
+        return ChatMessage.builder()
                 .chatRoomId(new ChatRoomId(chatRoomId))
                 .senderId(new ChatUserId(senderId))
                 .content(content)
@@ -36,8 +48,8 @@ public class Message {
                 .build();
     }
 
-    public Message markAsRead() {
-        return Message.builder()
+    public ChatMessage markAsRead() {
+        return ChatMessage.builder()
                 .id(id)
                 .chatRoomId(chatRoomId)
                 .senderId(senderId)
@@ -48,8 +60,8 @@ public class Message {
                 .build();
     }
 
-    public Message updateContent(String newContent) {
-        return Message.builder()
+    public ChatMessage updateContent(String newContent) {
+        return ChatMessage.builder()
                 .id(id)
                 .chatRoomId(chatRoomId)
                 .senderId(senderId)
@@ -60,8 +72,8 @@ public class Message {
                 .build();
     }
 
-    public Message delete() {
-        return Message.builder()
+    public ChatMessage delete() {
+        return ChatMessage.builder()
                 .id(id)
                 .chatRoomId(chatRoomId)
                 .senderId(senderId)
@@ -72,7 +84,7 @@ public class Message {
                 .build();
     }
 
-    public Long getMessageIdValue() {
+    public Long getChatMessageIdValue() {
         return this.id != null ? this.id.getValue() : null;
     }
 }

@@ -13,21 +13,17 @@ public class SendMessageUsecase {
     private final ChatMessageWriteService chatMessageWriteService;
 
     public MessageResponse execute(SendMessageCommand command) {
-        var input = new SendMessageInput(
-                command.getChatRoomId(),
-                command.getSenderId(),
-                command.getContent()
-        );
+        var input = toSendMessageInput(command);
+        var chatMessageOutput = chatMessageWriteService.sendMessage(input);
 
-        var output = chatMessageWriteService.sendMessage(input);
-        return new MessageResponse(
-                output.getId(),
-                output.getChatRoomId(),
-                output.getSenderId(),
-                output.getContent(),
-                output.getSentAt(),
-                output.isRead(),
-                output.getStatus().name()
-        );
+        return MessageResponse.from(chatMessageOutput);
+    }
+
+    private SendMessageInput toSendMessageInput(SendMessageCommand command) {
+        return SendMessageInput.builder()
+                .chatRoomId(command.getChatRoomId())
+                .senderId(command.getSenderId())
+                .content(command.getContent())
+                .build();
     }
 }

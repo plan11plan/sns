@@ -10,10 +10,10 @@
 <div>
     <input type="text" id="chatRoomId" placeholder="Chat Room ID">
     <input type="text" id="senderId" placeholder="Sender ID">
-    <input type="text" id="message" placeholder="Message">
+    <input type="text" id="chatMessage" placeholder="Message">
     <button onclick="sendMessage()">Send Message</button>
 </div>
-<div id="messages"></div>
+<div id="chatMessages"></div>
 
 <script>
     var stompClient = null;
@@ -23,8 +23,8 @@
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/messages', function (message) {
-                showMessage(JSON.parse(message.body));
+            stompClient.subscribe('/topic/chatMessages', function (chatMessage) {
+                showMessage(JSON.parse(chatMessage.body));
             });
         });
     }
@@ -32,7 +32,7 @@
     function sendMessage() {
         var chatRoomId = document.getElementById('chatRoomId').value;
         var senderId = document.getElementById('senderId').value;
-        var content = document.getElementById('message').value;
+        var content = document.getElementById('chatMessage').value;
         stompClient.send("/app/sendMessage", {}, JSON.stringify({
             'chatRoomId': chatRoomId,
             'senderId': senderId,
@@ -40,11 +40,11 @@
         }));
     }
 
-    function showMessage(message) {
-        var messages = document.getElementById('messages');
+    function showMessage(chatMessage) {
+        var chatMessages = document.getElementById('chatMessages');
         var messageElement = document.createElement('div');
-        messageElement.appendChild(document.createTextNode(message.senderId + ": " + message.content));
-        messages.appendChild(messageElement);
+        messageElement.appendChild(document.createTextNode(chatMessage.senderId + ": " + chatMessage.content));
+        chatMessages.appendChild(messageElement);
     }
 
     connect();

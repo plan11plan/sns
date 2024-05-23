@@ -1,33 +1,20 @@
 package com.example.sns.core.chat.service;
 
-import com.example.sns.core.chat.domain.Message;
-import com.example.sns.core.chat.repository.ChatMessageRepository;
-import com.example.sns.core.chat.service.output.ChatMessageOutput;
+import com.example.sns.core.chat.domain.ChatMessage;
+import com.example.sns.core.chat.service.output.ChatMessagesOutput;
+import com.example.sns.core.chat.service.port.ChatMessageReadRepository;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class ChatMessageReadService {
-    private final ChatMessageRepository chatMessageRepository;
+    private final ChatMessageReadRepository chatMessageReadRepository;
 
-    public List<ChatMessageOutput> getMessagesByChatRoomId(Long chatRoomId) {
-        return chatMessageRepository.findByChatRoomId(chatRoomId).stream()
-                .map(this::toOutput)
-                .collect(Collectors.toList());
-    }
-
-    private ChatMessageOutput toOutput(Message message) {
-        return new ChatMessageOutput(
-                message.getId().getValue(),
-                message.getChatRoomId().getValue(),
-                message.getSenderId().getValue(),
-                message.getContent(),
-                message.getSentAt(),
-                message.isRead(),
-                message.getStatus()
-        );
+    public ChatMessagesOutput getMessagesByChatRoomId(Long chatRoomId) {
+        List<ChatMessage> chatMessages = chatMessageReadRepository.findByChatRoomId(chatRoomId).orElseThrow();
+        return ChatMessagesOutput.from(chatMessages);
     }
 }
+

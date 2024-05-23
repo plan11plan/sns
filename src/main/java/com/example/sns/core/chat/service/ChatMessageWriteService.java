@@ -1,9 +1,10 @@
 package com.example.sns.core.chat.service;
 
-import com.example.sns.core.chat.domain.Message;
-import com.example.sns.core.chat.repository.ChatMessageRepository;
+import com.example.sns.core.chat.domain.ChatMessage;
 import com.example.sns.core.chat.service.input.SendMessageInput;
 import com.example.sns.core.chat.service.output.ChatMessageOutput;
+import com.example.sns.core.chat.service.port.ChatMessageReadRepository;
+import com.example.sns.core.chat.service.port.ChatMessageWriteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,52 +13,35 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class ChatMessageWriteService {
-    private final ChatMessageRepository chatMessageRepository;
+    private final ChatMessageReadRepository chatMessageReadRepository;
     private final ChatRoomWriteService chatRoomWriteService;
+    private final ChatMessageWriteRepository chatMessageWriteRepository;
 
     public ChatMessageOutput sendMessage(SendMessageInput input) {
-        // Check if chat room exists or create a new one
         var chatRoomOutput = chatRoomWriteService.getOrCreateChatRoom(input.getChatRoomId(), input.getSenderId());
 
-        // Create a new message
-        var message = Message.create(
+        var message = ChatMessage.create(
                 chatRoomOutput.getId(),
                 input.getSenderId(),
                 input.getContent(),
                 LocalDateTime.now()
         );
 
-        var savedMessage = chatMessageRepository.save(message);
-        return new ChatMessageOutput(
-                savedMessage.getMessageIdValue(),
-                savedMessage.getChatRoomId().getValue(),
-                savedMessage.getSenderId().getValue(),
-                savedMessage.getContent(),
-                savedMessage.getSentAt(),
-                savedMessage.isRead(),
-                savedMessage.getStatus()
-        );
+        var savedMessage = chatMessageWriteRepository.save(message);
+        return ChatMessageOutput.from(savedMessage);
     }
 
     public ChatMessageOutput markMessageAsRead(Long messageId) {
-        var message = chatMessageRepository.findById(messageId)
-                .orElseThrow(() -> new RuntimeException("Message not found"));
+        var message = chatMessageReadRepository.findById(messageId)
+                .orElseThrow(() -> new RuntimeException("ChatMessage not found"));
 
         var updatedMessage = message.markAsRead();
-        var savedMessage = chatMessageRepository.save(updatedMessage);
+        var savedMessage = chatMessageWriteRepository.save(updatedMessage);
 
-        return new ChatMessageOutput(
-                savedMessage.getMessageIdValue(),
-                savedMessage.getChatRoomId().getValue(),
-                savedMessage.getSenderId().getValue(),
-                savedMessage.getContent(),
-                savedMessage.getSentAt(),
-                savedMessage.isRead(),
-                savedMessage.getStatus()
-        );
+        return ChatMessageOutput.from(savedMessage);
     }
 
     public void deleteMessage(Long messageId) {
-        chatMessageRepository.deleteById(messageId);
+        chatMessageWriteRepository.deleteById(messageId);
     }
 }
