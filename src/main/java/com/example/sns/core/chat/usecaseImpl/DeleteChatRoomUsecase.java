@@ -14,4 +14,3 @@ public class DeleteChatRoomUsecase {
         chatRoomWriteService.deleteChatRoom(command.getChatRoomId());
     }
 }
-

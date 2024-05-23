@@ -1,12 +1,13 @@
-package com.example.sns.core.chat.dto;
+package com.example.sns.core.chat.service.output;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-@Data
+@Getter
 @AllArgsConstructor
-public class ChatRoomResponse {
+public class ChatRoomOutput {
     private Long id;
     private Long userId1;
     private Long userId2;

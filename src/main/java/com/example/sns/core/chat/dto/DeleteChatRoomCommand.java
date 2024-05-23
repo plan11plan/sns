@@ -1,13 +1,10 @@
 package com.example.sns.core.chat.dto;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
+@Data
+@AllArgsConstructor
 public class DeleteChatRoomCommand {
-    private final Long chatRoomId;
-
-    public DeleteChatRoomCommand(Long chatRoomId) {
-        this.chatRoomId = chatRoomId;
-    }
+    private Long chatRoomId;
 }
-

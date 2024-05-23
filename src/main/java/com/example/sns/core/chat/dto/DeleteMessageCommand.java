@@ -1,12 +1,10 @@
 package com.example.sns.core.chat.dto;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
+@Data
+@AllArgsConstructor
 public class DeleteMessageCommand {
-    private final Long messageId;
-
-    public DeleteMessageCommand(Long  messageId) {
-        this.messageId = messageId;
-    }
+    private Long messageId;
 }

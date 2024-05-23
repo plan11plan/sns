@@ -1,4 +1,4 @@
-package com.example.sns.core.chat;
+package com.example.sns.core.chat.domain;
 
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.example.sns.core.chat;
+package com.example.sns.core.chat.domain;
 
 import java.time.LocalDateTime;
 import lombok.Builder;

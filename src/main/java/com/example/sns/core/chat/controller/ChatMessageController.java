@@ -27,13 +27,13 @@ public class ChatMessageController {
     private final SendMessageUsecase sendMessageUsecase;
     private final GetMessagesUsecase getMessagesUsecase;
     private final DeleteMessageUsecase deleteMessageUsecase;
-    //
+
     @MessageMapping("/sendMessage")
     @SendTo("/topic/messages")
     public MessageResponse sendMessageV2(SendMessageCommand command) {
         return sendMessageUsecase.execute(command);
     }
-    //
+
     @PostMapping("/message")
     public ResponseEntity<MessageResponse> sendMessage(@RequestBody SendMessageCommand command) {
         MessageResponse response = sendMessageUsecase.execute(command);
@@ -46,9 +46,8 @@ public class ChatMessageController {
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
-
     @DeleteMapping("/message/{messageId}")
-    public ResponseEntity<Void> deleteMessage(@PathVariable Long  messageId) {
+    public ResponseEntity<Void> deleteMessage(@PathVariable Long messageId) {
         deleteMessageUsecase.execute(new DeleteMessageCommand(messageId));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

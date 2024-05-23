@@ -1,4 +1,4 @@
-package com.example.sns.core.chat;
+package com.example.sns.core.chat.repository.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -15,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QMessageEntity extends EntityPathBase<MessageEntity> {
 
-    private static final long serialVersionUID = -1920069028L;
+    private static final long serialVersionUID = -210668747L;
 
     public static final QMessageEntity messageEntity = new QMessageEntity("messageEntity");
 
@@ -30,6 +30,8 @@ public class QMessageEntity extends EntityPathBase<MessageEntity> {
     public final NumberPath<Long> senderId = createNumber("senderId", Long.class);
 
     public final DateTimePath<java.time.LocalDateTime> sentAt = createDateTime("sentAt", java.time.LocalDateTime.class);
+
+    public final EnumPath<com.example.sns.core.chat.domain.MessageStatus> status = createEnum("status", com.example.sns.core.chat.domain.MessageStatus.class);
 
     public QMessageEntity(String variable) {
         super(MessageEntity.class, forVariable(variable));

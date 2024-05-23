@@ -1,18 +1,19 @@
-package com.example.sns.core.chat.dto;
+package com.example.sns.core.chat.service.output;
 
+import com.example.sns.core.chat.domain.MessageStatus;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
 @AllArgsConstructor
-public class MessageResponse {
+public class ChatMessageOutput {
     private Long id;
     private Long chatRoomId;
     private Long senderId;
     private String content;
     private LocalDateTime sentAt;
     private boolean isRead;
-    private String status;
+    private MessageStatus status;
 }

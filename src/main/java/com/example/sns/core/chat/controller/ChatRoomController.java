@@ -26,7 +26,6 @@ public class ChatRoomController {
     private final DeleteChatRoomUsecase deleteChatRoomUsecase;
     private final GetChatRoomsUsecase getChatRoomsUsecase;
 
-
     @PostMapping("/room")
     public ResponseEntity<ChatRoomResponse> createChatRoom(@RequestBody CreateChatRoomCommand command) {
         ChatRoomResponse response = createChatRoomUsecase.execute(command);
@@ -44,5 +43,4 @@ public class ChatRoomController {
         deleteChatRoomUsecase.execute(new DeleteChatRoomCommand(chatRoomId));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.sns.core.chat;
+package com.example.sns.core.chat.repository.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -15,11 +15,9 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QChatRoomEntity extends EntityPathBase<ChatRoomEntity> {
 
-    private static final long serialVersionUID = -2050035516L;
+    private static final long serialVersionUID = -598234357L;
 
     public static final QChatRoomEntity chatRoomEntity = new QChatRoomEntity("chatRoomEntity");
-
-    public final DateTimePath<java.time.LocalDateTime> createdAt = createDateTime("createdAt", java.time.LocalDateTime.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
