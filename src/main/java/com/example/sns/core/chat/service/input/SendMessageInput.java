@@ -5,14 +5,14 @@ import lombok.Getter;
 
 @Getter
 public class SendMessageInput {
-    private Long chatRoomId;
     private Long senderId;
+    private Long receiverId;
     private String content;
 
     @Builder
-    public SendMessageInput(Long chatRoomId, Long senderId, String content) {
-        this.chatRoomId = chatRoomId;
+    public SendMessageInput(Long senderId, Long receiverId, String content) {
         this.senderId = senderId;
+        this.receiverId = receiverId;
         this.content = content;
     }
 }

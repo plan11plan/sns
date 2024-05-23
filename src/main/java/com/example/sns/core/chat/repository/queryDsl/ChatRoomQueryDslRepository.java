@@ -14,14 +14,14 @@ import org.springframework.stereotype.Repository;
 public class ChatRoomQueryDslRepository {
     private final JPAQueryFactory queryFactory;
 
+
     public Optional<ChatRoomEntity> findByUserIds(Long userId1, Long userId2) {
         ChatRoomEntity entity = queryFactory.selectFrom(chatRoomEntity)
                 .where((chatRoomEntity.userId1.eq(userId1).and(chatRoomEntity.userId2.eq(userId2)))
                         .or(chatRoomEntity.userId1.eq(userId2).and(chatRoomEntity.userId2.eq(userId1))))
-                .fetchOne();
+                .fetchFirst();  // 중복 결과가 있을 경우 첫 번째 결과만 반환
         return Optional.ofNullable(entity);
     }
-
     public Optional<ChatRoomEntity> findById(Long chatRoomId) {
         ChatRoomEntity entity = queryFactory.selectFrom(chatRoomEntity)
                 .where(chatRoomEntity.id.eq(chatRoomId))

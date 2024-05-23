@@ -21,7 +21,7 @@ public class SendMessageUsecase {
 
     private SendMessageInput toSendMessageInput(SendMessageCommand command) {
         return SendMessageInput.builder()
-                .chatRoomId(command.getChatRoomId())
+                .receiverId(command.getReceiverId())
                 .senderId(command.getSenderId())
                 .content(command.getContent())
                 .build();

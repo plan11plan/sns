@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class ChatMessageWriteService {
     private final ChatMessageWriteRepository chatMessageWriteRepository;
 
     public ChatMessageOutput sendMessage(SendMessageInput input) {
-        var chatRoomOutput = chatRoomWriteService.getOrCreateChatRoom(input.getChatRoomId(), input.getSenderId());
+        var chatRoomOutput = chatRoomWriteService.getOrCreateChatRoom(input.getSenderId(), input.getReceiverId());
 
         var message = ChatMessage.create(
                 chatRoomOutput.getId(),
@@ -35,10 +36,23 @@ public class ChatMessageWriteService {
         var message = chatMessageReadRepository.findById(messageId)
                 .orElseThrow(() -> new RuntimeException("ChatMessage not found"));
 
-        var updatedMessage = message.markAsRead();
-        var savedMessage = chatMessageWriteRepository.save(updatedMessage);
+        if (!message.isRead()) {  // Only mark as read if it is not already read
+            var updatedMessage = message.markAsRead();
+            var savedMessage = chatMessageWriteRepository.save(updatedMessage);
+            return ChatMessageOutput.from(savedMessage);
+        }
 
-        return ChatMessageOutput.from(savedMessage);
+        return ChatMessageOutput.from(message);  // Return the original message if already read
+    }
+
+    public void markMessagesAsReadInChatRoom(Long chatRoomId, Long userId) {
+        List<ChatMessage> messages = chatMessageReadRepository.findUnreadMessagesInChatRoom(chatRoomId, userId);
+        messages.forEach(message -> {
+            if (!message.isRead()) {  // Only save if the message was unread
+                var updatedMessage = message.markAsRead();
+                chatMessageWriteRepository.save(updatedMessage);
+            }
+        });
     }
 
     public void deleteMessage(Long messageId) {

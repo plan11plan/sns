@@ -1,8 +1,8 @@
-package com.example.sns.core.chat.repository.implement;
+package com.example.sns.core.chat.repository;
 
 import com.example.sns.core.chat.domain.ChatMessage;
 import com.example.sns.core.chat.repository.entity.ChatMessageEntity;
-import com.example.sns.core.chat.repository.jpa.ChatMessageJpaRepository;
+import com.example.sns.core.chat.repository.queryDsl.ChatMessageQueryDslRepository;
 import com.example.sns.core.chat.service.port.ChatMessageReadRepository;
 import java.util.List;
 import java.util.Optional;
@@ -13,20 +13,25 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class ChatMessageReadRepositoryImpl implements ChatMessageReadRepository {
-    private final ChatMessageJpaRepository chatMessageJpaRepository;
-
+    private final ChatMessageQueryDslRepository queryDslRepository;
 
     @Override
     public Optional<ChatMessage> findById(Long messageId) {
-        return chatMessageJpaRepository.findById(messageId).map(ChatMessageEntity::toModel);
+        return queryDslRepository.findById(messageId)
+                .map(ChatMessageEntity::toModel);
     }
 
     @Override
     public Optional<List<ChatMessage>> findByChatRoomId(Long chatRoomId) {
-        List<ChatMessage> chatMessages = chatMessageJpaRepository.findByChatRoomId(chatRoomId).stream()
-                .map(ChatMessageEntity::toModel)
-                .collect(Collectors.toList());
-        return chatMessages.isEmpty() ? Optional.empty() : Optional.of(chatMessages);
+        List<ChatMessageEntity> entities = queryDslRepository.findByChatRoomId(chatRoomId);
+        List<ChatMessage> messages = entities.stream().map(ChatMessageEntity::toModel).collect(Collectors.toList());
+        return Optional.ofNullable(messages);
     }
 
+    @Override
+    public List<ChatMessage> findUnreadMessagesInChatRoom(Long chatRoomId, Long userId) {
+        return queryDslRepository.findUnreadMessagesInChatRoom(chatRoomId, userId).stream()
+                .map(ChatMessageEntity::toModel)
+                .collect(Collectors.toList());
+    }
 }
