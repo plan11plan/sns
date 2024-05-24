@@ -7,6 +7,7 @@ import com.example.sns.core.post.infrastructure.repository.queryDsl.CommentQuery
 import com.example.sns.core.post.service.port.CommentReadRepository;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -22,12 +23,26 @@ public class CommentReadRepositoryImpl implements CommentReadRepository {
     }
 
     @Override
-    public List<Comment> findByPostId(Long postId) {
-        return commentQueryDslRepository.findByPostId(postId).stream().map(CommentEntity::toModel).toList();
+    public Optional<List<Comment>> findByPostId(Long postId) {
+        List<CommentEntity> commentEntities = commentQueryDslRepository.findByPostId(postId);
+        if (commentEntities.isEmpty()) {
+            return Optional.empty();
+        }
+        List<Comment> comments = commentEntities.stream()
+                .map(CommentEntity::toModel)
+                .collect(Collectors.toList());
+        return Optional.of(comments);
     }
 
     @Override
-    public List<Comment> findByParentId(Long parentId) {
-        return commentQueryDslRepository.findByParentId(parentId).stream().map(CommentEntity::toModel).toList();
+    public Optional<List<Comment>> findByParentId(Long parentId) {
+        List<CommentEntity> commentEntities = commentQueryDslRepository.findByParentId(parentId);
+        if (commentEntities.isEmpty()) {
+            return Optional.empty();
+        }
+        List<Comment> comments = commentEntities.stream()
+                .map(CommentEntity::toModel)
+                .collect(Collectors.toList());
+        return Optional.of(comments);
     }
 }

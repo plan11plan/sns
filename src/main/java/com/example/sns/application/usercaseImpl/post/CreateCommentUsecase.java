@@ -1,7 +1,7 @@
 package com.example.sns.application.usercaseImpl.post;
 
-import com.example.sns.core.post.domain.entity.request.CommentCreate;
 import com.example.sns.core.post.service.CommentWriteService;
+import com.example.sns.core.post.service.input.CommentCreateInput;
 import com.example.sns.core.post.service.output.CommentOutput;
 import com.example.sns.presentation.post.controller.request.CommentCreateRequest;
 import com.example.sns.presentation.post.controller.response.CommentResponse;
@@ -14,7 +14,7 @@ public class CreateCommentUsecase {
     private final CommentWriteService commentService;
 
     public CommentResponse execute(CommentCreateRequest request) {
-        CommentCreate commentCreate = CommentCreate.builder()
+        CommentCreateInput commentCreate = CommentCreateInput.builder()
                 .postId(request.toPostId())
                 .writerId(request.toWriterId())
                 .parentId(request.toParentId())
