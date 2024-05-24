@@ -1,6 +1,9 @@
 package com.example.sns.core.post.infrastructure.repository.entity;
 
+import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.domain.entity.PostLike;
+import com.example.sns.core.post.domain.entity.PostLikeId;
+import com.example.sns.core.post.domain.entity.UserId;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,8 +24,8 @@ public class PostLikeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "writer_id")
-    private Long writerId;
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(name = "post_id")
     private Long postId;
@@ -32,16 +35,16 @@ public class PostLikeEntity {
 
     public static PostLikeEntity from(PostLike postLike){
         PostLikeEntity postLikeEntity = new PostLikeEntity();
-        postLikeEntity.writerId  = postLike.getWriterId();
-        postLikeEntity.postId = postLike.getPostId();
+        postLikeEntity.userId  = postLike.getUserIdValue();
+        postLikeEntity.postId = postLike.getPostIdValue();
         postLikeEntity.createdAt = postLike.getCreatedAt();
         return postLikeEntity;
     }
     public PostLike toModel(){
         return PostLike.builder()
-                .id(id)
-                .writerId(writerId)
-                .postId(postId)
+                .id(PostLikeId.of(id))
+                .userId(UserId.of(userId))
+                .postId(PostId.of(postId))
                 .createdAt(createdAt)
                 .build();
     }

@@ -2,8 +2,11 @@ package com.example.sns.core.post.service;
 
 
 import com.example.sns.core.common.service.port.TimeHolder;
-import com.example.sns.core.post.domain.entity.Post;
+import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.domain.entity.PostLike;
+import com.example.sns.core.post.domain.entity.UserId;
+import com.example.sns.core.post.domain.entity.request.PostLikeCreate;
+import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.core.post.service.port.PostLikeWriteRepository;
 import com.example.sns.core.user.service.output.UserOutput;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +18,12 @@ public class PostLikeWriteService {
     private final PostLikeWriteRepository postLikeWriteRepository;
     private final TimeHolder timeHolder;
 
-    public void create(Post post, UserOutput dto){
-        PostLike postLike = PostLike.builder()
-                .writerId(dto.getId())
-                .postId(post.getPostIdValue())
-                .createdAt(timeHolder.nowDateTime())
+    public void create(PostOutput postOutput, UserOutput userOutput){
+        PostLikeCreate postLikeCreate = PostLikeCreate.builder()
+                .postId(PostId.of(postOutput.getId()))
+                .userId(UserId.of(userOutput.getId()))
                 .build();
+        PostLike postLike = PostLike.from(postLikeCreate,timeHolder.nowDateTime());
         postLikeWriteRepository.save(postLike);
     }
 }

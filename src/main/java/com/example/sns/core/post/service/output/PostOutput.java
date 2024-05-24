@@ -16,6 +16,29 @@ public class PostOutput {
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
 
+    public PostOutput setLikeCount(Long to){
+        return PostOutput.builder()
+                .id(id)
+                .writerId(writerId)
+                .title(title)
+                .likeCount(to)
+                .content(content)
+                .createdAt(createdAt)
+                .modifiedAt(modifiedAt)
+                .build();
+    }
+
+    public static PostOutput from(Post post){
+        return PostOutput.builder()
+                .id(post.getPostIdValue())
+                .writerId(post.getWriterIdValue())
+                .title(post.getTitleValue())
+                .likeCount(post.getLikeCount())
+                .content(post.getContentValue())
+                .createdAt(post.getCreatedAt())
+                .modifiedAt(post.getModifiedAt())
+                .build();
+    }
     public static PostOutput from(Post post, Long likeCount) {
         return PostOutput.builder()
                 .id(post.getPostIdValue())

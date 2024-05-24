@@ -25,7 +25,7 @@ public class QPostLikeEntity extends EntityPathBase<PostLikeEntity> {
 
     public final NumberPath<Long> postId = createNumber("postId", Long.class);
 
-    public final NumberPath<Long> writerId = createNumber("writerId", Long.class);
+    public final NumberPath<Long> userId = createNumber("userId", Long.class);
 
     public QPostLikeEntity(String variable) {
         super(PostLikeEntity.class, forVariable(variable));

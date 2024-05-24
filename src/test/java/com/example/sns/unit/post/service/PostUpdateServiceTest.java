@@ -1,11 +1,18 @@
-package com.example.sns.core.post.service;
+package com.example.sns.unit.post.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import com.example.sns.core.post.domain.entity.*;
+import com.example.sns.core.post.domain.entity.Content;
+import com.example.sns.core.post.domain.entity.Post;
+import com.example.sns.core.post.domain.entity.PostId;
+import com.example.sns.core.post.domain.entity.PostStatus;
+import com.example.sns.core.post.domain.entity.Title;
+import com.example.sns.core.post.domain.entity.WriterId;
 import com.example.sns.core.post.domain.entity.request.PostUpdate;
+import com.example.sns.core.post.service.PostUpdateService;
 import com.example.sns.core.post.service.port.PostWriteRepository;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;

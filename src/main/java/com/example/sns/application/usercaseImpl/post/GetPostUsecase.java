@@ -1,7 +1,6 @@
 package com.example.sns.application.usercaseImpl.post;
 
 
-import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.service.PostGetService;
 import com.example.sns.core.post.service.PostLikeReadService;
 import com.example.sns.core.post.service.output.PostOutput;
@@ -22,10 +21,10 @@ public class GetPostUsecase {
 
     public ResponseEntity<PostResponse> getById(Long id) {
         UserOutput userOutput = userReadService.getById(id);
-        Post post = postGetService.getById(id);
-        Long postLike = postLikeReadService.getPostLike(post.getPostIdValue()).getLikeCount();
+        PostOutput postOutput = postGetService.getById(id);
+        Long postLike = postLikeReadService.getPostLike(postOutput.getId()).getLikeCount();
+        postOutput = postOutput.setLikeCount(postLike);
 
-        PostOutput postOutput = PostOutput.from(post,postLike);
         return ResponseEntity.ok(PostResponse.from(postOutput, UserResponse.from(userOutput)));
     }
 }

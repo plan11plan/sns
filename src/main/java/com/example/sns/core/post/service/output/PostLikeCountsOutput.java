@@ -19,4 +19,8 @@ public class PostLikeCountsOutput {
     public boolean containsPost(Long postId) {
         return postLikes.containsKey(postId);
     }
+
+    public int getPostLikeCountsSize() {
+        return postLikes.size();
+    }
 }

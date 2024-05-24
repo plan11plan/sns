@@ -12,6 +12,7 @@ import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
 import com.example.sns.core.post.service.PostGetService;
+import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.mock.post.FakePostReadRepository;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,14 +49,14 @@ class PostGetServiceTest {
         fakePostReadRepository.save(post);
 
         // when
-        Post result = postGetService.getById(1L);
+        PostOutput result = postGetService.getById(1L);
 
         // then
         assertAll(
                 () -> assertThat(result).isNotNull(),
-                () -> assertThat(result.getWriterId().getValue()).isEqualTo(1L),
-                () -> assertThat(result.getTitle().getValue()).isEqualTo("Existing Title"),
-                () -> assertThat(result.getContent().getValue()).isEqualTo("Existing Content")
+                () -> assertThat(result.getWriterId()).isEqualTo(1L),
+                () -> assertThat(result.getTitle()).isEqualTo("Existing Title"),
+                () -> assertThat(result.getContent()).isEqualTo("Existing Content")
         );
     }
 

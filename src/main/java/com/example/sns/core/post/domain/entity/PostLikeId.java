@@ -4,23 +4,18 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class WriterId {
+public class PostLikeId {
     private final Long value;
 
 
     @Builder
-    public WriterId(long value) {
+    public PostLikeId(Long value) {
         this.value = value;
     }
 
-    public static WriterId of(Long value) {
-        return WriterId.builder()
+    public static PostLikeId of(Long value){
+        return PostLikeId.builder()
                 .value(value)
                 .build();
     }
-
-    public Long getValue() {
-        return this.value;
-    }
-
 }

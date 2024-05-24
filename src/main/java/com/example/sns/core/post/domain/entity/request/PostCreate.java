@@ -9,17 +9,17 @@ import lombok.Getter;
 
 @Getter
 public class PostCreate {
-        private final WriterId writerId;
+    private final WriterId writerId;
 
-        private final Title title;
-        private final Content content;
-        private final PostStatus status;
+    private final Title title;
+    private final Content content;
+    private final PostStatus status;
 
-        @Builder
-        public PostCreate(WriterId writerId, Title title, Content content) {
-                this.writerId = writerId;
-                this.title = title;
-                this.content = content;
-                this.status = PostStatus.PUBLISHED;
-        }
+    @Builder
+    public PostCreate(WriterId writerId, Title title, Content content) {
+        this.writerId = writerId;
+        this.title = title;
+        this.content = content;
+        this.status = PostStatus.PUBLISHED;
+    }
 }
