@@ -6,8 +6,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.PostId;
+import com.example.sns.core.post.domain.entity.Title;
+import com.example.sns.core.post.domain.entity.WriterId;
 import com.example.sns.core.post.domain.entity.PostLike;
 import com.example.sns.core.post.service.PostLikeWriteService;
 import com.example.sns.core.post.service.output.PostOutput;
@@ -44,6 +47,9 @@ class PostLikeWriteServiceTest {
         // given
         Post post = Post.builder()
                 .id(PostId.of(1L))
+                .writerId(WriterId.of(1L))
+                .title(Title.of("title"))
+                .content(Content.of("content"))
                 .build();
         UserOutput user = UserOutput.builder()
                 .id(1L)

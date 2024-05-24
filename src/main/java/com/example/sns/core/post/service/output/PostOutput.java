@@ -16,7 +16,7 @@ public class PostOutput {
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
 
-    public PostOutput setLikeCount(Long to){
+    public PostOutput setLikeCount(Long to) {
         return PostOutput.builder()
                 .id(id)
                 .writerId(writerId)
@@ -28,7 +28,7 @@ public class PostOutput {
                 .build();
     }
 
-    public static PostOutput from(Post post){
+    public static PostOutput from(Post post) {
         return PostOutput.builder()
                 .id(post.getPostIdValue())
                 .writerId(post.getWriterIdValue())
@@ -39,6 +39,7 @@ public class PostOutput {
                 .modifiedAt(post.getModifiedAt())
                 .build();
     }
+
     public static PostOutput from(Post post, Long likeCount) {
         return PostOutput.builder()
                 .id(post.getPostIdValue())
