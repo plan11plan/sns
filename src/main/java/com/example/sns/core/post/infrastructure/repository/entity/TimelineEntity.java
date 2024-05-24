@@ -1,6 +1,9 @@
 package com.example.sns.core.post.infrastructure.repository.entity;
 
+import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.domain.entity.Timeline;
+import com.example.sns.core.post.domain.entity.TimelineId;
+import com.example.sns.core.post.domain.entity.UserId;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,17 +37,17 @@ public class TimelineEntity {
 
     public static TimelineEntity from(Timeline timeline) {
         TimelineEntity timelineEntity = new TimelineEntity();
-        timelineEntity.userId = timeline.getUserId();
-        timelineEntity.postId = timeline.getPostId();
+        timelineEntity.userId = timeline.getUserIdValue();
+        timelineEntity.postId = timeline.getPostIdValue();
         timelineEntity.createdAt = timeline.getCreatedAt();
         return timelineEntity;
     }
 
     public Timeline toModel() {
         return Timeline.builder()
-                .id(id)
-                .userId(userId)
-                .postId(postId)
+                .id(TimelineId.of(id))
+                .userId(UserId.of(userId))
+                .postId(PostId.of(postId))
                 .createdAt(createdAt)
                 .build();
     }

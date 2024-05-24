@@ -40,7 +40,7 @@ public class CursorPagingPostService {
 
     public CursorResponse<PostOutput> getPostsByTimeline(Long userId, CursorRequest cursorRequest) {
         List<Timeline> timelines = timelineReadService.getTimelines(userId, cursorRequest);
-        List<Long> postIds = timelines.stream().map(Timeline::getPostId).toList();
+        List<Long> postIds = timelines.stream().map(Timeline::getPostIdValue).toList();
         return getPostsByIds(postIds, cursorRequest);
     }
 
