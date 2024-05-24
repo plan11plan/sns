@@ -17,4 +17,10 @@ public class WriterId {
     public WriterId(long value) {
         this.value = value;
     }
+
+    public static WriterId of(Long value){
+        return WriterId.builder()
+                .value(value)
+                .build();
+    }
 }

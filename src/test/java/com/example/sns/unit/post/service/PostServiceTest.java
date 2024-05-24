@@ -13,9 +13,8 @@
 //import com.example.sns.core.user.domain.entity.Sex;
 //import com.example.sns.core.user.domain.entity.UserStatus;
 //import com.example.sns.core.user.domain.entity.root.User;
-//import com.example.sns.mock.FakePostRepository;
 //import com.example.sns.mock.FakeUserRepository;
-//import com.example.sns.mock.TestClockHolder;
+//import com.example.sns.mock.TestTimeHolder;
 //import java.time.LocalDate;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
@@ -33,7 +32,7 @@
 //        this.postCommandService = PostCommandServiceImpl.builder()
 //                .postWriteRepository(fakePostRepository)
 //                .userRepository(fakeUserRepository)
-//                .clockHolder(new TestClockHolder(1679530673958L))
+//                .clockHolder(new TestTimeHolder(1679530673958L))
 //                .build();
 //        // DI
 //        this.postReadService = PostGetService.builder()

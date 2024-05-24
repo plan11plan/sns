@@ -13,9 +13,10 @@
 //import com.example.sns.core.user.domain.request.UserCreate;
 //import com.example.sns.core.user.domain.request.UserUpdate;
 //import com.example.sns.core.user.service.CertificationService;
+//import com.example.sns.core.user.service.UserReadService;
 //import com.example.sns.mock.FakeMailSender;
 //import com.example.sns.mock.FakeUserRepository;
-//import com.example.sns.mock.TestClockHolder;
+//import com.example.sns.mock.TestTimeHolder;
 //import com.example.sns.mock.TestUuidHolder;
 //import java.time.LocalDate;
 //import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,7 @@
 //        //
 //        this.userCommandService = UserServiceImpl.builder()
 //            .uuidHolder(new TestUuidHolder("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab"))
-//            .clockHolder(new TestClockHolder(1678530673958L))
+//            .clockHolder(new TestTimeHolder(1678530673958L))
 //            .userRepository(fakeUserRepository)
 //            .certificationService(new CertificationService(fakeMailSender))
 //            .build();

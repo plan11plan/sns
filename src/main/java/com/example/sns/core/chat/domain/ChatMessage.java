@@ -44,7 +44,7 @@ public class ChatMessage {
                 .content(content)
                 .sentAt(sentAt)
                 .isRead(false)
-                .status(MessageStatus.PUBLISHED)
+                .status(MessageStatus.SENT)
                 .build();
     }
 

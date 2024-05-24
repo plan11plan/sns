@@ -5,6 +5,6 @@ import com.example.sns.core.post.domain.entity.Post;
 public interface PostWriteRepository {
     Post save(Post post);
 
-    Post getById(long id);
+    Post getById(Long id);
 
 }

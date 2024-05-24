@@ -20,7 +20,7 @@ public class PostWriteRepositoryImpl implements PostWriteRepository {
     }
 
     @Override
-    public Post getById(long id) {
+    public Post getById(Long id) {
         return postJpaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("posts", id)).toModel();
     }
 

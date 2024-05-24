@@ -75,6 +75,6 @@
 	clean {
 		delete file(generated)
 	}
-//	tasks.named('test') {
-//		useJUnitPlatform()
-//	}
+	tasks.named('test') {
+		useJUnitPlatform()
+	}

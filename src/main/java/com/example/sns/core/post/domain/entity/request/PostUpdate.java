@@ -13,7 +13,7 @@ public class PostUpdate {
     private final PostStatus status;
 
     @Builder
-    public PostUpdate(Title title, Content content, PostStatus status) {
+    public PostUpdate(Title title, Content content) {
         this.title = title;
         this.content = content;
         this.status = PostStatus.UPDATED;
