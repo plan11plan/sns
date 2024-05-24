@@ -1,7 +1,7 @@
 package com.example.sns.unit.user.service;
 
 import com.example.sns.core.user.service.CertificationService;
-import com.example.sns.mock.FakeMailSender;
+import com.example.sns.mock.user.FakeMailSender;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

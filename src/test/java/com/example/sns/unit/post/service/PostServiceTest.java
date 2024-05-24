@@ -13,7 +13,7 @@
 //import com.example.sns.core.user.domain.entity.Sex;
 //import com.example.sns.core.user.domain.entity.UserStatus;
 //import com.example.sns.core.user.domain.entity.root.User;
-//import com.example.sns.mock.FakeUserRepository;
+//import com.example.sns.mock.user.FakeUserRepository;
 //import com.example.sns.mock.TestTimeHolder;
 //import java.time.LocalDate;
 //import org.junit.jupiter.api.BeforeEach;

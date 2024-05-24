@@ -2,6 +2,7 @@ package com.example.sns.core.post.domain.entity;
 
 import jakarta.persistence.Lob;
 import java.util.Objects;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -9,11 +10,18 @@ public class CommentContent {
     @Lob
     String value;
 
+    @Builder
     public CommentContent(String value) {
         this.value = Objects.requireNonNull(value,"내용을 입력해주세요)");
     }
 
     public String getValue(){
         return this.value;
+    }
+
+    public static CommentContent of(String value){
+        return CommentContent.builder()
+                .value(value)
+                .build();
     }
 }

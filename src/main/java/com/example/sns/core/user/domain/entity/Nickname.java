@@ -25,7 +25,11 @@ public class Nickname {
 //        lengthValidator().validate(nickname);
         this.value = value;
     }
-
+    public static Nickname of(String value){
+        return Nickname.builder()
+                .value(value)
+                .build();
+    }
     public void editTo(Nickname to) {
         duplicateValidator().validate(new Pair<>(to,this));
         this.value = to.getValue();

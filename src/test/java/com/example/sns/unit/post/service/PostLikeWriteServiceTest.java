@@ -9,9 +9,9 @@ import com.example.sns.core.common.service.port.TimeHolder;
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.PostId;
+import com.example.sns.core.post.domain.entity.PostLike;
 import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
-import com.example.sns.core.post.domain.entity.PostLike;
 import com.example.sns.core.post.service.PostLikeWriteService;
 import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.core.user.service.output.UserOutput;
@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -29,7 +28,6 @@ class PostLikeWriteServiceTest {
     @Mock
     private TimeHolder timeHolder;
 
-    @InjectMocks
     private PostLikeWriteService postLikeWriteService;
 
     private FakePostLikeWriteRepository fakePostLikeWriteRepository;

@@ -5,9 +5,13 @@ import com.example.sns.core.common.service.port.TimeHolder;
 import com.example.sns.core.post.domain.entity.Comment;
 import com.example.sns.core.post.domain.entity.request.CommentCreate;
 import com.example.sns.core.post.domain.entity.request.CommentUpdate;
+import com.example.sns.core.post.service.input.CommentCreateInput;
+import com.example.sns.core.post.service.input.CommentDeleteInput;
+import com.example.sns.core.post.service.input.CommentUpdateInput;
 import com.example.sns.core.post.service.output.CommentOutput;
 import com.example.sns.core.post.service.port.CommentReadRepository;
 import com.example.sns.core.post.service.port.CommentWriteRepository;
+import com.example.sns.core.user.service.output.UserOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,22 +23,32 @@ public class CommentWriteService {
     private final CommentReadRepository commentReadRepository;
     private final TimeHolder timeHolder;
 
-    public CommentOutput create(CommentCreate input) {
-        Comment comment = Comment.from(input, timeHolder.nowDateTime());
+    public CommentOutput create(CommentCreateInput input) {
+        CommentCreate commentCreate = CommentCreate.builder()
+                .postId(input.getPostId())
+                .writerId(input.getWriterId())
+                .parentId(input.getParentId())
+                .content(input.getContent())
+                .build();
+        Comment comment = Comment.from(commentCreate, timeHolder.nowDateTime());
         Comment savedComment = commentWriteRepository.save(comment);
         return CommentOutput.from(savedComment);
     }
     @Transactional
-    public CommentOutput update(Long id, CommentUpdate input) {
-        Comment comment = commentReadRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("comment", id));
-        comment = comment.update(input, timeHolder.nowDateTime());
+    public CommentOutput update(CommentUpdateInput input, UserOutput userOutput) {
+        Comment comment = commentReadRepository.findById(userOutput.getId()).orElseThrow(
+                () -> new ResourceNotFoundException("comment", userOutput.getId()));
+        CommentUpdate commentUpdate = CommentUpdate.builder()
+                .content(input.getContent())
+                .build();
+        comment = comment.update(commentUpdate, timeHolder.nowDateTime());
 
         Comment savedComment = commentWriteRepository.save(comment);
         return CommentOutput.from(savedComment);
     }
 
-    public void delete(Long id) {
-        Comment comment = commentReadRepository.findById(id)
+    public void delete(CommentDeleteInput input) {
+        Comment comment = commentReadRepository.findById(input.getId())
                 .orElseThrow(() -> new RuntimeException("Comment not found"));
         commentWriteRepository.delete(comment);
     }

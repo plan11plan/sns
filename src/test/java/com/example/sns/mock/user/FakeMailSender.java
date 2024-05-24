@@ -1,4 +1,4 @@
-package com.example.sns.mock;
+package com.example.sns.mock.user;
 
 import com.example.sns.core.user.service.port.MailSender;
 

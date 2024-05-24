@@ -20,13 +20,17 @@ public class Password {
     private String value;
 
     @Builder
-    public Password(String input) {
-        PasswordValidatorFactory.blankValidator().validate(input);
-        PasswordValidatorFactory.lengthValidator().validate(input);
-        this.value =input;
+    public Password(String value) {
+        PasswordValidatorFactory.blankValidator().validate(value);
+        PasswordValidatorFactory.lengthValidator().validate(value);
+        this.value =value;
     }
 
-
+    public static Password of(String value){
+        return Password.builder()
+                .value(value)
+                .build();
+    }
     public void editTo(Password to){
         PasswordValidatorFactory.duplicateCurrentPasswordValidator().validate(new Pair<>(this,to));
         this.value =to.getValue();

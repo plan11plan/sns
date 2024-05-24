@@ -21,12 +21,12 @@ public class UserCreate {
     private LocalDateTime createdAt;
 
     @Builder
-    public UserCreate(Email email, Password password, Nickname nickname, UserStatus status, Sex sex, Birthday birthday,
+    public UserCreate(Email email, Password password, Nickname nickname, Sex sex, Birthday birthday,
                       LocalDateTime createdAt) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
-        this.status = status;
+        this.status = UserStatus.PENDING;
         this.sex = sex;
         this.birthday = birthday;
         this.createdAt = createdAt;

@@ -1,8 +1,15 @@
 package com.example.sns.core.user.service;
 
+import com.example.sns.core.common.service.port.TimeHolder;
 import com.example.sns.core.common.service.port.UuidHolder;
+import com.example.sns.core.user.domain.entity.Birthday;
+import com.example.sns.core.user.domain.entity.Email;
+import com.example.sns.core.user.domain.entity.Nickname;
+import com.example.sns.core.user.domain.entity.Password;
+import com.example.sns.core.user.domain.entity.Sex;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.domain.request.UserCreate;
+import com.example.sns.core.user.service.input.UserCreateInput;
 import com.example.sns.core.user.service.output.UserOutput;
 import com.example.sns.core.user.service.port.UserRepository;
 import lombok.Builder;
@@ -15,11 +22,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserCreateService {
     private final UserRepository userRepository;
     private final CertificationService certificationService;
-
+    private final TimeHolder timeHolder;
     private final UuidHolder uuidHolder;
 
     @Transactional
-    public UserOutput create(UserCreate userCreate) {
+    public UserOutput create(UserCreateInput userCreateInput) {
+        UserCreate userCreate = UserCreate.builder()
+                .email(Email.of(userCreateInput.getEmail()))
+                .nickname(Nickname.of(userCreateInput.getNickname()))
+                .password(Password.of(userCreateInput.getPassword()))
+                .birthday(Birthday.of(userCreateInput.getBirthDay()))
+                .sex(Sex.valueOf(userCreateInput.getSex()))
+                .createdAt(timeHolder.nowDateTime())
+                .build();
         User user = User.from(userCreate, uuidHolder);
         user = userRepository.save(user);
 

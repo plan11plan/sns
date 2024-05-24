@@ -1,5 +1,6 @@
 package com.example.sns.presentation.user.controller;
 
+import com.example.sns.core.user.service.input.UserCreateInput;
 import com.example.sns.presentation.user.controller.request.UserCreateRequest;
 import com.example.sns.presentation.user.controller.response.UserResponse;
 import com.example.sns.core.user.service.AuthenticationService;
@@ -31,8 +32,15 @@ public class UserCreateController {
     요청시 - 이메일 발송(상태 펜딩) - 응답 , ( 이메일 발송 안에 새로운 요청 응답시(상태 액티브))
      */
     @PostMapping
-    public ResponseEntity<UserResponse> create(@RequestBody UserCreateRequest request) {
-        UserOutput userOutput = userCreateService.create(request.toDomainRequest());
+    public ResponseEntity<UserResponse> create(@RequestBody UserCreateRequest command) {
+        UserCreateInput userCreateInput = UserCreateInput.builder()
+                .email(command.getEmail())
+                .nickname(command.getNickname())
+                .sex(command.getSex())
+                .birthDay(command.getBirthday())
+                .password(command.getPassword())
+                .build();
+        UserOutput userOutput = userCreateService.create(userCreateInput);
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(UserResponse.from(userOutput));

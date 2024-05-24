@@ -11,7 +11,6 @@ public interface UserRepository {
 
     Optional<User> findByIdAndStatus(Long id, String status);
     Optional<User> findByEmailAndStatus(String email, String status);
-    Optional<User> findByEmail(String email);
 
     User save(User userEntity);
 

@@ -1,7 +1,6 @@
 package com.example.sns.core.user.infrastructure.persistence;
 
 import com.example.sns.core.common.exception.ResourceNotFoundException;
-import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.infrastructure.persistence.entity.UserEntity;
 import com.example.sns.core.user.service.port.UserRepository;
@@ -38,10 +37,7 @@ public class UserRepositoryImpl implements UserRepository {
         return userJpaRepository.findByEmailAndStatus(email,status).map(UserEntity::toModel);
     }
 
-    @Override
-    public Optional<User> findByEmail(String email) {
-        return userJpaRepository.findByEmail(email).map(UserEntity::toModel);
-    }
+
 
     @Override
     public User save(User user) {

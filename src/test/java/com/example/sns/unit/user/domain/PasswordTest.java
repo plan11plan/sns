@@ -20,7 +20,7 @@ class PasswordTest {
         // given
         Password password = new Password("password");
         Password passwordByBuilder = Password.builder()
-                .input("password")
+                .value("password")
                 .build();
 
         // expected

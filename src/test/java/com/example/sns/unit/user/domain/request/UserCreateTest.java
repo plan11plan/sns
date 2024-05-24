@@ -30,7 +30,7 @@ class UserCreateTest {
                 .password(new Password("password"))
                 .sex(Sex.M)
                 .birthday(new Birthday(LocalDate.of(1999, 7, 28)))
-                .status(UserStatus.PENDING)
+//                .status(UserStatus.PENDING)
                 .createdAt(LocalDateTime.now())
                 .build();
         UuidHolder uuidHolder = new SystemUuidHolder();

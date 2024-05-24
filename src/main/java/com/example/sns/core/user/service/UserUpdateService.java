@@ -1,8 +1,6 @@
 package com.example.sns.core.user.service;
 
 import com.example.sns.core.common.service.port.TimeHolder;
-import com.example.sns.core.user.domain.entity.Nickname;
-import com.example.sns.core.user.domain.entity.NicknameHistory;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.domain.request.UserUpdate;
 import com.example.sns.core.user.service.output.UserOutput;
@@ -26,17 +24,5 @@ public class UserUpdateService {
         user = user.update(userUpdate);
         userRepository.save(user);
         return UserOutput.from(user);
-    }
-    @Transactional
-    public void changeNickname(Long userId, Nickname nickname){
-        User user = userRepository.getById(userId);
-        user.changeNickname(nickname);
-
-        NicknameHistory nicknameHistory = NicknameHistory.builder()
-                .userId(userId)
-                .nickname(nickname)
-                .createdAt(timeHolder.nowDateTime())
-                .build();
-        nicknameHistoryRepository.save(nicknameHistory);
     }
 }

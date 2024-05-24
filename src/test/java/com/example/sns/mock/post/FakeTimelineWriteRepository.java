@@ -19,5 +19,9 @@ public class FakeTimelineWriteRepository implements TimelineWriteRepository {
     @Override
     public void bulkInsert(List<Timeline> timelines) {
         data.addAll(timelines);
+
+    }
+    public List<Timeline> getTimelines() {
+        return data;
     }
 }

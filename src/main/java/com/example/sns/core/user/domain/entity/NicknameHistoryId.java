@@ -1,20 +1,19 @@
 package com.example.sns.core.user.domain.entity;
 
-
-import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class Birthday {
-    private final LocalDate value;
+public class NicknameHistoryId {
+    private final Long value;
 
     @Builder
-    public Birthday(LocalDate value) {
+    public NicknameHistoryId(Long value) {
         this.value = value;
     }
-    public static Birthday of(LocalDate value){
-        return Birthday.builder()
+
+    public static NicknameHistoryId of(Long value){
+        return NicknameHistoryId.builder()
                 .value(value)
                 .build();
     }
