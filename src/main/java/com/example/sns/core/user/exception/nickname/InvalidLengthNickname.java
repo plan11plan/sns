@@ -1,11 +1,11 @@
 package com.example.sns.core.user.exception.nickname;
 
-import com.example.sns.core.common.exception.RootException;
+import com.example.sns.core.common.exception.SnsException;
 
 /**
  * status : 400
  */
-public class InvalidLengthNickname extends RootException {
+public class InvalidLengthNickname extends SnsException {
     // 동적 메시지 생성을 위해 기본 메시지 패턴 수정
     public InvalidLengthNickname(int min, int max) {
         super(min + "글자 이상, " + max + "글자 이하로 입력해주세요.");

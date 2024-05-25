@@ -5,12 +5,16 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public abstract class RootException extends RuntimeException {
+public abstract class SnsException extends RuntimeException {
 
     public final Map<String, String> validation = new HashMap<>();
 
-    public RootException(String message) {
+    public SnsException(String message) {
         super(message);
+    }
+
+    public SnsException(String message, Throwable cause) {
+        super(message, cause);
     }
 
     public abstract String getStatusCode();

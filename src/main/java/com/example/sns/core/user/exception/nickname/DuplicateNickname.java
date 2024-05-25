@@ -1,8 +1,8 @@
 package com.example.sns.core.user.exception.nickname;
 
-import com.example.sns.core.common.exception.RootException;
+import com.example.sns.core.common.exception.SnsException;
 
-public class DuplicateNickname extends RootException {
+public class DuplicateNickname extends SnsException {
     private static final String MESSAGE = "다른 닉네임을 사용해주세요.";
 
     public DuplicateNickname() {

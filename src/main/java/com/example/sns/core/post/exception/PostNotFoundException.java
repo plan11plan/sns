@@ -2,9 +2,10 @@ package com.example.sns.core.post.exception;
 
 import com.example.sns.core.common.exception.SnsException;
 
-public class NoValueTitle extends SnsException {
-    private static final String MESSAGE = "제목을 입력해주세요";
-    public NoValueTitle() {
+public class PostNotFoundException extends SnsException{
+    private static final String MESSAGE = "포스트를 찾을 수 없습니다.";
+
+    public PostNotFoundException() {
         super(MESSAGE);
     }
 
