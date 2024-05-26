@@ -5,7 +5,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.common.service.port.TimeHolder;
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.PostId;

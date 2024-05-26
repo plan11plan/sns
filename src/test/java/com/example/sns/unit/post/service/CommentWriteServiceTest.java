@@ -3,7 +3,7 @@ package com.example.sns.unit.post.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.common.service.port.TimeHolder;
 import com.example.sns.core.post.domain.entity.Comment;
 import com.example.sns.core.post.domain.entity.CommentContent;
 import com.example.sns.core.post.domain.entity.CommentId;

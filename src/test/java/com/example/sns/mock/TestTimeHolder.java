@@ -1,6 +1,6 @@
 package com.example.sns.mock;
 
-import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.common.service.port.TimeHolder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

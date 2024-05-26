@@ -3,6 +3,7 @@ package com.example.sns.core.post.service;
 
 import com.example.sns.core.post.domain.entity.CursorRequest;
 import com.example.sns.core.post.domain.entity.Timeline;
+import com.example.sns.core.post.exception.TimelineNotFoundException;
 import com.example.sns.core.post.service.port.TimelineReadRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,9 @@ public class TimelineReadService {
     public List<Timeline> getTimelines(Long userId, CursorRequest cursorRequest) {
         if (cursorRequest.hasKey()) {
             return timelineReadRepository.findTimelinesByUseridBeforeId(cursorRequest.getKey(), userId,
-                    cursorRequest.getSize());
+                    cursorRequest.getSize()).orElseThrow(TimelineNotFoundException::new);
         }
-        return timelineReadRepository.findLatestTimelinesByUserId(userId, cursorRequest.getSize());
+        return timelineReadRepository.findLatestTimelinesByUserId(userId, cursorRequest.getSize())
+                .orElseThrow(TimelineNotFoundException::new);
     }
 }

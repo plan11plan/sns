@@ -1,7 +1,7 @@
 package com.example.sns.core.follow.service.write;
 
 
-import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.common.service.port.TimeHolder;
 import com.example.sns.core.follow.domain.Follow;
 import com.example.sns.core.follow.domain.FollowStatus;
 import com.example.sns.core.follow.domain.request.FollowCancelDetails;

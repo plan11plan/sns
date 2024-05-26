@@ -1,6 +1,7 @@
 package com.example.sns.core.chat.service;
 
 import com.example.sns.core.chat.domain.ChatMessage;
+import com.example.sns.core.chat.exception.ChatRoomNotFoundException;
 import com.example.sns.core.chat.service.input.SendMessageInput;
 import com.example.sns.core.chat.service.output.ChatMessageOutput;
 import com.example.sns.core.chat.service.port.ChatMessageReadRepository;
@@ -46,7 +47,8 @@ public class ChatMessageWriteService {
     }
 
     public void markMessagesAsReadInChatRoom(Long chatRoomId, Long userId) {
-        List<ChatMessage> messages = chatMessageReadRepository.findUnreadMessagesInChatRoom(chatRoomId, userId);
+        List<ChatMessage> messages = chatMessageReadRepository.findUnreadMessagesInChatRoom(chatRoomId, userId)
+                .orElseThrow(ChatRoomNotFoundException::new);
         messages.forEach(message -> {
             if (!message.isRead()) {  // Only save if the message was unread
                 var updatedMessage = message.markAsRead();

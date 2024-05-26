@@ -1,8 +1,9 @@
 package com.example.sns.core.user.service;
 
-import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.user.domain.entity.NicknameHistory;
 import com.example.sns.core.user.domain.entity.root.User;
+import com.example.sns.core.user.exception.NicknameHistoryNotFoundException;
+import com.example.sns.core.user.exception.UserNotFoundException;
 import com.example.sns.core.user.service.output.NicknameHistoryOutput;
 import com.example.sns.core.user.service.output.UserOutput;
 import com.example.sns.core.user.service.output.UserProfileOutput;
@@ -37,7 +38,7 @@ public class UserReadService {
 
     public UserProfileOutput getUserProfile(Long userId) {
         User user = userRepository.findByIdAndStatus(userId, USER_STATUS_ACTIVE)
-                .orElseThrow(() -> new ResourceNotFoundException("Users", userId));
+                .orElseThrow(UserNotFoundException::new);
         return UserProfileOutput.builder()
                 .userId(user.getUserIdValue())
                 .nickname(user.getNickname().getValue())
@@ -47,13 +48,13 @@ public class UserReadService {
 
     public UserOutput getByEmail(String email) {
         User user = userRepository.findByEmailAndStatus(email, USER_STATUS_ACTIVE)
-                .orElseThrow(() -> new ResourceNotFoundException("Users", email));
+                .orElseThrow(UserNotFoundException::new);
         return UserOutput.from(user);
     }
 
     public UserOutput getById(Long id) {
         User user = userRepository.findByIdAndStatus(id, USER_STATUS_ACTIVE)
-                .orElseThrow(() -> new ResourceNotFoundException("Users", id));
+                .orElseThrow(UserNotFoundException::new);
         return UserOutput.from(user);
     }
 
@@ -62,15 +63,15 @@ public class UserReadService {
         return UserOutput.from(user);
     }
 
-    public List<UserOutput> getUsers(List<Long> ids){
+    public List<UserOutput> getUsers(List<Long> ids) {
         List<User> users = userRepository.findAllByIdIn(ids)
-                .orElseThrow(() -> new ResourceNotFoundException("Users", 1L));
+                .orElseThrow(UserNotFoundException::new);
         return UserOutput.from(users);
     }
 
-    public List<NicknameHistoryOutput> getNicknameHistories(Long userId){
+    public List<NicknameHistoryOutput> getNicknameHistories(Long userId) {
         List<NicknameHistory> nicknameHistory = nicknameHistoryRepository.findAllByUserId(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("nicknameHistory", userId));
+                .orElseThrow(NicknameHistoryNotFoundException::new);
         return nicknameHistory.stream()
                 .map(NicknameHistoryOutput::from)
                 .collect(Collectors.toList());
@@ -78,6 +79,6 @@ public class UserReadService {
 
     public void ensureWriterExists(Long writerId) {
         userRepository.findByIdAndStatus(writerId, USER_STATUS_ACTIVE)
-                .orElseThrow(() -> new ResourceNotFoundException("User", writerId));
+                .orElseThrow(UserNotFoundException::new);
     }
 }

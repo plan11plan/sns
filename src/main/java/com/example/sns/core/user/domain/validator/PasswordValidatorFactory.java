@@ -1,6 +1,6 @@
 package com.example.sns.core.user.domain.validator;
 
-import com.example.sns.core.common.util.Pair;
+import com.example.sns.common.util.Pair;
 import com.example.sns.core.user.domain.entity.Password;
 import com.example.sns.core.user.domain.validator.password.DuplicateCurrentPasswordValidator;
 import com.example.sns.core.user.domain.validator.password.PasswordBlankValidator;

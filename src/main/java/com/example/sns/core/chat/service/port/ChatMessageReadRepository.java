@@ -7,6 +7,6 @@ import java.util.Optional;
 public interface ChatMessageReadRepository {
     Optional<ChatMessage> findById(Long messageId);
     Optional<List<ChatMessage>> findByChatRoomId(Long chatRoomId);
-    List<ChatMessage> findUnreadMessagesInChatRoom(Long chatRoomId, Long userId);
+    Optional<List<ChatMessage>> findUnreadMessagesInChatRoom(Long chatRoomId, Long userId);
 
 }

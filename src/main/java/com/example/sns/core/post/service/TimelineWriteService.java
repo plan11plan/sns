@@ -1,6 +1,6 @@
 package com.example.sns.core.post.service;
 
-import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.common.service.port.TimeHolder;
 import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.domain.entity.Timeline;
 import com.example.sns.core.post.domain.entity.UserId;

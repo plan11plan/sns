@@ -2,7 +2,7 @@ package com.example.sns.core.user.domain.entity;
 
 import static com.example.sns.core.user.domain.validator.NicknameValidatorFactory.duplicateValidator;
 
-import com.example.sns.core.common.util.Pair;
+import com.example.sns.common.util.Pair;
 import jakarta.persistence.Embeddable;
 import lombok.Builder;
 import lombok.Getter;

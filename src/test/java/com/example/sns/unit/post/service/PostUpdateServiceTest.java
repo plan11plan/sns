@@ -1,9 +1,6 @@
 package com.example.sns.unit.post.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
@@ -13,35 +10,28 @@ import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
 import com.example.sns.core.post.domain.entity.request.PostUpdate;
 import com.example.sns.core.post.service.PostUpdateService;
-import com.example.sns.core.post.service.port.PostWriteRepository;
+import com.example.sns.mock.post.FakePostReadRepository;
+import com.example.sns.mock.post.FakePostWriteRepository;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 class PostUpdateServiceTest {
 
-    @Mock
-    private PostWriteRepository postWriteRepository;
-
-    @InjectMocks
+    private FakePostWriteRepository postWriteRepository;
+    private FakePostReadRepository postReadRepository;
     private PostUpdateService postUpdateService;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+        postWriteRepository = new FakePostWriteRepository();
+        postReadRepository = new FakePostReadRepository();
+        postUpdateService = new PostUpdateService(postWriteRepository, postReadRepository);
 
-    @DisplayName("[수정] PostUpdateService로 Post를 수정할 수 있다.")
-    @Test
-    void updatePost() {
-        // given
+        // 미리 데이터를 추가합니다.
         Long postId = 1L;
         LocalDateTime createdAt = LocalDateTime.now();
-        LocalDateTime updatedAt = LocalDateTime.now();
         WriterId writerId = WriterId.of(1L);
         Title originalTitle = Title.of("original title");
         Content originalContent = Content.of("original content");
@@ -56,6 +46,16 @@ class PostUpdateServiceTest {
                 .createdAt(createdAt)
                 .build();
 
+        postWriteRepository.save(post);
+        postReadRepository.save(post); // 읽기 리포지토리에도 추가
+    }
+
+    @DisplayName("[수정] PostUpdateService로 Post를 수정할 수 있다.")
+    @Test
+    void updatePost() {
+        // given
+        Long postId = 1L;
+        LocalDateTime updatedAt = LocalDateTime.now();
         Title newTitle = Title.of("new title");
         Content newContent = Content.of("new content");
 
@@ -63,9 +63,6 @@ class PostUpdateServiceTest {
                 .title(newTitle)
                 .content(newContent)
                 .build();
-
-        when(postWriteRepository.getById(postId)).thenReturn(post);
-        when(postWriteRepository.save(any(Post.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // when
         Post updatedPost = postUpdateService.update(postId, postUpdate);
@@ -76,8 +73,5 @@ class PostUpdateServiceTest {
         assertThat(updatedPost.getContent().getValue()).isEqualTo("new content");
         assertThat(updatedPost.getModifiedAt()).isEqualToIgnoringNanos(updatedAt);
         assertThat(updatedPost.getStatusValue()).isEqualTo(PostStatus.UPDATED.name());
-
-        verify(postWriteRepository).getById(postId);
-        verify(postWriteRepository).save(any(Post.class));
     }
 }

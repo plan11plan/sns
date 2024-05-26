@@ -1,6 +1,6 @@
 package com.example.sns.core.user.domain.validator.nickname;
 
-import com.example.sns.core.common.util.Pair;
+import com.example.sns.common.util.Pair;
 import com.example.sns.core.user.domain.validator.Validator;
 import com.example.sns.core.user.exception.nickname.DuplicateNickname;
 import com.example.sns.core.user.domain.entity.Nickname;

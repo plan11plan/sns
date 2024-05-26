@@ -1,6 +1,5 @@
 package com.example.sns.core.user.infrastructure.persistence;
 
-import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.infrastructure.persistence.entity.UserEntity;
 import com.example.sns.core.user.service.port.UserRepository;
@@ -17,10 +16,7 @@ public class UserRepositoryImpl implements UserRepository {
     private final UserJpaRepository userJpaRepository;
 
 
-    @Override
-    public User getById(Long id) {
-        return userJpaRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Users",id)).toModel();
-    }
+
 
     @Override
     public Optional<User> findById(Long  id) {

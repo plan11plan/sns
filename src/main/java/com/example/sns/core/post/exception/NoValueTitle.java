@@ -1,6 +1,6 @@
 package com.example.sns.core.post.exception;
 
-import com.example.sns.core.common.exception.SnsException;
+import com.example.sns.common.exception.SnsException;
 
 public class NoValueTitle extends SnsException {
     private static final String MESSAGE = "제목을 입력해주세요";

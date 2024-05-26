@@ -1,6 +1,6 @@
 package com.example.sns.common.util;
 
-import static com.example.sns.core.common.util.StringInBoundary.isInBoundary;
+import static com.example.sns.common.util.StringInBoundary.isInBoundary;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

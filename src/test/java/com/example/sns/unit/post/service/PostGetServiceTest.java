@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import com.example.sns.core.common.exception.ResourceNotFoundException;
+import com.example.sns.common.exception.ResourceNotFoundException;
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.PostId;
@@ -68,7 +68,6 @@ class PostGetServiceTest {
 
         // when & then
         assertThatThrownBy(() -> postGetService.getById(nonExistentId))
-                .isInstanceOf(ResourceNotFoundException.class)
-                .hasMessageContaining("post에서 ID " + nonExistentId + "를 찾을 수 없습니다.");
+                .isInstanceOf(ResourceNotFoundException.class);
     }
 }

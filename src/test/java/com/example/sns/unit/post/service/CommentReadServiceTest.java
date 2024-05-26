@@ -8,7 +8,7 @@ import com.example.sns.core.post.domain.entity.CommentContent;
 import com.example.sns.core.post.domain.entity.CommentId;
 import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.domain.entity.WriterId;
-import com.example.sns.core.post.service.CommentNotFoundException;
+import com.example.sns.core.post.exception.CommentNotFoundException;
 import com.example.sns.core.post.service.CommentReadService;
 import com.example.sns.core.post.service.output.CommentOutput;
 import com.example.sns.mock.post.FakeCommentReadRepository;

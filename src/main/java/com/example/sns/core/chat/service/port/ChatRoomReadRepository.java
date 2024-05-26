@@ -7,6 +7,6 @@ import java.util.Optional;
 public interface ChatRoomReadRepository {
     Optional<ChatRoom> findByUserIds(Long userId1, Long userId2);
     Optional<ChatRoom> findById(Long chatRoomId);
-    List<ChatRoom> findByUserId(Long userId);
+    Optional<List<ChatRoom>> findByUserId(Long userId);
 
 }

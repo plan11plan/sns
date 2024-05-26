@@ -4,6 +4,7 @@ import com.example.sns.core.post.domain.entity.CursorRequest;
 import com.example.sns.core.post.domain.entity.CursorResponse;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.Timeline;
+import com.example.sns.core.post.exception.PostNotFoundException;
 import com.example.sns.core.post.service.output.PostLikeCountsOutput;
 import com.example.sns.core.post.service.output.PostOutput;
 import com.example.sns.core.post.service.port.PostReadRepository;
@@ -30,7 +31,7 @@ public class CursorPagingPostService {
     }
 
     public CursorResponse<PostOutput> getPostsByIds(List<Long> postIds, CursorRequest cursorRequest) {
-        List<Post> posts = postReadRepository.findAllByInId(postIds);
+        List<Post> posts = postReadRepository.findAllByInId(postIds).orElseThrow(PostNotFoundException::new);
         PostLikeCountsOutput postLikes = postLikeReadService.getPostLikes(postIds);
 
         List<PostOutput> postOutputs = convertToPostDto(posts, postLikes);
@@ -47,9 +48,10 @@ public class CursorPagingPostService {
     private List<Post> findAllBy(Long writerId, String status, CursorRequest cursorRequest) {
         if (cursorRequest.hasKey()) {
             return postReadRepository.findPostsByWriterAndStatusBeforeId(writerId, status, cursorRequest.getKey(),
-                    cursorRequest.getSize());
+                    cursorRequest.getSize()).orElseThrow(PostNotFoundException::new);
         }
-        return postReadRepository.findLatestPostsByWriterAndStatus(writerId, status, cursorRequest.getSize());
+        return postReadRepository.findLatestPostsByWriterAndStatus(writerId, status, cursorRequest.getSize())
+                .orElseThrow(PostNotFoundException::new);
     }
 
     private List<PostOutput> convertToPostDto(List<Post> posts, PostLikeCountsOutput postLikes) {

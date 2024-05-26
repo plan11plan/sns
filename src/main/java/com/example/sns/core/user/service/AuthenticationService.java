@@ -1,12 +1,12 @@
 package com.example.sns.core.user.service;
 
-import com.example.sns.core.common.exception.ResourceNotFoundException;
-import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.common.service.port.TimeHolder;
 import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.NicknameHistory;
 import com.example.sns.core.user.domain.entity.UserId;
 import com.example.sns.core.user.domain.entity.request.NicknameHistoryCreate;
 import com.example.sns.core.user.domain.entity.root.User;
+import com.example.sns.core.user.exception.UserNotFoundException;
 import com.example.sns.core.user.service.port.NicknameHistoryRepository;
 import com.example.sns.core.user.service.port.UserRepository;
 import java.time.LocalDateTime;
@@ -25,7 +25,7 @@ public class AuthenticationService {
 
     @Transactional
     public void login(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Users", id));
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         user = user.login(LocalDateTime.now());
         userRepository.save(user);
 
@@ -33,7 +33,7 @@ public class AuthenticationService {
 
     @Transactional
     public void verifyEmail(long id, String certificationCode) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Users", id));
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         user = user.certificate(certificationCode);
         NicknameHistoryCreate nicknameHistoryCreate = getCreate(user);
         NicknameHistory nicknameHistory = NicknameHistory.from(nicknameHistoryCreate,timeHolder.nowDateTime());

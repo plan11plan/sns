@@ -1,10 +1,10 @@
 package com.example.sns.core.post.service;
 
-import com.example.sns.core.common.exception.ResourceNotFoundException;
-import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.common.service.port.TimeHolder;
 import com.example.sns.core.post.domain.entity.Comment;
 import com.example.sns.core.post.domain.entity.request.CommentCreate;
 import com.example.sns.core.post.domain.entity.request.CommentUpdate;
+import com.example.sns.core.post.exception.CommentNotFoundException;
 import com.example.sns.core.post.service.input.CommentCreateInput;
 import com.example.sns.core.post.service.input.CommentDeleteInput;
 import com.example.sns.core.post.service.input.CommentUpdateInput;
@@ -36,8 +36,8 @@ public class CommentWriteService {
     }
     @Transactional
     public CommentOutput update(CommentUpdateInput input, UserOutput userOutput) {
-        Comment comment = commentReadRepository.findById(userOutput.getId()).orElseThrow(
-                () -> new ResourceNotFoundException("comment", userOutput.getId()));
+        Comment comment = commentReadRepository.findById(userOutput.getId())
+                .orElseThrow(CommentNotFoundException::new);
         CommentUpdate commentUpdate = CommentUpdate.builder()
                 .content(input.getContent())
                 .build();
@@ -49,7 +49,7 @@ public class CommentWriteService {
 
     public void delete(CommentDeleteInput input) {
         Comment comment = commentReadRepository.findById(input.getId())
-                .orElseThrow(() -> new RuntimeException("Comment not found"));
+                .orElseThrow(CommentNotFoundException::new);
         commentWriteRepository.delete(comment);
     }
 }

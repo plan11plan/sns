@@ -10,10 +10,10 @@ public interface PostReadRepository {
 
 
     //첫 조회시, 기준 키 값이 없으므로   최신 게시글을 해당 사이즈만큼 가져옴
-    List<Post> findLatestPostsByWriterAndStatus(Long writerId, String status, int limit);
-    List<Post> findPostsByWriterAndStatusBeforeId(Long writerId, String  status, Long lastId, int limit);
+    Optional<List<Post>> findLatestPostsByWriterAndStatus(Long writerId, String status, int limit);
+    Optional<List<Post>> findPostsByWriterAndStatusBeforeId(Long writerId, String  status, Long lastId, int limit);
 
-    List<Post> findAllByInId(List<Long> postIds);
+    Optional<List<Post>> findAllByInId(List<Long> postIds);
 
 
 }

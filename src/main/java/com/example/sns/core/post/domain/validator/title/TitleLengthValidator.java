@@ -1,6 +1,6 @@
 package com.example.sns.core.post.domain.validator.title;
 
-import static com.example.sns.core.common.util.StringInBoundary.isInBoundary;
+import static com.example.sns.common.util.StringInBoundary.isInBoundary;
 
 import com.example.sns.core.post.exception.InvalidLengthTitle;
 import com.example.sns.core.user.domain.validator.Validator;

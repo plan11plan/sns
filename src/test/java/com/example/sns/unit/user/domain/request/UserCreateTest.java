@@ -3,8 +3,8 @@ package com.example.sns.unit.user.domain.request;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import com.example.sns.core.common.infrstructure.SystemUuidHolder;
-import com.example.sns.core.common.service.port.UuidHolder;
+import com.example.sns.common.infrstructure.SystemUuidHolder;
+import com.example.sns.common.service.port.UuidHolder;
 import com.example.sns.core.user.domain.entity.Birthday;
 import com.example.sns.core.user.domain.entity.Email;
 import com.example.sns.core.user.domain.entity.Nickname;

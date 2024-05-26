@@ -1,7 +1,7 @@
 package com.example.sns.core.post.infrastructure.repository;
 
-import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.post.domain.entity.Post;
+import com.example.sns.core.post.exception.PostNotFoundException;
 import com.example.sns.core.post.infrastructure.repository.entity.PostEntity;
 import com.example.sns.core.post.infrastructure.repository.jpa.PostJpaRepository;
 import com.example.sns.core.post.service.port.PostWriteRepository;
@@ -21,7 +21,7 @@ public class PostWriteRepositoryImpl implements PostWriteRepository {
 
     @Override
     public Post getById(Long id) {
-        return postJpaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("posts", id)).toModel();
+        return postJpaRepository.findById(id).orElseThrow(PostNotFoundException::new).toModel();
     }
 
 

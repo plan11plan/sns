@@ -3,8 +3,8 @@ package com.example.sns.unit.user.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.example.sns.core.common.exception.CertificationCodeNotMatchedException;
-import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.common.exception.CertificationCodeNotMatchedException;
+import com.example.sns.common.service.port.TimeHolder;
 import com.example.sns.core.user.domain.entity.Email;
 import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.Password;
@@ -59,7 +59,7 @@ class AuthenticationServiceTest {
         authenticationService.login(savedUser.getUserIdValue());
 
         // then
-        User updatedUser = fakeUserRepository.getById(savedUser.getUserIdValue());
+        User updatedUser = fakeUserRepository.findById(savedUser.getUserIdValue()).get();
     }
 
     @DisplayName("User는 인증할 수 있다")
@@ -83,7 +83,7 @@ class AuthenticationServiceTest {
         authenticationService.verifyEmail(savedUser.getUserIdValue(), "1234");
 
         // then
-        User updatedUser = fakeUserRepository.getById(savedUser.getUserIdValue());
+        User updatedUser = fakeUserRepository.findById(savedUser.getUserIdValue()).get();
         assertThat(updatedUser.getStatus()).isEqualTo(UserStatus.ACTIVE);
         assertThat(fakeNicknameHistoryRepository.findAllByUserId(savedUser.getUserIdValue()).isPresent()).isTrue();
     }

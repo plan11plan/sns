@@ -14,33 +14,39 @@ public class FakePostReadRepository implements PostReadRepository {
     }
 
     @Override
-    public List<Post> findLatestPostsByWriterAndStatus(Long writerId, String status, int limit) {
-        return data.stream()
+    public Optional<List<Post>> findLatestPostsByWriterAndStatus(Long writerId, String status, int limit) {
+        List<Post> posts = data.stream()
                 .filter(post -> Objects.equals(post.getWriterId().getValue(), writerId) &&
                         Objects.equals(post.getStatus().name(), status))
                 .sorted(Comparator.comparing(Post::getCreatedAt).reversed())
                 .limit(limit)
                 .collect(Collectors.toList());
+        return posts.isEmpty() ? Optional.empty() : Optional.of(posts);
+
     }
 
     @Override
-    public List<Post> findPostsByWriterAndStatusBeforeId(Long writerId, String status, Long lastId, int limit) {
-        return data.stream()
+    public Optional<List<Post>> findPostsByWriterAndStatusBeforeId(Long writerId, String status, Long lastId, int limit) {
+        List<Post> posts = data.stream()
                 .filter(post -> Objects.equals(post.getWriterId().getValue(), writerId) &&
                         Objects.equals(post.getStatus().name(), status) &&
                         post.getId().getValue() < lastId)
                 .sorted(Comparator.comparing(Post::getCreatedAt).reversed())
                 .limit(limit)
                 .collect(Collectors.toList());
+      return posts.isEmpty() ? Optional.empty() : Optional.of(posts);
+
     }
 
     @Override
-    public List<Post> findAllByInId(List<Long> postIds) {
-        return postIds.stream()
+    public Optional<List<Post>> findAllByInId(List<Long> postIds) {
+        List<Post> posts = postIds.stream()
                 .map(this::findById)
                 .flatMap(Optional::stream)
                 .sorted(Comparator.comparing(post -> post.getId().getValue(), Comparator.reverseOrder()))
                 .collect(Collectors.toList());
+        return posts.isEmpty() ? Optional.empty() : Optional.of(posts);
+
     }
 
     public void save(Post post) {

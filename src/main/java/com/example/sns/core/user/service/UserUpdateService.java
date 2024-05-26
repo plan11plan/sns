@@ -1,8 +1,9 @@
 package com.example.sns.core.user.service;
 
-import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.common.service.port.TimeHolder;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.domain.request.UserUpdate;
+import com.example.sns.core.user.exception.UserNotFoundException;
 import com.example.sns.core.user.service.output.UserOutput;
 import com.example.sns.core.user.service.port.NicknameHistoryRepository;
 import com.example.sns.core.user.service.port.UserRepository;
@@ -20,7 +21,7 @@ public class UserUpdateService {
 
     @Transactional
     public UserOutput update(Long id, UserUpdate userUpdate) {
-        User user = userRepository.getById(id);
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         user = user.update(userUpdate);
         userRepository.save(user);
         return UserOutput.from(user);

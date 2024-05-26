@@ -1,7 +1,7 @@
 package com.example.sns.core.user.domain.entity.root;
 
-import com.example.sns.core.common.exception.CertificationCodeNotMatchedException;
-import com.example.sns.core.common.service.port.UuidHolder;
+import com.example.sns.common.exception.CertificationCodeNotMatchedException;
+import com.example.sns.common.service.port.UuidHolder;
 import com.example.sns.core.user.domain.entity.Birthday;
 import com.example.sns.core.user.domain.entity.Email;
 import com.example.sns.core.user.domain.entity.Nickname;

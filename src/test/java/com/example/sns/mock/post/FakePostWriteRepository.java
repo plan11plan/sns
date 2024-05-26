@@ -1,8 +1,8 @@
 package com.example.sns.mock.post;
 
-import com.example.sns.core.common.exception.ResourceNotFoundException;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.PostId;
+import com.example.sns.core.post.exception.PostNotFoundException;
 import com.example.sns.core.post.service.port.PostWriteRepository;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,6 +41,6 @@ public class FakePostWriteRepository implements PostWriteRepository {
         return data.stream()
                 .filter(post -> post.getId().getValue().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new ResourceNotFoundException("Post", id));
+                .orElseThrow(PostNotFoundException::new);
     }
 }

@@ -6,7 +6,7 @@ import com.example.sns.core.chat.domain.ChatUserId;
 import com.example.sns.core.chat.service.port.ChatRoomReadRepository;
 import com.example.sns.core.chat.service.output.ChatRoomOutput;
 import com.example.sns.core.chat.service.port.ChatRoomWriteRepository;
-import com.example.sns.core.common.service.port.TimeHolder;
+import com.example.sns.common.service.port.TimeHolder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
