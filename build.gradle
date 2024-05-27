@@ -1,80 +1,84 @@
-	plugins {
-		id 'java'
-		id 'org.springframework.boot' version '3.2.5'
-		id 'io.spring.dependency-management' version '1.1.4'
-	}
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
 
-	group = 'com.example'
-	version = '0.0.1-SNAPSHOT'
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
 
-	java {
-		sourceCompatibility = '17'
-	}
+java {
+    sourceCompatibility = '17'
+}
 
-	repositories {
-		mavenCentral()
-	}
+repositories {
+    mavenCentral()
+}
 
-	dependencies {
-		// Spring Boot Starter
-		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-		implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+dependencies {
+    // Spring Boot Starter
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
-		implementation 'org.springframework.boot:spring-boot-starter-web'
-		implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-		// Spring Boot 기타 의존성
-		implementation 'org.springdoc:springdoc-openapi-ui:1.6.8'
+    // Security
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "org.springframework.security:spring-security-test"
 
-		// 데이터베이스 드라이버
-		runtimeOnly 'mysql:mysql-connector-java:+'
+    // Spring Boot 기타 의존성
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.8'
 
-		// 개발 도구
-		compileOnly 'org.projectlombok:lombok'
-		annotationProcessor 'org.projectlombok:lombok'
-		developmentOnly 'org.springframework.boot:spring-boot-devtools'
-		annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    // 데이터베이스 드라이버
+    runtimeOnly 'mysql:mysql-connector-java:+'
 
-		// 테스트 의존성
-		testImplementation 'org.springframework.boot:spring-boot-starter-test'
-		testImplementation 'org.jeasy:easy-random-core:5.0.0'
+    // 개발 도구
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-		//쿼리 DSL
-		implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-		annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
-		annotationProcessor "jakarta.annotation:jakarta.annotation-api"
-		annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+    // 테스트 의존성
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.jeasy:easy-random-core:5.0.0'
 
-	// JavaMailSender
-	//	implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
-		implementation 'org.springframework.boot:spring-boot-starter-mail:'
-	//	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.5.1'
-		//test 롬복 추가
-		testCompileOnly 'org.projectlombok:lombok:'
-		testAnnotationProcessor 'org.projectlombok:lombok:'
+    //쿼리 DSL
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
-		//채팅 웹소캣
-		implementation 'org.springframework.boot:spring-boot-starter-websocket'
-		implementation 'org.webjars:sockjs-client:1.1.2'
-		implementation 'org.webjars:stomp-websocket:2.3.3-1'
-	}
-	// Querydsl 설정부
-	def generated = 'src/main/generated'
+    // JavaMailSender
+    //	implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+    implementation 'org.springframework.boot:spring-boot-starter-mail:'
+    //	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.5.1'
+    //test 롬복 추가
+    testCompileOnly 'org.projectlombok:lombok:'
+    testAnnotationProcessor 'org.projectlombok:lombok:'
 
-	// querydsl QClass 파일 생성 위치를 지정
-	tasks.withType(JavaCompile) {
-		options.getGeneratedSourceOutputDirectory().set(file(generated))
-	}
+    //채팅 웹소캣
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.webjars:sockjs-client:1.1.2'
+    implementation 'org.webjars:stomp-websocket:2.3.3-1'
+}
+// Querydsl 설정부
+def generated = 'src/main/generated'
 
-	// java source set 에 querydsl QClass 위치 추가
-	sourceSets {
-		main.java.srcDirs += [ generated ]
-	}
+// querydsl QClass 파일 생성 위치를 지정
+tasks.withType(JavaCompile) {
+    options.getGeneratedSourceOutputDirectory().set(file(generated))
+}
 
-	// gradle clean 시에 QClass 디렉토리 삭제
-	clean {
-		delete file(generated)
-	}
-	tasks.named('test') {
-		useJUnitPlatform()
-	}
+// java source set 에 querydsl QClass 위치 추가
+sourceSets {
+    main.java.srcDirs += [generated]
+}
+
+// gradle clean 시에 QClass 디렉토리 삭제
+clean {
+    delete file(generated)
+}
+tasks.named('test') {
+    useJUnitPlatform()
+}
