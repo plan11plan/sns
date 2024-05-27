@@ -2,6 +2,10 @@ package com.example.sns.core.post.service;
 
 import com.example.sns.common.service.port.TimeHolder;
 import com.example.sns.core.post.domain.entity.Comment;
+import com.example.sns.core.post.domain.entity.CommentContent;
+import com.example.sns.core.post.domain.entity.CommentId;
+import com.example.sns.core.post.domain.entity.PostId;
+import com.example.sns.core.post.domain.entity.WriterId;
 import com.example.sns.core.post.domain.entity.request.CommentCreate;
 import com.example.sns.core.post.domain.entity.request.CommentUpdate;
 import com.example.sns.core.post.exception.CommentNotFoundException;
@@ -25,10 +29,10 @@ public class CommentWriteService {
 
     public CommentOutput create(CommentCreateInput input) {
         CommentCreate commentCreate = CommentCreate.builder()
-                .postId(input.getPostId())
-                .writerId(input.getWriterId())
-                .parentId(input.getParentId())
-                .content(input.getContent())
+                .postId(PostId.of(input.getPostId()))
+                .writerId(WriterId.of(input.getWriterId()))
+                .parentId(CommentId.of(input.getParentId()))
+                .content(CommentContent.of(input.getContent()))
                 .build();
         Comment comment = Comment.from(commentCreate, timeHolder.nowDateTime());
         Comment savedComment = commentWriteRepository.save(comment);

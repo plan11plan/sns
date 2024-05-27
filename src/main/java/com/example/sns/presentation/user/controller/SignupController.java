@@ -1,10 +1,10 @@
 package com.example.sns.presentation.user.controller;
 
+import com.example.sns.core.user.service.UserSignupService;
 import com.example.sns.core.user.service.input.UserCreateInput;
-import com.example.sns.presentation.user.controller.request.UserCreateRequest;
+import com.example.sns.presentation.user.controller.request.SignupRequest;
 import com.example.sns.presentation.user.controller.response.UserResponse;
 import com.example.sns.core.user.service.AuthenticationService;
-import com.example.sns.core.user.service.UserCreateService;
 import com.example.sns.core.user.service.output.UserOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
-public class UserCreateController {
+public class SignupController {
 
 
-    private final UserCreateService userCreateService;
+    private final UserSignupService userSignupService;
     private final AuthenticationService authenticationService;
 
 
@@ -32,7 +32,7 @@ public class UserCreateController {
     요청시 - 이메일 발송(상태 펜딩) - 응답 , ( 이메일 발송 안에 새로운 요청 응답시(상태 액티브))
      */
     @PostMapping
-    public ResponseEntity<UserResponse> create(@RequestBody UserCreateRequest command) {
+    public ResponseEntity<UserResponse> create(@RequestBody SignupRequest command) {
         UserCreateInput userCreateInput = UserCreateInput.builder()
                 .email(command.getEmail())
                 .nickname(command.getNickname())
@@ -40,7 +40,7 @@ public class UserCreateController {
                 .birthDay(command.getBirthday())
                 .password(command.getPassword())
                 .build();
-        UserOutput userOutput = userCreateService.create(userCreateInput);
+        UserOutput userOutput = userSignupService.signup(userCreateInput);
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(UserResponse.from(userOutput));

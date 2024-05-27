@@ -49,9 +49,9 @@ class CommentWriteServiceTest {
         // given
         LocalDateTime now = LocalDateTime.now();
         CommentCreateInput input = CommentCreateInput.builder()
-                .postId(PostId.of(1L))
-                .writerId(WriterId.of(1L))
-                .content(CommentContent.of("new comment"))
+                .postId(1L)
+                .writerId(1L)
+                .content("new comment")
                 .build();
         when(timeHolder.nowDateTime()).thenReturn(now);
 

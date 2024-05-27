@@ -15,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QChatMessageEntity extends EntityPathBase<ChatMessageEntity> {
 
-    private static final long serialVersionUID = -1628958403L;
+    private static final long serialVersionUID = -136666108L;
 
     public static final QChatMessageEntity chatMessageEntity = new QChatMessageEntity("chatMessageEntity");
 

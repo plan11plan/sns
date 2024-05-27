@@ -19,14 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Builder
 @RequiredArgsConstructor
-public class UserCreateService {
+public class UserSignupService {
     private final UserRepository userRepository;
     private final CertificationService certificationService;
     private final TimeHolder timeHolder;
     private final UuidHolder uuidHolder;
 
     @Transactional
-    public UserOutput create(UserCreateInput userCreateInput) {
+    public UserOutput signup(UserCreateInput userCreateInput) {
         UserCreate userCreate = UserCreate.builder()
                 .email(Email.of(userCreateInput.getEmail()))
                 .nickname(Nickname.of(userCreateInput.getNickname()))

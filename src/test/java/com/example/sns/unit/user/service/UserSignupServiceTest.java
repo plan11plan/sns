@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.service.CertificationService;
-import com.example.sns.core.user.service.UserCreateService;
+import com.example.sns.core.user.service.UserSignupService;
 import com.example.sns.core.user.service.input.UserCreateInput;
 import com.example.sns.core.user.service.output.UserOutput;
 import com.example.sns.mock.TestTimeHolder;
@@ -17,9 +17,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserCreateServiceTest {
+class UserSignupServiceTest {
 
-    private UserCreateService userCreateService;
+    private UserSignupService userSignupService;
     private FakeUserRepository fakeUserRepository;
     private FakeMailSender fakeMailSender;
 
@@ -27,7 +27,7 @@ class UserCreateServiceTest {
     void setUp() {
         fakeMailSender = new FakeMailSender();
         fakeUserRepository = new FakeUserRepository();
-        userCreateService = UserCreateService.builder()
+        userSignupService = UserSignupService.builder()
                 .userRepository(fakeUserRepository)
                 .certificationService(new CertificationService(fakeMailSender))
                 .timeHolder(   new TestTimeHolder(LocalDateTime.of(2023, 1, 1, 0, 0))
@@ -49,7 +49,7 @@ class UserCreateServiceTest {
                 .build();
 
         // when
-        UserOutput result = userCreateService.create(userCreateInput);
+        UserOutput result = userSignupService.signup(userCreateInput);
 
         // then
         assertThat(result).isNotNull();

@@ -5,7 +5,7 @@
 //import com.example.sns.core.post.service.port.PostWriteRepository;
 //import com.example.sns.core.user.service.AuthenticationService;
 //import com.example.sns.core.user.service.CertificationService;
-//import com.example.sns.core.user.service.UserCreateService;
+//import com.example.sns.core.user.service.UserSignupService;
 //import com.example.sns.core.user.service.UserReadService;
 //import com.example.sns.core.user.service.UserUpdateService;
 //import com.example.sns.core.user.service.port.MailSender;
@@ -19,7 +19,7 @@
 //    public final PostWriteRepository postWriteRepository;
 //    /// UserService
 //    private final UserUpdateService userUpdateService;
-//    private final UserCreateService userCreateService;
+//    private final UserSignupService userCreateService;
 //    private final AuthenticationService authenticationService;
 //    private final UserReadService userReadService;
 //    /// PostService
@@ -46,7 +46,7 @@
 //                .build();
 //        this.userReadService = UserReadService.builder().userRepository(this.userRepository).build();
 //        this.userUpdateService = UserUpdateService.builder().userRepository(this.userRepository).build();
-//        this.userCreateService = UserCreateService.builder()
+//        this.userCreateService = UserSignupService.builder()
 //                .userRepository(this.userRepository)
 //                .certificationService(this.certificationService)
 //                .uuidHolder(uuidHolder)
