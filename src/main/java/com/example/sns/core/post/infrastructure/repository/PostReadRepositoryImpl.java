@@ -4,7 +4,7 @@ import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.infrastructure.repository.entity.PostEntity;
 import com.example.sns.core.post.infrastructure.repository.jpa.PostJpaRepository;
 import com.example.sns.core.post.infrastructure.repository.queryDsl.PostQueryDslRepository;
-import com.example.sns.core.post.service.port.PostReadRepository;
+import com.example.sns.core.post.domain.service.port.PostReadRepository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

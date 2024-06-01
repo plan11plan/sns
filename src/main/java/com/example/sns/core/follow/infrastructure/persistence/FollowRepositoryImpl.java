@@ -2,7 +2,7 @@ package com.example.sns.core.follow.infrastructure.persistence;
 
 import com.example.sns.core.follow.domain.Follow;
 import com.example.sns.core.follow.domain.FollowStatus;
-import com.example.sns.core.follow.service.port.FollowRepository;
+import com.example.sns.core.follow.domain.service.port.FollowRepository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

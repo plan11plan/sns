@@ -4,7 +4,7 @@ import com.example.sns.core.post.domain.entity.Comment;
 import com.example.sns.core.post.infrastructure.repository.entity.CommentEntity;
 import com.example.sns.core.post.infrastructure.repository.jpa.CommentJpaRepository;
 import com.example.sns.core.post.infrastructure.repository.queryDsl.CommentQueryDslRepository;
-import com.example.sns.core.post.service.port.CommentReadRepository;
+import com.example.sns.core.post.domain.service.port.CommentReadRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

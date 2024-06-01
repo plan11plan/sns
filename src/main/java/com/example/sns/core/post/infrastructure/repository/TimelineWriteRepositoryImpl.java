@@ -5,7 +5,7 @@ import com.example.sns.core.post.domain.entity.Timeline;
 import com.example.sns.core.post.infrastructure.repository.entity.TimelineEntity;
 import com.example.sns.core.post.infrastructure.repository.jdbc.TimelineBulkNamedParameterJdbcRepository;
 import com.example.sns.core.post.infrastructure.repository.jpa.TimelineJpaRepository;
-import com.example.sns.core.post.service.port.TimelineWriteRepository;
+import com.example.sns.core.post.domain.service.port.TimelineWriteRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

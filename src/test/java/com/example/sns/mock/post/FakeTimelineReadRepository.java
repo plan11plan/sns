@@ -1,7 +1,7 @@
 package com.example.sns.mock.post;
 
 import com.example.sns.core.post.domain.entity.Timeline;
-import com.example.sns.core.post.service.port.TimelineReadRepository;
+import com.example.sns.core.post.domain.service.port.TimelineReadRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;

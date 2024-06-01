@@ -1,0 +1,47 @@
+### Signin 요청
+POST http://localhost:8080/api/users/signup
+Content-Type: application/json
+
+{
+  "email": "tjtfy7028@gmail.com",
+  "password": "password",
+  "nickname": "userNickname",
+  "sex": "M",
+  "birthday": "1990-01-01"
+}
+
+### Verify 이메일 요청
+GET http://localhost:8080/api/users/1/verify?certificationCode=someCertificationCode
+
+### login1
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "tjtfy7028@gmail.com",
+  "password": "password"
+}
+
+### login2
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "tjtfy7028@gmail.com",
+  "password": "password"
+}
+### 어드민으로 변경
+PUT http://localhost:8080/api/users/ad
+Content-Type: application/json
+
+{
+  "id" : 1
+}
+### 메인 페이지
+GET http://localhost:8080
+
+### 사용자 페이지 대체
+GET http://localhost:8080/user
+
+### 관리자 페이지
+GET http://localhost:8080/admin

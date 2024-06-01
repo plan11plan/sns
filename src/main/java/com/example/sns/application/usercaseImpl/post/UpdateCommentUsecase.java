@@ -1,9 +1,9 @@
 package com.example.sns.application.usercaseImpl.post;
 
-import com.example.sns.core.post.service.CommentWriteService;
-import com.example.sns.core.post.service.input.CommentUpdateInput;
-import com.example.sns.core.post.service.output.CommentOutput;
-import com.example.sns.core.user.service.output.UserOutput;
+import com.example.sns.core.post.domain.service.CommentWriteService;
+import com.example.sns.core.post.domain.service.input.CommentUpdateInput;
+import com.example.sns.core.post.domain.service.output.CommentOutput;
+import com.example.sns.core.user.domain.service.output.UserOutput;
 import com.example.sns.presentation.post.controller.request.CommentUpdateRequest;
 import com.example.sns.presentation.post.controller.response.CommentResponse;
 import lombok.RequiredArgsConstructor;

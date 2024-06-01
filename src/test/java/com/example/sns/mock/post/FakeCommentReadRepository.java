@@ -1,7 +1,7 @@
 package com.example.sns.mock.post;
 
 import com.example.sns.core.post.domain.entity.Comment;
-import com.example.sns.core.post.service.port.CommentReadRepository;
+import com.example.sns.core.post.domain.service.port.CommentReadRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

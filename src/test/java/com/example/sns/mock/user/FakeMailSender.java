@@ -1,6 +1,6 @@
 package com.example.sns.mock.user;
 
-import com.example.sns.core.user.service.port.MailSender;
+import com.example.sns.core.user.domain.service.port.MailSender;
 
 public class FakeMailSender implements MailSender {
     public String email;

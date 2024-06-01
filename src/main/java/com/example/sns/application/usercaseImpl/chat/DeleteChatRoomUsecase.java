@@ -1,7 +1,7 @@
 package com.example.sns.application.usercaseImpl.chat;
 
 import com.example.sns.application.command.chat.DeleteChatRoomCommand;
-import com.example.sns.core.chat.service.ChatRoomWriteService;
+import com.example.sns.core.chat.domain.service.ChatRoomWriteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

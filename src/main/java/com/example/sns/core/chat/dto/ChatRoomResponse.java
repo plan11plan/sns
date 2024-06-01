@@ -1,6 +1,6 @@
 package com.example.sns.core.chat.dto;
 
-import com.example.sns.core.chat.service.output.ChatRoomOutput;
+import com.example.sns.core.chat.domain.service.output.ChatRoomOutput;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Data;

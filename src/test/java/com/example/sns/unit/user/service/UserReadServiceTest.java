@@ -9,7 +9,7 @@ import com.example.sns.core.user.domain.entity.Sex;
 import com.example.sns.core.user.domain.entity.UserId;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
-import com.example.sns.core.user.service.UserReadService;
+import com.example.sns.core.user.domain.service.UserReadService;
 import com.example.sns.mock.user.FakeUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

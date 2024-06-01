@@ -1,8 +1,9 @@
 package com.example.sns.core.user.infrastructure.persistence;
 
+import com.example.sns.core.user.domain.entity.OnlineStatus;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.infrastructure.persistence.entity.UserEntity;
-import com.example.sns.core.user.service.port.UserRepository;
+import com.example.sns.core.user.domain.service.port.UserRepository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +15,6 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
     private final UserJpaRepository userJpaRepository;
-
-
-
 
     @Override
     public Optional<User> findById(Long  id) {
@@ -45,4 +43,12 @@ public class UserRepositoryImpl implements UserRepository {
         List<UserEntity> userEntities = userJpaRepository.findAllByIdIn(ids).orElse(Collections.emptyList());
        return Optional.of(userEntities.stream().map(UserEntity::toModel).collect(Collectors.toList()));
     }
+
+    @Override
+    public Optional<List<User>> findAllByOnlineStatus(String onlineStatus) {
+        List<UserEntity> userEntities = userJpaRepository.findAllByOnlineStatus(onlineStatus)
+                .orElse(Collections.emptyList());
+        return Optional.of(userEntities.stream().map(UserEntity::toModel).collect(Collectors.toList()));
+    }
+
 }

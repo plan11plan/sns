@@ -3,10 +3,10 @@ package com.example.sns.application.usercaseImpl.post;
 import com.example.sns.application.command.post.GetPostsResponse;
 import com.example.sns.application.command.post.GetTimelineByCursorCommand;
 import com.example.sns.core.post.domain.entity.CursorResponse;
-import com.example.sns.core.post.service.CursorPagingPostService;
-import com.example.sns.core.post.service.output.PostOutput;
-import com.example.sns.core.user.service.UserReadService;
-import com.example.sns.core.user.service.output.UserProfilesOutput;
+import com.example.sns.core.post.domain.service.CursorPagingPostService;
+import com.example.sns.core.post.domain.service.output.PostOutput;
+import com.example.sns.core.user.domain.service.UserReadService;
+import com.example.sns.core.user.domain.service.output.UserProfilesOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

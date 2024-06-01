@@ -1,6 +1,6 @@
 package com.example.sns.core.user.infrastructure;
 
-import com.example.sns.core.user.service.port.MailSender;
+import com.example.sns.core.user.domain.service.port.MailSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

@@ -2,7 +2,7 @@ package com.example.sns.mock.user;
 
 import com.example.sns.core.user.domain.entity.UserId;
 import com.example.sns.core.user.domain.entity.root.User;
-import com.example.sns.core.user.service.port.UserRepository;
+import com.example.sns.core.user.domain.service.port.UserRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,6 +40,7 @@ public class FakeUserRepository implements UserRepository {
                     .nickname(user.getNickname())
                     .birthday(user.getBirthday())
                     .createdAt(user.getCreatedAt())
+                    .role(user.getRole())
                     .sex(user.getSex())
                     .certificationCode(user.getCertificationCode())
                     .status(user.getStatus())

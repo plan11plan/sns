@@ -4,7 +4,7 @@ import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.exception.PostNotFoundException;
 import com.example.sns.core.post.infrastructure.repository.entity.PostEntity;
 import com.example.sns.core.post.infrastructure.repository.jpa.PostJpaRepository;
-import com.example.sns.core.post.service.port.PostWriteRepository;
+import com.example.sns.core.post.domain.service.port.PostWriteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -2,7 +2,7 @@ package com.example.sns.mock.post;
 
 import com.example.sns.core.post.domain.entity.PostLike;
 import com.example.sns.core.post.domain.entity.PostLikeId;
-import com.example.sns.core.post.service.port.PostLikeWriteRepository;
+import com.example.sns.core.post.domain.service.port.PostLikeWriteRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

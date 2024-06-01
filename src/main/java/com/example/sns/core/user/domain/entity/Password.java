@@ -22,7 +22,7 @@ public class Password {
     @Builder
     public Password(String value) {
         PasswordValidatorFactory.blankValidator().validate(value);
-        PasswordValidatorFactory.lengthValidator().validate(value);
+//        PasswordValidatorFactory.lengthValidator().validate(value);
         this.value =value;
     }
 

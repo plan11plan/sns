@@ -1,7 +1,7 @@
 package com.example.sns.presentation.post.controller.response;
 
 
-import com.example.sns.core.post.service.output.CommentOutput;
+import com.example.sns.core.post.domain.service.output.CommentOutput;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -2,7 +2,7 @@ package com.example.sns.presentation.post.controller;
 
 
 import com.example.sns.application.usercaseImpl.post.CreatePostLikeUsecase;
-import com.example.sns.core.post.service.port.PostLikeReadRepository;
+import com.example.sns.core.post.domain.service.port.PostLikeReadRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

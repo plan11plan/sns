@@ -2,16 +2,16 @@ package com.example.sns.application.usercaseImpl.post;
 
 
 import com.example.sns.application.command.post.CreatePostCommand;
-import com.example.sns.core.follow.service.input.FollowGetInput;
-import com.example.sns.core.follow.service.output.FollowOutput;
-import com.example.sns.core.follow.service.read.FollowReadService;
+import com.example.sns.core.follow.domain.service.input.FollowGetInput;
+import com.example.sns.core.follow.domain.service.output.FollowOutput;
+import com.example.sns.core.follow.domain.service.read.FollowReadService;
 import com.example.sns.core.post.domain.entity.Content;
 import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
 import com.example.sns.core.post.domain.entity.request.PostCreate;
-import com.example.sns.core.post.service.PostCreateService;
-import com.example.sns.core.post.service.TimelineWriteService;
-import com.example.sns.core.user.service.UserReadService;
+import com.example.sns.core.post.domain.service.PostCreateService;
+import com.example.sns.core.post.domain.service.TimelineWriteService;
+import com.example.sns.core.user.domain.service.UserReadService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

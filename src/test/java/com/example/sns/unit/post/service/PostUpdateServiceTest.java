@@ -9,7 +9,7 @@ import com.example.sns.core.post.domain.entity.PostStatus;
 import com.example.sns.core.post.domain.entity.Title;
 import com.example.sns.core.post.domain.entity.WriterId;
 import com.example.sns.core.post.domain.entity.request.PostUpdate;
-import com.example.sns.core.post.service.PostUpdateService;
+import com.example.sns.core.post.domain.service.PostUpdateService;
 import com.example.sns.mock.post.FakePostReadRepository;
 import com.example.sns.mock.post.FakePostWriteRepository;
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.example.sns.core.chat.dto;
 
-import com.example.sns.core.chat.service.output.ChatMessageOutput;
+import com.example.sns.core.chat.domain.service.output.ChatMessageOutput;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

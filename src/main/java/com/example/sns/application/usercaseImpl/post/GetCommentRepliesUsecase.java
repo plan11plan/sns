@@ -1,7 +1,7 @@
 package com.example.sns.application.usercaseImpl.post;
 
-import com.example.sns.core.post.service.CommentReadService;
-import com.example.sns.core.post.service.output.CommentOutput;
+import com.example.sns.core.post.domain.service.CommentReadService;
+import com.example.sns.core.post.domain.service.output.CommentOutput;
 import com.example.sns.presentation.post.controller.response.CommentResponse;
 import java.util.List;
 import java.util.stream.Collectors;

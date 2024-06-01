@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -18,37 +17,26 @@ public class QNicknameHistoryEntity extends EntityPathBase<NicknameHistoryEntity
 
     private static final long serialVersionUID = -1474140835L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QNicknameHistoryEntity nicknameHistoryEntity = new QNicknameHistoryEntity("nicknameHistoryEntity");
 
     public final DateTimePath<java.time.LocalDateTime> createdAt = createDateTime("createdAt", java.time.LocalDateTime.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final com.example.sns.core.user.domain.entity.QNickname nickname;
+    public final StringPath nickname = createString("nickname");
 
     public final NumberPath<Long> userId = createNumber("userId", Long.class);
 
     public QNicknameHistoryEntity(String variable) {
-        this(NicknameHistoryEntity.class, forVariable(variable), INITS);
+        super(NicknameHistoryEntity.class, forVariable(variable));
     }
 
     public QNicknameHistoryEntity(Path<? extends NicknameHistoryEntity> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QNicknameHistoryEntity(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QNicknameHistoryEntity(PathMetadata metadata, PathInits inits) {
-        this(NicknameHistoryEntity.class, metadata, inits);
-    }
-
-    public QNicknameHistoryEntity(Class<? extends NicknameHistoryEntity> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.nickname = inits.isInitialized("nickname") ? new com.example.sns.core.user.domain.entity.QNickname(forProperty("nickname")) : null;
+        super(NicknameHistoryEntity.class, metadata);
     }
 
 }

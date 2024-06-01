@@ -2,7 +2,7 @@ package com.example.sns.mock.user;
 
 import com.example.sns.core.user.domain.entity.NicknameHistory;
 import com.example.sns.core.user.domain.entity.NicknameHistoryId;
-import com.example.sns.core.user.service.port.NicknameHistoryRepository;
+import com.example.sns.core.user.domain.service.port.NicknameHistoryRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.example.sns.application.usercaseImpl.chat;
 
 import com.example.sns.core.chat.dto.ChatRoomResponse;
-import com.example.sns.core.chat.service.ChatRoomReadService;
+import com.example.sns.core.chat.domain.service.ChatRoomReadService;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;

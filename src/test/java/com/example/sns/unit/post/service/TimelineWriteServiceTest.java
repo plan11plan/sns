@@ -5,7 +5,7 @@ import static org.mockito.Mockito.when;
 
 import com.example.sns.common.service.port.TimeHolder;
 import com.example.sns.core.post.domain.entity.Timeline;
-import com.example.sns.core.post.service.TimelineWriteService;
+import com.example.sns.core.post.domain.service.TimelineWriteService;
 import com.example.sns.mock.post.FakeTimelineWriteRepository;
 import java.time.LocalDateTime;
 import java.util.List;

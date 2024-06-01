@@ -3,7 +3,7 @@ package com.example.sns.core.post.infrastructure.repository;
 import com.example.sns.core.post.domain.entity.Timeline;
 import com.example.sns.core.post.infrastructure.repository.entity.TimelineEntity;
 import com.example.sns.core.post.infrastructure.repository.queryDsl.TimelineQueryDslRepository;
-import com.example.sns.core.post.service.port.TimelineReadRepository;
+import com.example.sns.core.post.domain.service.port.TimelineReadRepository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

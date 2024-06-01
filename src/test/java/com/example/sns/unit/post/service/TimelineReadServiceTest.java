@@ -7,7 +7,7 @@ import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.domain.entity.Timeline;
 import com.example.sns.core.post.domain.entity.TimelineId;
 import com.example.sns.core.post.domain.entity.UserId;
-import com.example.sns.core.post.service.TimelineReadService;
+import com.example.sns.core.post.domain.service.TimelineReadService;
 import com.example.sns.mock.post.FakeTimelineReadRepository;
 import java.time.LocalDateTime;
 import java.util.List;

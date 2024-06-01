@@ -1,0 +1,12 @@
+package com.example.sns.core.chat.domain.service.port;
+
+import com.example.sns.core.chat.domain.ChatMessage;
+import java.util.List;
+import java.util.Optional;
+
+public interface ChatMessageReadRepository {
+    Optional<ChatMessage> findById(Long messageId);
+    Optional<List<ChatMessage>> findByChatRoomId(Long chatRoomId);
+    Optional<List<ChatMessage>> findUnreadMessagesInChatRoom(Long chatRoomId, Long userId);
+
+}

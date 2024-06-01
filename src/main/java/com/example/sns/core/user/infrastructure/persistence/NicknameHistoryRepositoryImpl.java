@@ -2,7 +2,7 @@ package com.example.sns.core.user.infrastructure.persistence;
 
 import com.example.sns.core.user.domain.entity.NicknameHistory;
 import com.example.sns.core.user.infrastructure.persistence.entity.NicknameHistoryEntity;
-import com.example.sns.core.user.service.port.NicknameHistoryRepository;
+import com.example.sns.core.user.domain.service.port.NicknameHistoryRepository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

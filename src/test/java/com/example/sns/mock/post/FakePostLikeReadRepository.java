@@ -1,7 +1,7 @@
 package com.example.sns.mock.post;
 
 import com.example.sns.core.post.infrastructure.repository.entity.outputVo.PostLikeCountDaoResponse;
-import com.example.sns.core.post.service.port.PostLikeReadRepository;
+import com.example.sns.core.post.domain.service.port.PostLikeReadRepository;
 import java.util.*;
 
 public class FakePostLikeReadRepository implements PostLikeReadRepository {

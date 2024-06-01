@@ -3,7 +3,7 @@ package com.example.sns.core.chat.infrastructure.implement;
 import com.example.sns.core.chat.domain.ChatMessage;
 import com.example.sns.core.chat.infrastructure.entity.ChatMessageEntity;
 import com.example.sns.core.chat.infrastructure.jpa.ChatMessageJpaRepository;
-import com.example.sns.core.chat.service.port.ChatMessageWriteRepository;
+import com.example.sns.core.chat.domain.service.port.ChatMessageWriteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

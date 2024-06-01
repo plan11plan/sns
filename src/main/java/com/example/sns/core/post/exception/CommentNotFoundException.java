@@ -12,3 +12,5 @@ public class CommentNotFoundException extends ResourceNotFoundException {
         super(ID_IS+ id + MESSAGE);
     }
 }
+
+//TODO : 케이크의 상태 MAKED , OP- > CANDLE

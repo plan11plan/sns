@@ -1,9 +1,9 @@
 package com.example.sns.application.usercaseImpl.chat;
 
 import com.example.sns.core.chat.dto.MessageResponse;
-import com.example.sns.core.chat.service.ChatMessageReadService;
-import com.example.sns.core.chat.service.ChatMessageWriteService;
-import com.example.sns.core.chat.service.output.ChatMessagesOutput;
+import com.example.sns.core.chat.domain.service.ChatMessageReadService;
+import com.example.sns.core.chat.domain.service.ChatMessageWriteService;
+import com.example.sns.core.chat.domain.service.output.ChatMessagesOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

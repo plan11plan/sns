@@ -2,9 +2,9 @@ package com.example.sns.unit.post.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.sns.core.post.service.PostLikeReadService;
-import com.example.sns.core.post.service.output.PostLikeCountOutput;
-import com.example.sns.core.post.service.output.PostLikeCountsOutput;
+import com.example.sns.core.post.domain.service.PostLikeReadService;
+import com.example.sns.core.post.domain.service.output.PostLikeCountOutput;
+import com.example.sns.core.post.domain.service.output.PostLikeCountsOutput;
 import com.example.sns.mock.post.FakePostLikeReadRepository;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;

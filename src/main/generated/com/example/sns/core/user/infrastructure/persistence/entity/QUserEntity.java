@@ -29,9 +29,15 @@ public class QUserEntity extends EntityPathBase<UserEntity> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final DateTimePath<java.time.LocalDateTime> lastActivityAt = createDateTime("lastActivityAt", java.time.LocalDateTime.class);
+
     public final StringPath nickname = createString("nickname");
 
+    public final StringPath onlineStatus = createString("onlineStatus");
+
     public final StringPath password = createString("password");
+
+    public final StringPath role = createString("role");
 
     public final StringPath sex = createString("sex");
 

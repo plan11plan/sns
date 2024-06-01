@@ -3,7 +3,7 @@ package com.example.sns.mock.post;
 import com.example.sns.core.post.domain.entity.Post;
 import com.example.sns.core.post.domain.entity.PostId;
 import com.example.sns.core.post.exception.PostNotFoundException;
-import com.example.sns.core.post.service.port.PostWriteRepository;
+import com.example.sns.core.post.domain.service.port.PostWriteRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

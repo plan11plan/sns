@@ -2,10 +2,10 @@ package com.example.sns.presentation.user.controller;
 
 import com.example.sns.presentation.user.controller.response.MyProfileResponse;
 import com.example.sns.core.user.domain.request.UserUpdate;
-import com.example.sns.core.user.service.AuthenticationService;
-import com.example.sns.core.user.service.UserReadService;
-import com.example.sns.core.user.service.UserUpdateService;
-import com.example.sns.core.user.service.output.UserOutput;
+import com.example.sns.core.user.domain.service.AuthenticationService;
+import com.example.sns.core.user.domain.service.UserReadService;
+import com.example.sns.core.user.domain.service.UserUpdateService;
+import com.example.sns.core.user.domain.service.output.UserOutput;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,7 +1,7 @@
 package com.example.sns.mock.post;
 
 import com.example.sns.core.post.domain.entity.Post;
-import com.example.sns.core.post.service.port.PostReadRepository;
+import com.example.sns.core.post.domain.service.port.PostReadRepository;
 import java.util.*;
 import java.util.stream.Collectors;
 

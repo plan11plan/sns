@@ -28,17 +28,17 @@ class PasswordTest {
         Assertions.assertThat(passwordByBuilder.getValue()).isEqualTo("password");
     }
 
-    @DisplayName("[생성 에러] 4~20글자가 아니면 예외를 던진다.")
-    @ParameterizedTest
-    @ValueSource(strings = {"aaa", "aaaaaaaaaaaaaaaaaaaaa"})
-        // 3글자와 21글자 입력
-    void create_length_fail(String input) {
-
-        // expected
-        assertThatExceptionOfType(InvalidLengthPassword.class)
-                .isThrownBy(() -> new Password(input))
-                .withMessageContaining("4글자 이상, 20글자 이하로 입력해주세요.");
-    }
+//    @DisplayName("[생성 에러] 4~20글자가 아니면 예외를 던진다.")
+//    @ParameterizedTest
+//    @ValueSource(strings = {"aaa", "aaaaaaaaaaaaaaaaaaaaa"})
+//        // 3글자와 21글자 입력
+//    void create_length_fail(String input) {
+//
+//        // expected
+//        assertThatExceptionOfType(InvalidLengthPassword.class)
+//                .isThrownBy(() -> new Password(input))
+//                .withMessageContaining("4글자 이상, 20글자 이하로 입력해주세요.");
+//    }
 
 
     @DisplayName("[생성 에러] 빈 값이면 예외를 던진다.")

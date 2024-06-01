@@ -3,7 +3,7 @@ package com.example.sns.core.chat.infrastructure.implement;
 import com.example.sns.core.chat.domain.ChatMessage;
 import com.example.sns.core.chat.infrastructure.entity.ChatMessageEntity;
 import com.example.sns.core.chat.infrastructure.queryDsl.ChatMessageQueryDslRepository;
-import com.example.sns.core.chat.service.port.ChatMessageReadRepository;
+import com.example.sns.core.chat.domain.service.port.ChatMessageReadRepository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

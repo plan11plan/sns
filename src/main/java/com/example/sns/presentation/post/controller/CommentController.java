@@ -55,9 +55,11 @@ public class CommentController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{commentId}")
-    public ResponseEntity<Void> deleteComment(@PathVariable("commentId") Long commentId) {
-        deleteCommentUsecase.execute(commentId);
+    @DeleteMapping("/{userId}/{commentId}")
+    public ResponseEntity<Void> deleteComment(
+            @PathVariable("userId") Long userId,
+            @PathVariable("commentId") Long commentId) {
+        deleteCommentUsecase.execute(userId,commentId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

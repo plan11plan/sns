@@ -1,11 +1,11 @@
 package com.example.sns.application.usercaseImpl.post;
 
 
-import com.example.sns.core.post.service.PostGetService;
-import com.example.sns.core.post.service.PostLikeWriteService;
-import com.example.sns.core.post.service.output.PostOutput;
-import com.example.sns.core.user.service.UserReadService;
-import com.example.sns.core.user.service.output.UserOutput;
+import com.example.sns.core.post.domain.service.PostGetService;
+import com.example.sns.core.post.domain.service.PostLikeWriteService;
+import com.example.sns.core.post.domain.service.output.PostOutput;
+import com.example.sns.core.user.domain.service.UserReadService;
+import com.example.sns.core.user.domain.service.output.UserOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

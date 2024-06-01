@@ -6,7 +6,7 @@ import com.example.sns.application.usercaseImpl.follow.read.GetFollowerUsecase;
 import com.example.sns.application.usercaseImpl.follow.read.GetFollowingUsecase;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
-import com.example.sns.core.user.service.output.UserOutput;
+import com.example.sns.core.user.domain.service.output.UserOutput;
 import java.util.List;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;

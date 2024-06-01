@@ -1,24 +1,14 @@
 package com.example.sns.core.user.infrastructure.persistence.entity;
 
-import com.example.sns.core.user.domain.entity.Birthday;
-import com.example.sns.core.user.domain.entity.Email;
-import com.example.sns.core.user.domain.entity.Nickname;
-import com.example.sns.core.user.domain.entity.Password;
-import com.example.sns.core.user.domain.entity.Sex;
-import com.example.sns.core.user.domain.entity.UserId;
-import com.example.sns.core.user.domain.entity.UserStatus;
+import com.example.sns.core.user.domain.entity.*;
 import com.example.sns.core.user.domain.entity.root.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -36,9 +26,14 @@ public class UserEntity {
     private LocalDate birthday;
     @Column(name = "status")
     private String status;
+    private String role;
     @Column(name = "certification_code")
     private String certificationCode;
     private LocalDateTime createdAt;
+    @Column(name = "online_status")
+    private String onlineStatus;
+    @Column(name = "last_activity_at")
+    private LocalDateTime lastActivityAt;
 
     public static UserEntity from(User user) {
         UserEntity userEntity = new UserEntity();
@@ -47,13 +42,15 @@ public class UserEntity {
         userEntity.password = user.getPasswordValue();
         userEntity.nickname = user.getNicknameValue();
         userEntity.sex = user.getSexValue();
+        userEntity.role = user.getRoleValue();
         userEntity.birthday = user.getBirthdayValue();
         userEntity.status = user.getStatusValue();
         userEntity.certificationCode = user.getCertificationCode();
         userEntity.createdAt = user.getCreatedAt();
+        userEntity.onlineStatus = user.getOnlineStatusValue();
+        userEntity.lastActivityAt = user.getLastActivityAt();
         return userEntity;
     }
-
 
     public User toModel() {
         return User.builder()
@@ -64,9 +61,11 @@ public class UserEntity {
                 .sex(Sex.valueOf(sex))
                 .birthday(new Birthday(birthday))
                 .status(UserStatus.valueOf(status))
+                .role(Role.valueOf(role))
                 .certificationCode(certificationCode)
                 .createdAt(createdAt)
+                .online(onlineStatus != null ? OnlineStatus.valueOf(onlineStatus) : OnlineStatus.OFF)
+                .lastActivityAt(lastActivityAt)
                 .build();
     }
-
 }

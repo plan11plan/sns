@@ -10,8 +10,8 @@ import com.example.sns.core.user.domain.entity.UserId;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
 import com.example.sns.core.user.domain.request.UserUpdate;
-import com.example.sns.core.user.service.UserUpdateService;
-import com.example.sns.core.user.service.output.UserOutput;
+import com.example.sns.core.user.domain.service.UserUpdateService;
+import com.example.sns.core.user.domain.service.output.UserOutput;
 import com.example.sns.mock.TestTimeHolder;
 import com.example.sns.mock.user.FakeNicknameHistoryRepository;
 import com.example.sns.mock.user.FakeUserRepository;
@@ -61,9 +61,11 @@ class UserUpdateServiceTest {
                 .password(Password.of("updated-password"))
                 .nickname(Nickname.of("updated-nickname"))
                 .build();
+        System.out.println("1");
 
         // when
         UserOutput userOutput = userUpdateService.update(userId, userUpdate);
+        System.out.println(userOutput.getRole());
 
 
     }

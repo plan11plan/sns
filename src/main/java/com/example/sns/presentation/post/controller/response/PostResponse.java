@@ -1,6 +1,6 @@
 package com.example.sns.presentation.post.controller.response;
 
-import com.example.sns.core.post.service.output.PostOutput;
+import com.example.sns.core.post.domain.service.output.PostOutput;
 import com.example.sns.presentation.user.controller.response.UserResponse;
 import java.time.LocalDateTime;
 import lombok.Builder;

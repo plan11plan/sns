@@ -9,6 +9,7 @@ import com.example.sns.core.user.domain.entity.Birthday;
 import com.example.sns.core.user.domain.entity.Email;
 import com.example.sns.core.user.domain.entity.Nickname;
 import com.example.sns.core.user.domain.entity.Password;
+import com.example.sns.core.user.domain.entity.Role;
 import com.example.sns.core.user.domain.entity.Sex;
 import com.example.sns.core.user.domain.entity.UserId;
 import com.example.sns.core.user.domain.entity.UserStatus;
@@ -90,6 +91,39 @@ class UserTest {
         assertThat(updatedUser.getCertificationCode()).isEqualTo("1234");
         assertThat(updatedUser.getCreatedAt()).isEqualTo(now);
         assertThat(updatedUser.getBirthday().getValue()).isEqualTo(LocalDate.of(1999, 7, 28));
+    }
+
+    @DisplayName("[수정] User는 Role 데이터를 Admin으로 수정할 수 있다.")
+    @Test
+    void changeRoleToAdmin() {
+        // given
+        LocalDateTime now = LocalDateTime.now();
+        User user = User.builder()
+                .id(new UserId(1L))
+                .role(Role.ROLE_USER)
+                .email(new Email("email@gmail.com"))
+                .password(new Password("password"))
+                .nickname(new Nickname("nickname"))
+                .sex(Sex.W)
+                .status(UserStatus.ACTIVE)
+                .certificationCode("1234")
+                .createdAt(now)
+                .birthday(new Birthday(LocalDate.of(1999, 7, 28)))
+                .lastLoginAt(now)
+                .build();        // when
+
+        user = user.changeRoleToAdmin();
+        // then
+        assertThat(user.getRoleValue()).isEqualTo("ROLE_ADMIN");
+        assertThat(user.getNickname().getValue()).isEqualTo("nickname");
+        assertThat(user.getPassword().getValue()).isEqualTo("password");
+        assertThat(user.getEmail().getValue()).isEqualTo("email@gmail.com");
+        assertThat(user.getUserIdValue()).isEqualTo(1L);
+        assertThat(user.getSex().toString()).isEqualTo("W");
+        assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
+        assertThat(user.getCertificationCode()).isEqualTo("1234");
+        assertThat(user.getCreatedAt()).isEqualTo(now);
+        assertThat(user.getBirthday().getValue()).isEqualTo(LocalDate.of(1999, 7, 28));
     }
 
     @DisplayName("[로그인] User는 로그인을 할 수 있고, 로그인시 마지막 로그인 시간이 변경된다.")

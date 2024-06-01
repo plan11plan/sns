@@ -4,7 +4,7 @@ package com.example.sns.core.post.infrastructure.repository;
 import com.example.sns.core.post.domain.entity.Comment;
 import com.example.sns.core.post.infrastructure.repository.entity.CommentEntity;
 import com.example.sns.core.post.infrastructure.repository.jpa.CommentJpaRepository;
-import com.example.sns.core.post.service.port.CommentWriteRepository;
+import com.example.sns.core.post.domain.service.port.CommentWriteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

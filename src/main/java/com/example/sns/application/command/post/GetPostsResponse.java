@@ -1,8 +1,8 @@
 package com.example.sns.application.command.post;
 
-import com.example.sns.core.post.service.output.PostOutput;
-import com.example.sns.core.user.service.output.UserProfileOutput;
-import com.example.sns.core.user.service.output.UserProfilesOutput;
+import com.example.sns.core.post.domain.service.output.PostOutput;
+import com.example.sns.core.user.domain.service.output.UserProfileOutput;
+import com.example.sns.core.user.domain.service.output.UserProfilesOutput;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;

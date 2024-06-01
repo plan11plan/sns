@@ -3,9 +3,9 @@ package com.example.sns.application.usercaseImpl.follow.write;
 import com.example.sns.application.command.follow.DeleteFollowerUserCommand;
 import com.example.sns.core.follow.domain.Follower;
 import com.example.sns.core.follow.domain.Following;
-import com.example.sns.core.follow.service.input.FollowerDeleteInput;
-import com.example.sns.core.follow.service.write.FollowDeleteService;
-import com.example.sns.core.user.service.UserReadService;
+import com.example.sns.core.follow.domain.service.input.FollowerDeleteInput;
+import com.example.sns.core.follow.domain.service.write.FollowDeleteService;
+import com.example.sns.core.user.domain.service.UserReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

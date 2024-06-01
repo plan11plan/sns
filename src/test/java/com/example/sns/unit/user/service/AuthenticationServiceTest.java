@@ -11,7 +11,7 @@ import com.example.sns.core.user.domain.entity.Password;
 import com.example.sns.core.user.domain.entity.Sex;
 import com.example.sns.core.user.domain.entity.UserStatus;
 import com.example.sns.core.user.domain.entity.root.User;
-import com.example.sns.core.user.service.AuthenticationService;
+import com.example.sns.core.user.domain.service.AuthenticationService;
 import com.example.sns.mock.TestTimeHolder;
 import com.example.sns.mock.user.FakeNicknameHistoryRepository;
 import com.example.sns.mock.user.FakeUserRepository;
